@@ -70,7 +70,7 @@
             <div class="sketch-workbench">
               <div class="sketch-sheet">
                 <div class="sketch-toolbar"><img class="sketch-brand" src="assets/img/ferro-logo.svg" alt="Ferro Stålentreprenør" width="72" height="48"><div role="group" aria-label="Visning"><button type="button" data-view="volume" aria-pressed="true">3D</button><button type="button" data-view="plan" aria-pressed="false">Plan</button><button type="button" data-view="facade" aria-pressed="false">Fasade</button></div><button type="button" data-rotate aria-label="Roter bygget 45 grader">Roter ↻</button></div>
-                <div class="sketch-layer" data-model-tools role="group" aria-label="Modellvisning"><button data-layer="shell" aria-pressed="true">Utvendig</button><button type="button" data-layer="drawing" aria-pressed="false">Tegningsvisning</button><button data-layer="open" aria-pressed="false">Åpen modell</button><button type="button" data-layer="steel" aria-pressed="false">Stål</button><button type="button" data-tilt>Vipp ↕</button></div>
+                <div class="sketch-layer" data-model-tools role="group" aria-label="Modellvisning"><button data-layer="shell" aria-pressed="true">Utvendig</button><button data-layer="open" aria-pressed="false">Åpen modell</button><button type="button" data-layer="steel" aria-pressed="false">Stål</button><button type="button" data-measurements aria-pressed="false">Vis mål</button><button type="button" data-tilt>Vipp ↕</button></div>
                 <label class="sketch-layer elevation-picker" data-section-tools hidden>Vis til og med <select name="cutFloor"></select></label>
                 <div class="sketch-layer" data-plan-tools role="group" aria-label="Plannivå" hidden><button data-level="ground" aria-pressed="true">1. etasje</button><button data-level="deck" aria-pressed="false">Mesanin</button><button data-level="second">2. etasje</button><button data-level="third">3. etasje</button><button data-level="loft" hidden>Loft</button></div>
                 <div class="sketch-layer roof-section" data-roof-section hidden>
@@ -98,6 +98,11 @@
                   <div class="thermal-option"><strong data-thermal></strong><label class="sketch-check"><input type="checkbox" name="cold"> Uisolert bygg</label></div>
                   <div class="sketch-pair"><label class="sketch-field">Yttervegg<select name="wall"><option value="horizontal">Liggende sandwichpanel (SW)</option><option value="vertical">Stående sandwichpanel (SW)</option><option value="sheet">Profilert stålplate</option><option value="other">Annen løsning</option></select></label>
                   <label class="sketch-field">Takoppbygning<select name="cover"><option value="membrane">TRP + taktekking</option><option value="trp">TRP uten taktekking</option><option value="sandwich">Sandwichpanel (SW)</option><option value="other">Annen løsning</option></select></label></div>
+                  <details data-cladding-details><summary>Fasadedetaljer (valgfritt)</summary>
+                    <label class="sketch-field" data-panel-module>Modulbredde for SW<select name="panelModule"><option value="">Avklares · vist med 1,10 m</option><option value="1">1,00 m</option><option value="1.1">1,10 m</option><option value="1.15">1,15 m</option></select></label>
+                    <label class="sketch-check"><input type="checkbox" name="concreteBase"> Betongbrystning</label>
+                    <label class="sketch-field" data-concrete-height hidden>Høyde på betongbrystning (m)<input type="number" min="0.01" step="0.01" name="concreteHeight" placeholder="1,00 (skisse)"></label>
+                  </details>
                   <label class="sketch-field">Kommentar til vegger og tak<textarea name="envelopeNote" maxlength="500" rows="2" placeholder="Paneltype, taktekking eller andre ønsker"></textarea></label>
                 </div>
                 <div data-pane="openings" hidden>
@@ -398,7 +403,7 @@
   </dialog>
 
 </div>
-<script src="js/ferro.min.js?v=36c2e8bac21e"></script>
+<script src="js/ferro.min.js?v=3f8283460557"></script>
 
 
 
