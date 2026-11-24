@@ -20,7 +20,7 @@
 </script>
 <link rel="preload" as="image" href="assets/img/hero-drone-v4-poster-480.webp" type="image/webp" media="(max-width: 600px)" fetchpriority="high">
 <link rel="preload" as="image" href="assets/img/hero-drone-v4-poster-1080.webp" type="image/webp" media="(min-width: 600.02px)" fetchpriority="high">
-<link rel="stylesheet" href="css/ferro.min.css?v=3adc2b5c6f7e">
+<link rel="stylesheet" href="css/ferro.min.css?v=b3b56ee5ed77">
 
 
 
@@ -69,7 +69,7 @@
             <div class="sketch-workbench">
               <div class="sketch-sheet">
                 <div class="sketch-toolbar"><img class="sketch-brand" src="assets/img/ferro-logo.svg" alt="Ferro Stålentreprenør" width="72" height="48"><div role="group" aria-label="Visning"><button type="button" data-view="volume" aria-pressed="true">3D</button><button type="button" data-view="plan" aria-pressed="false">Plan</button><button type="button" data-view="facade" aria-pressed="false">Fasade</button></div><button type="button" data-rotate aria-label="Roter bygget 45 grader">Roter ↻</button><button type="button" class="tool-toggle" data-tools-toggle aria-label="Åpne verktøy" title="Verktøy" aria-expanded="false" aria-controls="sketch-tools"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h7m4 0h7M3 12h12m4 0h2M3 18h2m4 0h12"/><circle cx="12" cy="6" r="2"/><circle cx="17" cy="12" r="2"/><circle cx="7" cy="18" r="2"/></svg></button></div>
-                <div class="sketch-layer" data-model-tools role="group" aria-label="Modellvisning"><button data-layer="shell" aria-pressed="true">Utvendig</button><button data-layer="open" aria-pressed="false">Åpen modell</button><button type="button" data-layer="steel" aria-pressed="false">Stål</button><button type="button" data-layer="foundation" aria-pressed="false">Fundament</button><button type="button" data-measurements aria-pressed="false">Vis mål</button><button type="button" data-tilt>Vipp ↕</button></div>
+                <div class="sketch-layer" data-model-tools role="group" aria-label="Modellvisning"><button data-layer="shell" aria-pressed="true">Utvendig</button><button data-layer="open" aria-pressed="false">Åpen modell</button><button type="button" data-layer="steel" aria-pressed="false">Stål</button><button type="button" data-measurements aria-pressed="false">Vis mål</button><button type="button" data-tilt>Vipp ↕</button></div>
                 <label class="sketch-layer elevation-picker" data-section-tools hidden>Vis til og med <select name="cutFloor"></select></label>
                 <div class="sketch-layer" data-plan-tools role="group" aria-label="Plannivå" hidden><button data-level="ground" aria-pressed="true">1. etasje</button><button data-level="deck" aria-pressed="false">Mesanin</button><button data-level="second">2. etasje</button><button data-level="third">3. etasje</button><button data-level="loft" hidden>Loft</button><button type="button" data-plan-axes aria-pressed="false">Vis akser</button></div>
                 <details class="plan-figures" data-figure-tools hidden>
@@ -109,7 +109,7 @@
               </div>
               <div class="sketch-panel" id="sketch-tools" hidden>
                 <div class="tools-heading"><strong>Verktøy</strong><button type="button" data-close-tools aria-label="Lukk verktøy">×</button></div>
-                <div class="sketch-sections" role="group" aria-label="Innstillinger"><button type="button" data-edit="form" aria-pressed="true">Byggform</button><button type="button" data-edit="facade" aria-pressed="false">Vegger og tak</button><button type="button" data-edit="openings" aria-pressed="false">Åpninger</button><button type="button" data-edit="zones" aria-pressed="false">Romplan</button><button type="button" data-edit="details" aria-pressed="false">Prosjektdetaljer</button></div>
+                <div class="sketch-sections" role="group" aria-label="Innstillinger"><button type="button" data-edit="form" aria-pressed="true">Byggform</button><button type="button" data-edit="facade" aria-pressed="false">Vegger og tak</button><button type="button" data-edit="openings" aria-pressed="false">Åpninger</button><button type="button" data-edit="zones" aria-pressed="false">Romplan</button></div>
                 <div data-pane="form">
                   <label class="sketch-field">Byggtype<select name="sketchUse"><option>Lagerhall</option><option>Verksted</option><option>Butikk</option><option>Kontor</option></select></label>
                   <label class="sketch-field">Takform<select name="tak"><option value="gable">Saltak</option><option value="mono">Pulttak</option><option value="flat">Flatt tak</option></select></label>
@@ -176,13 +176,8 @@
                     <label class="sketch-field">Antall rom<select name="rowCount"><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option></select></label></div>
                     <button type="button" data-row>Sett inn rom på rekke</button></div>
                   </fieldset>
-                  <label class="sketch-field">Kommentar til romplanen<textarea name="planNote" maxlength="500" rows="2" placeholder="F.eks. garderobe ved inngangen eller kontor på mesaninen"></textarea></label>
-                </div>
-                <div data-pane="details" hidden>
-                  <div data-project-fields></div>
-                  <details class="project-group" data-stair-group>
-                    <summary>Innvendige trapper</summary>
-                    <label class="sketch-field">Sone<select name="stairZone"></select></label>
+                  <details class="plan-zones" data-stair-group>
+                    <summary>Trapp i valgt sone</summary>
                     <label class="sketch-field">Trapp fra 1. etasje<select name="stairType"><option value="">Ingen trapp tegnet</option></select></label>
                     <div data-stair-options hidden>
                       <label class="sketch-field">Opp til<select name="stairTo"></select></label>
@@ -191,7 +186,7 @@
                       <p class="sketch-limits" data-stair-hint></p>
                     </div>
                   </details>
-                  <label class="sketch-field">Andre behov eller kjente laster<textarea name="detailNote" maxlength="500" rows="2" placeholder="F.eks. punktlast fra maskin, betongkvalitet fra tegning eller ønsket fri høyde"></textarea></label>
+                  <label class="sketch-field">Kommentar til romplanen<textarea name="planNote" maxlength="500" rows="2" placeholder="F.eks. garderobe ved inngangen eller kontor på mesaninen"></textarea></label>
                 </div>
                 <p class="opening-status" data-opening-status role="status" hidden></p>
                 <details class="sketch-files"><summary>Egne tegninger</summary><div data-drawing-picker></div></details>
@@ -457,7 +452,7 @@
   </dialog>
 
 </div>
-<script src="js/ferro.min.js?v=94b5511bdadc"></script>
+<script src="js/ferro.min.js?v=795d874b0856"></script>
 
 
 
