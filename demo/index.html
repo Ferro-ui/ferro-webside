@@ -21,7 +21,7 @@
 </script>
 <link rel="preload" as="image" href="assets/img/hero-drone-v4-poster-480.webp" type="image/webp" media="(max-width: 600px)" fetchpriority="high">
 <link rel="preload" as="image" href="assets/img/hero-drone-v4-poster-1080.webp" type="image/webp" media="(min-width: 600.02px)" fetchpriority="high">
-<link rel="stylesheet" href="css/ferro.min.css">
+<link rel="stylesheet" href="css/ferro.min.css?v=2d5de29df758">
 
 
 
@@ -73,6 +73,15 @@
                 <div class="sketch-layer" data-model-tools role="group" aria-label="Modellvisning"><button data-layer="shell" aria-pressed="true">Utvendig</button><button data-layer="open" aria-pressed="false">Åpen modell</button><button type="button" data-layer="steel" aria-pressed="false">Stål</button><button type="button" data-measurements aria-pressed="false">Vis mål</button><button type="button" data-tilt>Vipp ↕</button></div>
                 <label class="sketch-layer elevation-picker" data-section-tools hidden>Vis til og med <select name="cutFloor"></select></label>
                 <div class="sketch-layer" data-plan-tools role="group" aria-label="Plannivå" hidden><button data-level="ground" aria-pressed="true">1. etasje</button><button data-level="deck" aria-pressed="false">Mesanin</button><button data-level="second">2. etasje</button><button data-level="third">3. etasje</button><button data-level="loft" hidden>Loft</button></div>
+                <details class="plan-figures" data-figure-tools hidden>
+                  <summary>Tegn og merk figurer</summary>
+                  <div class="figure-actions"><button type="button" data-figure-start="polygon">+ Fri kontur</button><button type="button" data-figure-start="rectangle">+ Rektangel</button></div>
+                  <label class="sketch-field" data-figure-chooser hidden>Figur på dette nivået<select name="figurePick"></select></label>
+                  <label class="sketch-field" data-figure-naming hidden>Hva viser figuren?<input name="figureName" maxlength="60" placeholder="F.eks. pakkelinje eller maskinsone"></label>
+                  <div class="figure-actions" data-figure-draft hidden><button type="button" data-figure-undo>Angre punkt</button><button type="button" data-figure-save>Lagre figur</button><button type="button" data-figure-cancel>Avbryt</button></div>
+                  <button type="button" data-figure-delete hidden>Fjern valgt figur</button>
+                  <p data-figure-message role="status"></p>
+                </details>
                 <div class="sketch-layer roof-section" data-roof-section hidden>
                   <svg viewBox="0 0 104 54" width="104" height="54" aria-hidden="true"><g data-roof-profile><path data-roof-walls fill="#e2eaf1" stroke="#4a6883"/><path data-roof-space fill="#bbd8e9" stroke="#294f70"/><path data-loft-floor stroke="#193451" stroke-dasharray="3 2"/></g></svg>
                   <div><strong>Saltak · tverrsnitt</strong><small data-roof-description></small></div>
@@ -403,7 +412,8 @@
   </dialog>
 
 </div>
-<script src="js/ferro.min.js?v=3f8283460557"></script>
+<script src="js/ferro.min.js?v=199262a975db"></script>
+
 
 
 
