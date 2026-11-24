@@ -1,401 +1,234 @@
 <!DOCTYPE html>
-<html lang="no">
+<html lang="nb" data-theme="light">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Ferro Stålentreprenør — Vi reiser stålbygg raskt og presist</title>
 <meta name="description" content="Ferro Stålentreprenør AS — totalentreprenør for stålbygg. Fra idé til ferdig bygg, vi er med hele veien. Hele Norge.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Expanded:wght@600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
+<meta name="theme-color" content="#FFFFFF">
+<script>
+  /* Theme and intro flags are set before first paint to avoid a flash. Light is the default. */
+  (function () {
+    var root = document.documentElement;
+    var theme = 'light';
+    try { if (localStorage.getItem('ferro-theme') === 'dark') theme = 'dark'; } catch (e) {}
+    root.setAttribute('data-theme', theme);
+    root.classList.add('js');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduce) root.classList.add('motion', 'logo-intro');
+  })();
+</script>
+<link rel="preload" as="image" href="assets/img/hero-drone-v4-poster-480.webp" type="image/webp" media="(max-width: 600px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/img/hero-drone-v4-poster-1080.webp" type="image/webp" media="(min-width: 600.02px)" fetchpriority="high">
+<link rel="stylesheet" href="css/ferro.min.css">
+
+
+
 </head>
 <body>
-<div style="font-family:'Archivo',sans-serif;color:#20395D;background:#FCFBF8;overflow-x:hidden;-webkit-font-smoothing:antialiased;position:relative">
+<a class="skip-link" href="#innhold">Hopp til innhold</a>
+<div class="site">
 
-  <!-- ============ AMBIENT BACKGROUND ============ -->
-  <div style="position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden">
-    <div style="position:absolute;inset:0;background:radial-gradient(60% 50% at 92% 6%,rgba(46,90,140,0.15),transparent 55%),radial-gradient(50% 50% at 4% 96%,rgba(46,90,140,0.1),transparent 60%)"></div>
-    <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(46,90,140,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(46,90,140,0.05) 1px,transparent 1px),linear-gradient(rgba(46,90,140,0.028) 1px,transparent 1px),linear-gradient(90deg,rgba(46,90,140,0.028) 1px,transparent 1px);background-size:128px 128px,128px 128px,32px 32px,32px 32px;animation:gridFloat 30s linear infinite"></div>
-    <div style="position:absolute;left:0;right:0;top:0;height:180px;background:linear-gradient(180deg,rgba(46,90,140,0.09),transparent);animation:scanDown 11s ease-in-out infinite"></div>
-    <span style="position:absolute;top:22%;left:12%;width:16px;height:16px;background:linear-gradient(#2E5A8C,#2E5A8C),linear-gradient(#2E5A8C,#2E5A8C);background-size:100% 1.5px,1.5px 100%;background-position:center;background-repeat:no-repeat;animation:crossPulse 4s ease-in-out 0s infinite"></span>
-    <span style="position:absolute;top:68%;left:42%;width:13px;height:13px;background:linear-gradient(#2E5A8C,#2E5A8C),linear-gradient(#2E5A8C,#2E5A8C);background-size:100% 1.5px,1.5px 100%;background-position:center;background-repeat:no-repeat;animation:crossPulse 4s ease-in-out 1.3s infinite"></span>
-    <span style="position:absolute;top:34%;left:72%;width:14px;height:14px;background:linear-gradient(#2E5A8C,#2E5A8C),linear-gradient(#2E5A8C,#2E5A8C);background-size:100% 1.5px,1.5px 100%;background-position:center;background-repeat:no-repeat;animation:crossPulse 4s ease-in-out 2.1s infinite"></span>
-    <span style="position:absolute;top:80%;left:86%;width:13px;height:13px;background:linear-gradient(#2E5A8C,#2E5A8C),linear-gradient(#2E5A8C,#2E5A8C);background-size:100% 1.5px,1.5px 100%;background-position:center;background-repeat:no-repeat;animation:crossPulse 4s ease-in-out 0.7s infinite"></span>
+  <!-- ============ HEADER (shared by all screens) ============ -->
+  <div class="home26">
+    <header class="h26-header h26-shell">
+      <a class="h26-brand" href="#hjem" data-action="goHome" aria-label="Ferro – hjem"><img src="assets/img/ferro-logo.svg" width="88" height="58" alt="Ferro Stålentreprenør"></a>
+      <nav aria-label="Hovedmeny">
+        <a href="#prosjekter" data-action="goProsjekter" data-nav="prosjekter">Prosjekter</a>
+        <a href="#omoss" data-action="goOmOss" data-nav="omoss">Om oss</a>
+      </nav>
+      <a class="h26-header-contact" href="#kontakt" data-action="goKontakt" data-nav="kontakt">Kontakt <span aria-hidden="true">↗</span></a>
+    </header>
   </div>
 
-  <!-- ============ NAV ============ -->
-  <nav style="position:fixed;bottom:26px;left:50%;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.78);backdrop-filter:blur(24px) saturate(1.6);-webkit-backdrop-filter:blur(24px) saturate(1.6);border:1px solid rgba(32,57,93,0.1);border-radius:100px;padding:12px 14px;box-shadow:0 -4px 18px -14px rgba(32,57,93,0.25),0 24px 50px -22px rgba(32,57,93,0.55)">
-    <div style="display:flex;align-items:center;gap:6px;font-size:16px">
-      <a data-action="goHome" href="#hjem" style="position:relative;cursor:pointer;color:#20395D;font-weight:500;white-space:nowrap;padding:13px 24px;border-radius:100px;transition:background .2s;z-index:0;text-decoration:none;display:inline-block" data-hover="background:rgba(32,57,93,0.05)">
-        <span data-navdot="home" hidden style="position:absolute;inset:0;background:rgba(46,90,140,0.13);border-radius:100px;z-index:-1"></span>
-        Hjem
-      </a>
-      <a data-action="goProsjekter" href="#prosjekter" style="position:relative;cursor:pointer;color:#20395D;font-weight:500;white-space:nowrap;padding:13px 24px;border-radius:100px;transition:background .2s;z-index:0;text-decoration:none;display:inline-block" data-hover="background:rgba(32,57,93,0.05)">
-        <span data-navdot="prosjekter" hidden style="position:absolute;inset:0;background:rgba(46,90,140,0.13);border-radius:100px;z-index:-1"></span>
-        Prosjekter
-      </a>
-      <a data-action="goOmOss" href="#omoss" style="position:relative;cursor:pointer;color:#20395D;font-weight:500;white-space:nowrap;padding:13px 24px;border-radius:100px;transition:background .2s;z-index:0;text-decoration:none;display:inline-block" data-hover="background:rgba(32,57,93,0.05)">
-        <span data-navdot="omoss" hidden style="position:absolute;inset:0;background:rgba(46,90,140,0.13);border-radius:100px;z-index:-1"></span>
-        Om oss
-      </a>
-    </div>
-    <a data-action="goKontakt" href="#kontakt" style="cursor:pointer;font-size:15px;font-weight:600;letter-spacing:0.03em;text-transform:uppercase;color:#fff;background:#20395D;padding:16px 30px;border-radius:100px;transition:background .25s,transform .25s;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;margin-left:8px;text-decoration:none" data-hover="background:#2E5A8C;transform:translateY(-1px)">Kontakt oss<span style="font-size:14px">→</span></a>
-  </nav>
-
-  <main style="position:relative;z-index:1">
+  <main tabindex="-1" id="innhold" class="home26">
     <!-- ================= HOME ================= -->
     <div class="screen is-active" data-screen="home" data-screen-label="Hjem">
+        <section class="flight" aria-label="Utforsk Ferros stålbygg i Telemark">
+          <div class="flight-frame">
+            <picture class="flight-media"><source media="(max-width:600px)" srcset="assets/img/hero-drone-v4-poster-480.webp"><img src="assets/img/hero-drone-v4-poster-1080.webp" width="1920" height="1080" alt="" fetchpriority="high"></picture>
+            <video class="flight-media" data-film muted playsinline loop preload="none" aria-hidden="true"></video>
+            <div class="flight-tools">
+              <span class="flight-location"><i aria-hidden="true"></i>Telemark, Norge</span>
+            </div>
+            <div class="flight-intro">
+              <h1>Bygget i <em>stål.</em></h1>
+              <p>Vi bygger næringsbygg, fra første skisse til siste bolt.</p>
+              <a class="sketch-launch" href="#byggskisse" data-sketch-launch hidden>Skisser ditt bygg <span aria-hidden="true">↘</span></a>
+            </div>
 
-      <!-- HERO -->
-      <section style="position:relative;overflow:hidden;background:#FCFBF8;min-height:76vh;display:flex;align-items:center;padding:104px 0 70px">
-        <div style="position:absolute;top:0;right:0;bottom:0;width:60%;z-index:0;-webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,0.55) 18%,#000 44%);mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,0.55) 18%,#000 44%)">
-          <video data-hero src="assets/ferro-hero.mp4" autoplay muted loop playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
-          <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,26,40,0.06),rgba(16,26,40,0.22))"></div>
-        </div>
-        <div style="position:absolute;inset:0;z-index:1;background-image:linear-gradient(rgba(46,90,140,0.045) 1px,transparent 1px),linear-gradient(90deg,rgba(46,90,140,0.045) 1px,transparent 1px);background-size:64px 64px;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,#000 40%,transparent 66%);mask-image:linear-gradient(90deg,#000 40%,transparent 66%)"></div>
-        <div style="position:relative;z-index:2;width:100%;max-width:1560px;margin:0 auto;padding:0 56px">
-          <div style="max-width:72ch">
-            <div style="display:inline-block;overflow:hidden;position:relative;line-height:0;margin-bottom:26px">
-              <img src="https://ferrostal.no/wp-content/uploads/2024/08/Ferro-logo.png" alt="Ferro Stålentreprenør" style="display:block;height:150px;width:auto;animation:clipReveal 1s cubic-bezier(.65,0,.2,1) .15s both">
-              <span style="position:absolute;inset:0;background:linear-gradient(100deg,transparent 38%,rgba(255,255,255,0.9) 50%,transparent 62%);transform:translateX(-130%);animation:logoSheen 5s ease-in-out 1.6s infinite;pointer-events:none"></span>
-            </div>
-            <div style="margin-bottom:22px">
-              <span style="display:inline-flex;align-items:center;gap:11px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#2E5A8C;animation:fadeIn .7s .1s both"><span style="width:30px;height:1px;background:#2E5A8C"></span>Totalentreprenør · Hele Norge</span>
-            </div>
-            <h1 style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;color:#16263E;font-size:clamp(38px,5.2vw,74px);line-height:1.06;letter-spacing:-0.03em">
-              <span style="display:block;overflow:hidden"><span style="display:inline-block;animation:wordRise .9s cubic-bezier(.22,1,.36,1) .15s both">Vi reiser</span></span>
-              <span style="display:block;overflow:hidden"><span style="display:inline-block;animation:wordRise .9s cubic-bezier(.22,1,.36,1) .28s both"><span style="color:#2E5A8C">stålbygg</span></span></span>
-              <span style="display:block;overflow:hidden"><span style="display:inline-block;animation:wordRise .9s cubic-bezier(.22,1,.36,1) .41s both">raskt og presist</span></span>
-            </h1>
-            <p style="max-width:52ch;margin:26px 0 0;font-size:clamp(16px,1.3vw,18px);line-height:1.6;color:#56606e;animation:fadeIn 1s .7s both">Som totalentreprenør er vi med fra idé til ferdig bygg — én partner som tar ansvar for hele prosessen, fra første skisse til nøkkelferdig.</p>
-            <div style="display:flex;flex-wrap:wrap;gap:13px;margin-top:34px;animation:fadeIn 1s .9s both">
-              <span data-action="goKontakt" style="cursor:pointer;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#fff;background:#20395D;padding:16px 30px;border-radius:100px;display:inline-flex;align-items:center;gap:10px;transition:transform .25s,box-shadow .25s,background .25s;box-shadow:0 16px 30px -14px rgba(32,57,93,0.55)" data-hover="background:#2E5A8C;transform:translateY(-2px)">Få et uforpliktende tilbud<span>→</span></span>
-              <span data-action="goProsjekter" style="cursor:pointer;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:#20395D;background:rgba(255,255,255,0.7);border:1px solid rgba(32,57,93,0.18);padding:16px 30px;border-radius:100px;display:inline-flex;align-items:center;gap:10px;transition:background .25s;backdrop-filter:blur(4px)" data-hover="background:#fff">Se prosjekter</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:28px;margin-top:40px;padding-top:28px;border-top:1px solid rgba(32,57,93,0.14);animation:fadeIn 1s 1.1s both">
-              <div><div style="display:flex;align-items:baseline;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:38px;line-height:1;color:#20395D;letter-spacing:-0.02em"><span data-counter="c1"></span></div><div style="font-size:12.5px;color:#6B6E6A;margin-top:6px">typer stålbygg</div></div>
-              <div style="width:1px;height:44px;background:rgba(32,57,93,0.14)"></div>
-              <div><div style="display:flex;align-items:baseline;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:38px;line-height:1;color:#20395D;letter-spacing:-0.02em"><span data-counter="c2"></span><span style="font-size:22px">%</span></div><div style="font-size:12.5px;color:#6B6E6A;margin-top:6px">totalentreprenør</div></div>
+            <div class="film-readout">
+              <button type="button" data-toggle hidden aria-label="Spill av dronefilm"><span data-play-icon aria-hidden="true">▶</span></button>
+              <span data-caption>Tokke Teknologipark · Dalen</span>
             </div>
           </div>
-        </div>
-      </section>
-
-      <!-- TRUST / LOGOS MARQUEE -->
-      <section style="background:transparent;padding:6px 0 52px;border-top:1px solid rgba(32,57,93,0.08)">
-        <p style="text-align:center;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#9aa3b2;margin:0 0 24px">Betrodd av lokale bedrifter</p>
-        <div style="position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)">
-          <div style="display:flex;align-items:center;width:max-content;animation:marquee 80s linear infinite">
-            <img src="https://ferrostal.no/wp-content/uploads/2025/02/Eika-Maskinsalg-AS.png" style="height:46px;margin-right:72px;filter:drop-shadow(.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(-.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(0 .6px .4px rgba(32,57,93,.6)) drop-shadow(0 -.6px .4px rgba(32,57,93,.6));opacity:.95;transition:opacity .3s,transform .3s" data-hover="opacity:1;transform:scale(1.06)">
-            <img src="https://ferrostal.no/wp-content/uploads/2025/02/DalenMekaniske_staende.png" style="height:42px;margin-right:72px;filter:drop-shadow(.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(-.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(0 .6px .4px rgba(32,57,93,.6)) drop-shadow(0 -.6px .4px rgba(32,57,93,.6));opacity:.95;transition:opacity .3s,transform .3s" data-hover="opacity:1;transform:scale(1.06)">
-            <img src="https://ferrostal.no/wp-content/uploads/2025/02/TokkeTeknologipark.png" style="height:30px;margin-right:72px;filter:drop-shadow(.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(-.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(0 .6px .4px rgba(32,57,93,.6)) drop-shadow(0 -.6px .4px rgba(32,57,93,.6));opacity:.95;transition:opacity .3s,transform .3s" data-hover="opacity:1;transform:scale(1.06)">
-            <img src="https://ferrostal.no/wp-content/uploads/2025/02/ForbergEiendomsselskap.png" style="height:50px;margin-right:72px;filter:drop-shadow(.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(-.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(0 .6px .4px rgba(32,57,93,.6)) drop-shadow(0 -.6px .4px rgba(32,57,93,.6));opacity:.95;transition:opacity .3s,transform .3s" data-hover="opacity:1;transform:scale(1.06)">
-            <img src="https://ferrostal.no/wp-content/uploads/2025/02/mekan.png" style="height:34px;margin-right:72px;background:#20395D;padding:9px 16px;border-radius:10px;box-sizing:content-box;opacity:.95;transition:opacity .3s,transform .3s" data-hover="opacity:1;transform:scale(1.06)">
-            <img src="https://ferrostal.no/wp-content/uploads/2025/02/Eika-Maskinsalg-AS.png" style="height:46px;margin-right:72px;filter:drop-shadow(.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(-.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(0 .6px .4px rgba(32,57,93,.6)) drop-shadow(0 -.6px .4px rgba(32,57,93,.6));opacity:.95;transition:opacity .3s,transform .3s" data-hover="opacity:1;transform:scale(1.06)">
-            <img src="https://ferrostal.no/wp-content/uploads/2025/02/DalenMekaniske_staende.png" style="height:42px;margin-right:72px;filter:drop-shadow(.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(-.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(0 .6px .4px rgba(32,57,93,.6)) drop-shadow(0 -.6px .4px rgba(32,57,93,.6));opacity:.95;transition:opacity .3s,transform .3s" data-hover="opacity:1;transform:scale(1.06)">
-            <img src="https://ferrostal.no/wp-content/uploads/2025/02/TokkeTeknologipark.png" style="height:30px;margin-right:72px;filter:drop-shadow(.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(-.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(0 .6px .4px rgba(32,57,93,.6)) drop-shadow(0 -.6px .4px rgba(32,57,93,.6));opacity:.95;transition:opacity .3s,transform .3s" data-hover="opacity:1;transform:scale(1.06)">
-            <img src="https://ferrostal.no/wp-content/uploads/2025/02/ForbergEiendomsselskap.png" style="height:50px;margin-right:72px;filter:drop-shadow(.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(-.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(0 .6px .4px rgba(32,57,93,.6)) drop-shadow(0 -.6px .4px rgba(32,57,93,.6));opacity:.95;transition:opacity .3s,transform .3s" data-hover="opacity:1;transform:scale(1.06)">
-            <img src="https://ferrostal.no/wp-content/uploads/2025/02/mekan.png" style="height:34px;margin-right:72px;background:#20395D;padding:9px 16px;border-radius:10px;box-sizing:content-box;opacity:.95;transition:opacity .3s,transform .3s" data-hover="opacity:1;transform:scale(1.06)">
-            <img src="https://ferrostal.no/wp-content/uploads/2025/02/Eika-Maskinsalg-AS.png" style="height:46px;margin-right:72px;filter:drop-shadow(.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(-.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(0 .6px .4px rgba(32,57,93,.6)) drop-shadow(0 -.6px .4px rgba(32,57,93,.6));opacity:.95;transition:opacity .3s,transform .3s" data-hover="opacity:1;transform:scale(1.06)">
-            <img src="https://ferrostal.no/wp-content/uploads/2025/02/DalenMekaniske_staende.png" style="height:42px;margin-right:72px;filter:drop-shadow(.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(-.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(0 .6px .4px rgba(32,57,93,.6)) drop-shadow(0 -.6px .4px rgba(32,57,93,.6));opacity:.95;transition:opacity .3s,transform .3s" data-hover="opacity:1;transform:scale(1.06)">
-            <img src="https://ferrostal.no/wp-content/uploads/2025/02/TokkeTeknologipark.png" style="height:30px;margin-right:72px;filter:drop-shadow(.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(-.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(0 .6px .4px rgba(32,57,93,.6)) drop-shadow(0 -.6px .4px rgba(32,57,93,.6));opacity:.95;transition:opacity .3s,transform .3s" data-hover="opacity:1;transform:scale(1.06)">
-            <img src="https://ferrostal.no/wp-content/uploads/2025/02/ForbergEiendomsselskap.png" style="height:50px;margin-right:72px;filter:drop-shadow(.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(-.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(0 .6px .4px rgba(32,57,93,.6)) drop-shadow(0 -.6px .4px rgba(32,57,93,.6));opacity:.95;transition:opacity .3s,transform .3s" data-hover="opacity:1;transform:scale(1.06)">
-            <img src="https://ferrostal.no/wp-content/uploads/2025/02/mekan.png" style="height:34px;margin-right:72px;background:#20395D;padding:9px 16px;border-radius:10px;box-sizing:content-box;opacity:.95;transition:opacity .3s,transform .3s" data-hover="opacity:1;transform:scale(1.06)">
-            <img src="https://ferrostal.no/wp-content/uploads/2025/02/Eika-Maskinsalg-AS.png" style="height:46px;margin-right:72px;filter:drop-shadow(.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(-.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(0 .6px .4px rgba(32,57,93,.6)) drop-shadow(0 -.6px .4px rgba(32,57,93,.6));opacity:.95;transition:opacity .3s,transform .3s" data-hover="opacity:1;transform:scale(1.06)">
-            <img src="https://ferrostal.no/wp-content/uploads/2025/02/DalenMekaniske_staende.png" style="height:42px;margin-right:72px;filter:drop-shadow(.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(-.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(0 .6px .4px rgba(32,57,93,.6)) drop-shadow(0 -.6px .4px rgba(32,57,93,.6));opacity:.95;transition:opacity .3s,transform .3s" data-hover="opacity:1;transform:scale(1.06)">
-            <img src="https://ferrostal.no/wp-content/uploads/2025/02/TokkeTeknologipark.png" style="height:30px;margin-right:72px;filter:drop-shadow(.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(-.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(0 .6px .4px rgba(32,57,93,.6)) drop-shadow(0 -.6px .4px rgba(32,57,93,.6));opacity:.95;transition:opacity .3s,transform .3s" data-hover="opacity:1;transform:scale(1.06)">
-            <img src="https://ferrostal.no/wp-content/uploads/2025/02/ForbergEiendomsselskap.png" style="height:50px;margin-right:72px;filter:drop-shadow(.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(-.6px 0 .4px rgba(32,57,93,.6)) drop-shadow(0 .6px .4px rgba(32,57,93,.6)) drop-shadow(0 -.6px .4px rgba(32,57,93,.6));opacity:.95;transition:opacity .3s,transform .3s" data-hover="opacity:1;transform:scale(1.06)">
-            <img src="https://ferrostal.no/wp-content/uploads/2025/02/mekan.png" style="height:34px;margin-right:72px;background:#20395D;padding:9px 16px;border-radius:10px;box-sizing:content-box;opacity:.95;transition:opacity .3s,transform .3s" data-hover="opacity:1;transform:scale(1.06)">
-          </div>
-        </div>
-      </section>
-
-      <!-- SERVICES -->
-      <section style="background:transparent;padding:110px 0">
-        <div style="max-width:1280px;margin:0 auto;padding:0 32px">
-          <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:48px;animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 26%">
-            <div>
-              <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#2E5A8C">[ 01 ] — Tjenester</span>
-              <h2 style="margin:14px 0 0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(32px,4.4vw,58px);line-height:1.0;letter-spacing:-0.025em;max-width:16ch;color:#16263E">Hva ønsker du deg?</h2>
-            </div>
-            <p style="max-width:34ch;margin:0;font-size:16px;line-height:1.6;color:#56606e">Vi setter opp komplette stålbygg, skreddersydd for din virksomhet. <span style="color:#2E5A8C;font-weight:600">Hold musen over et bygg →</span></p>
-          </div>
-          <div data-svc-row data-stagger style="display:flex;gap:14px">
-            <div data-svc style="position:relative;height:460px;border-radius:20px;overflow:hidden;cursor:pointer;background:#16263E">
-              <img data-svc-img src="https://ferrostal.no/wp-content/uploads/2024/09/IMG_8290-1024x768.jpeg" alt="Næringslokaler" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.28) contrast(1.04)">
-              <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,38,62,0.12) 0%,rgba(22,38,62,0.5) 45%,rgba(22,38,62,0.93) 100%)"></div>
-              <span style="position:absolute;top:18px;left:20px;font-family:'Space Mono',monospace;font-size:13px;color:#9DBDE2;letter-spacing:0.1em">01</span>
-              <div data-svc-min style="position:absolute;left:0;right:0;bottom:0;padding:24px;display:flex;align-items:flex-end;justify-content:center">
-                <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:17px;color:#fff;writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:0.02em;white-space:nowrap">Næringslokaler</span>
-              </div>
-              <div data-svc-exp style="position:absolute;left:0;right:0;bottom:0;padding:30px">
-                <h3 style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:27px;color:#fff;letter-spacing:-0.01em;white-space:nowrap">Næringslokaler</h3>
-                <p style="margin:11px 0 18px;font-size:14.5px;line-height:1.55;color:rgba(255,255,255,0.82);max-width:40ch">Fleksible bygg for handel, lager og logistikk — reist raskt med stålkonstruksjon.</p>
-                <span data-action="goKontakt" style="display:inline-flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:600;color:#16263E;background:#fff;padding:10px 18px;border-radius:100px;transition:background .2s" data-hover="background:#E4ECF6">Les mer →</span>
-              </div>
-            </div>
-            <div data-svc style="position:relative;height:460px;border-radius:20px;overflow:hidden;cursor:pointer;background:#16263E">
-              <img data-svc-img src="https://ferrostal.no/wp-content/uploads/2024/09/image10.jpg" alt="Kontorer" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.28) contrast(1.04)">
-              <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,38,62,0.12) 0%,rgba(22,38,62,0.5) 45%,rgba(22,38,62,0.93) 100%)"></div>
-              <span style="position:absolute;top:18px;left:20px;font-family:'Space Mono',monospace;font-size:13px;color:#9DBDE2;letter-spacing:0.1em">02</span>
-              <div data-svc-min style="position:absolute;left:0;right:0;bottom:0;padding:24px;display:flex;align-items:flex-end;justify-content:center">
-                <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:17px;color:#fff;writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:0.02em;white-space:nowrap">Kontorer</span>
-              </div>
-              <div data-svc-exp style="position:absolute;left:0;right:0;bottom:0;padding:30px">
-                <h3 style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:27px;color:#fff;letter-spacing:-0.01em;white-space:nowrap">Kontorer</h3>
-                <p style="margin:11px 0 18px;font-size:14.5px;line-height:1.55;color:rgba(255,255,255,0.82);max-width:40ch">Moderne, lyse kontorbygg tilpasset arbeidsdagen.</p>
-                <span data-action="goKontakt" style="display:inline-flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:600;color:#16263E;background:#fff;padding:10px 18px;border-radius:100px;transition:background .2s" data-hover="background:#E4ECF6">Les mer →</span>
-              </div>
-            </div>
-            <div data-svc style="position:relative;height:460px;border-radius:20px;overflow:hidden;cursor:pointer;background:#16263E">
-              <img data-svc-img src="https://ferrostal.no/wp-content/uploads/2024/09/IMG_8087-e1738683144326.jpeg" alt="Produksjonslokaler" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.28) contrast(1.04)">
-              <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,38,62,0.12) 0%,rgba(22,38,62,0.5) 45%,rgba(22,38,62,0.93) 100%)"></div>
-              <span style="position:absolute;top:18px;left:20px;font-family:'Space Mono',monospace;font-size:13px;color:#9DBDE2;letter-spacing:0.1em">03</span>
-              <div data-svc-min style="position:absolute;left:0;right:0;bottom:0;padding:24px;display:flex;align-items:flex-end;justify-content:center">
-                <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:17px;color:#fff;writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:0.02em;white-space:nowrap">Produksjonslokaler</span>
-              </div>
-              <div data-svc-exp style="position:absolute;left:0;right:0;bottom:0;padding:30px">
-                <h3 style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:27px;color:#fff;letter-spacing:-0.01em;white-space:nowrap">Produksjonslokaler</h3>
-                <p style="margin:11px 0 18px;font-size:14.5px;line-height:1.55;color:rgba(255,255,255,0.82);max-width:40ch">Robuste haller bygd for produksjon og fremtidig vekst.</p>
-                <span data-action="goKontakt" style="display:inline-flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:600;color:#16263E;background:#fff;padding:10px 18px;border-radius:100px;transition:background .2s" data-hover="background:#E4ECF6">Les mer →</span>
-              </div>
-            </div>
-            <div data-svc style="position:relative;height:460px;border-radius:20px;overflow:hidden;cursor:pointer;background:#16263E">
-              <img data-svc-img src="https://ferrostal.no/wp-content/uploads/2024/09/IMG_2054-768x1024.jpg" alt="Verksted" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.28) contrast(1.04)">
-              <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,38,62,0.12) 0%,rgba(22,38,62,0.5) 45%,rgba(22,38,62,0.93) 100%)"></div>
-              <span style="position:absolute;top:18px;left:20px;font-family:'Space Mono',monospace;font-size:13px;color:#9DBDE2;letter-spacing:0.1em">04</span>
-              <div data-svc-min style="position:absolute;left:0;right:0;bottom:0;padding:24px;display:flex;align-items:flex-end;justify-content:center">
-                <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:17px;color:#fff;writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:0.02em;white-space:nowrap">Verksted</span>
-              </div>
-              <div data-svc-exp style="position:absolute;left:0;right:0;bottom:0;padding:30px">
-                <h3 style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:27px;color:#fff;letter-spacing:-0.01em;white-space:nowrap">Verksted</h3>
-                <p style="margin:11px 0 18px;font-size:14.5px;line-height:1.55;color:rgba(255,255,255,0.82);max-width:40ch">Funksjonelle verkstedbygg med god takhøyde.</p>
-                <span data-action="goKontakt" style="display:inline-flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:600;color:#16263E;background:#fff;padding:10px 18px;border-radius:100px;transition:background .2s" data-hover="background:#E4ECF6">Les mer →</span>
-              </div>
-            </div>
-            <div data-svc style="position:relative;height:460px;border-radius:20px;overflow:hidden;cursor:pointer;background:#16263E">
-              <img data-svc-img src="https://ferrostal.no/wp-content/uploads/2024/09/image11.jpg" alt="Butikk" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.28) contrast(1.04)">
-              <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,38,62,0.12) 0%,rgba(22,38,62,0.5) 45%,rgba(22,38,62,0.93) 100%)"></div>
-              <span style="position:absolute;top:18px;left:20px;font-family:'Space Mono',monospace;font-size:13px;color:#9DBDE2;letter-spacing:0.1em">05</span>
-              <div data-svc-min style="position:absolute;left:0;right:0;bottom:0;padding:24px;display:flex;align-items:flex-end;justify-content:center">
-                <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:17px;color:#fff;writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:0.02em;white-space:nowrap">Butikk</span>
-              </div>
-              <div data-svc-exp style="position:absolute;left:0;right:0;bottom:0;padding:30px">
-                <h3 style="margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:27px;color:#fff;letter-spacing:-0.01em;white-space:nowrap">Butikk</h3>
-                <p style="margin:11px 0 18px;font-size:14.5px;line-height:1.55;color:rgba(255,255,255,0.82);max-width:40ch">Innbydende butikklokaler — klare for kunder.</p>
-                <span data-action="goKontakt" style="display:inline-flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:600;color:#16263E;background:#fff;padding:10px 18px;border-radius:100px;transition:background .2s" data-hover="background:#E4ECF6">Les mer →</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- PROCESS -->
-      <section style="background:transparent;padding:120px 0">
-        <div style="max-width:1240px;margin:0 auto;padding:0 32px">
-          <div style="max-width:60ch;margin-bottom:70px;animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 26%">
-            <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#2E5A8C">[ 02 ] — Prosess</span>
-            <h2 style="margin:14px 0 0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(32px,4.4vw,58px);line-height:1.02;letter-spacing:-0.025em;color:#16263E">Fra idé til ferdig bygg — vi er med hele veien.</h2>
-          </div>
-          <div style="position:relative">
-            <div style="position:absolute;top:13px;left:0;right:0;height:2px;background:rgba(32,57,93,0.14)"></div>
-            <div style="position:absolute;top:13px;left:0;right:0;height:2px;background:linear-gradient(90deg,#2E5A8C,#9DBDE2);transform-origin:left;transform:scaleX(0);animation:lineDraw both linear;animation-timeline:view();animation-range:entry 14% cover 62%"></div>
-            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px">
-              <div style="animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 20%">
-                <span style="position:relative;display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#fff;border:2px solid #2E5A8C;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:#2E5A8C;animation:nodePulse 4s ease-in-out 0s infinite">01</span>
-                <h3 style="margin:22px 0 8px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:21px;letter-spacing:-0.01em;color:#16263E">Idé &amp; rådgivning</h3>
-                <p style="margin:0;color:#56606e;font-size:14.5px;line-height:1.6">Vi bistår allerede før tegningene er klare, og finner den beste løsningen sammen.</p>
-              </div>
-              <div style="animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 20%">
-                <span style="position:relative;display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#fff;border:2px solid #2E5A8C;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:#2E5A8C;animation:nodePulse 4s ease-in-out .6s infinite">02</span>
-                <h3 style="margin:22px 0 8px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:21px;letter-spacing:-0.01em;color:#16263E">Tegning &amp; plan</h3>
-                <p style="margin:0;color:#56606e;font-size:14.5px;line-height:1.6">Vi planlegger nøye, holder budsjettet i fokus og sikrer en effektiv prosess.</p>
-              </div>
-              <div style="animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 20%">
-                <span style="position:relative;display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#fff;border:2px solid #2E5A8C;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:#2E5A8C;animation:nodePulse 4s ease-in-out 1.2s infinite">03</span>
-                <h3 style="margin:22px 0 8px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:21px;letter-spacing:-0.01em;color:#16263E">Stålbygg reises</h3>
-                <p style="margin:0;color:#56606e;font-size:14.5px;line-height:1.6">Med stål leverer vi raskt — bygget reiser seg på kort tid.</p>
-              </div>
-              <div style="animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 20%">
-                <span style="position:relative;display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#2E5A8C;border:2px solid #2E5A8C;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:#fff;animation:nodePulse 4s ease-in-out 1.8s infinite">04</span>
-                <h3 style="margin:22px 0 8px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:21px;letter-spacing:-0.01em;color:#2E5A8C">Ferdig &amp; innflytting</h3>
-                <p style="margin:0;color:#56606e;font-size:14.5px;line-height:1.6">Du får lokalene du trenger, og kan fokusere på det som betyr mest.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- PROJECTS -->
-      <section style="background-color:#20395D;background-image:linear-gradient(rgba(157,189,226,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(157,189,226,0.06) 1px,transparent 1px);background-size:46px 46px;padding:120px 0;color:#fff">
-        <div style="max-width:1240px;margin:0 auto;padding:0 32px">
-          <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:48px;animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 26%">
-            <div>
-              <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#9DBDE2">[ 03 ] — Utvalgte prosjekter</span>
-              <h2 style="margin:14px 0 0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(32px,4.4vw,58px);line-height:1.02;letter-spacing:-0.025em;color:#fff">Bygg vi er stolte av.</h2>
-            </div>
-            <span data-action="goProsjekter" style="cursor:pointer;font-size:13px;font-weight:600;letter-spacing:0.02em;color:#16263E;background:#fff;padding:14px 24px;border-radius:100px;transition:transform .25s,background .25s;white-space:nowrap;display:inline-flex;align-items:center;gap:8px" data-hover="background:#E4ECF6;transform:translateY(-2px)">Se alle prosjekter <span>→</span></span>
-          </div>
-          <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:18px">
-            <a data-proj data-action="goProsjekter" style="grid-row:span 2;position:relative;border-radius:22px;overflow:hidden;cursor:pointer;min-height:560px;display:block;animation:revealClip both linear;animation-timeline:view();animation-range:entry 0% cover 22%">
-              <img data-proj-img src="https://ferrostal.no/wp-content/uploads/2024/09/image11.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.16,1,.3,1)">
-              <div data-proj-spot style="position:absolute;inset:0;z-index:1;opacity:0;transition:opacity .35s;pointer-events:none;mix-blend-mode:screen"></div>
-              <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,42,69,0.05) 30%,rgba(23,42,69,0.55) 62%,rgba(23,42,69,0.95))"></div>
-              <span style="position:absolute;top:24px;left:24px;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:#16263E;background:#fff;padding:6px 11px;border-radius:8px;letter-spacing:0.06em">01</span>
-              <span data-proj-arrow style="position:absolute;top:22px;right:22px;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.3);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;transition:background .3s,transform .3s">↗</span>
-              <div data-proj-body style="position:absolute;left:0;right:0;bottom:0;padding:34px;transition:transform .4s cubic-bezier(.16,1,.3,1)">
-                <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#9DBDE2;text-transform:uppercase">Coop Extra · Forberg Eiendomsselskap</span>
-                <h3 style="margin:10px 0 0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;color:#fff;line-height:1.04;letter-spacing:-0.01em">Folkestadvegen 3</h3>
-                <p style="margin:9px 0 0;color:rgba(255,255,255,0.78);font-size:14.5px;line-height:1.5">Ny Coop Extra-butikk i Bø i Telemark.</p>
-                <div style="display:flex;gap:8px;margin-top:16px">
-                  <span style="font-family:'Space Mono',monospace;font-size:11px;color:#fff;border:1px solid rgba(255,255,255,0.28);padding:5px 12px;border-radius:100px">Butikk</span>
-                  <span style="font-family:'Space Mono',monospace;font-size:11px;color:#fff;border:1px solid rgba(255,255,255,0.28);padding:5px 12px;border-radius:100px">Bø, Telemark</span>
+        </section>
+        <section class="sketch" id="byggskisse" aria-labelledby="sketch-title" hidden>
+          <div class="h26-shell">
+            <header class="sketch-head"><h2 id="sketch-title" tabindex="-1">Skisser ditt bygg.</h2><p>Velg leveranse, tegn inn rom og se hallen uten tak. Ta med idéskissen til en samtale med Ferro.</p></header>
+            <div class="sketch-workbench">
+              <div class="sketch-sheet">
+                <div class="sketch-toolbar"><img class="sketch-brand" src="assets/img/ferro-logo.svg" alt="Ferro Stålentreprenør" width="72" height="48"><div role="group" aria-label="Visning"><button type="button" data-view="volume" aria-pressed="true">3D</button><button type="button" data-view="plan" aria-pressed="false">Plan</button><button type="button" data-view="facade" aria-pressed="false">Fasade</button></div><button type="button" data-rotate aria-label="Roter bygget 45 grader">Roter ↻</button></div>
+                <div class="sketch-layer" data-model-tools role="group" aria-label="Modellvisning"><button data-layer="shell" aria-pressed="true">Utvendig</button><button data-layer="open" aria-pressed="false">Åpen modell</button><button type="button" data-layer="steel" aria-pressed="false">Stål</button><button type="button" data-tilt>Vipp ↕</button></div>
+                <label class="sketch-layer elevation-picker" data-section-tools hidden>Vis til og med <select name="cutFloor"></select></label>
+                <div class="sketch-layer" data-plan-tools role="group" aria-label="Plannivå" hidden><button data-level="ground" aria-pressed="true">1. etasje</button><button data-level="deck" aria-pressed="false">Mesanin</button><button data-level="second">2. etasje</button><button data-level="third">3. etasje</button><button data-level="loft" hidden>Loft</button></div>
+                <div class="sketch-layer roof-section" data-roof-section hidden>
+                  <svg viewBox="0 0 104 54" width="104" height="54" aria-hidden="true"><g data-roof-profile><path data-roof-walls fill="#e2eaf1" stroke="#4a6883"/><path data-roof-space fill="#bbd8e9" stroke="#294f70"/><path data-loft-floor stroke="#193451" stroke-dasharray="3 2"/></g></svg>
+                  <div><strong>Saltak · tverrsnitt</strong><small data-roof-description></small></div>
+                  <button type="button" data-add-loft>+ Loftrom</button>
                 </div>
+                <label class="sketch-layer elevation-picker" hidden data-elevation>Vis fasade <select name="elevation"></select></label>
+                <svg id="sketch-drawing" viewBox="0 0 720 440" role="img" aria-label="Romskisse av hallen"></svg>
+                <div class="sheet-caption"><span data-sheet-title></span><span data-measure></span></div>
+                <p class="sheet-note" data-gesture></p>
               </div>
-            </a>
-            <a data-proj data-action="goProsjekter" style="position:relative;border-radius:22px;overflow:hidden;cursor:pointer;min-height:271px;display:block;animation:revealClip both linear;animation-timeline:view();animation-range:entry 0% cover 22%">
-              <img data-proj-img src="https://ferrostal.no/wp-content/uploads/2024/09/IMG_8290-1024x768.jpeg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.16,1,.3,1)">
-              <div data-proj-spot style="position:absolute;inset:0;z-index:1;opacity:0;transition:opacity .35s;pointer-events:none;mix-blend-mode:screen"></div>
-              <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,42,69,0.05) 36%,rgba(23,42,69,0.92))"></div>
-              <span style="position:absolute;top:20px;left:20px;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:#16263E;background:#fff;padding:6px 11px;border-radius:8px;letter-spacing:0.06em">02</span>
-              <span data-proj-arrow style="position:absolute;top:18px;right:18px;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.3);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;transition:background .3s,transform .3s">↗</span>
-              <div data-proj-body style="position:absolute;left:0;right:0;bottom:0;padding:26px;transition:transform .4s cubic-bezier(.16,1,.3,1)">
-                <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#9DBDE2;text-transform:uppercase">Dalen Mekaniske</span>
-                <h3 style="margin:8px 0 0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:23px;color:#fff;line-height:1.04;letter-spacing:-0.01em">Tokke Teknologipark</h3>
-              </div>
-            </a>
-            <a data-proj data-action="goProsjekter" style="position:relative;border-radius:22px;overflow:hidden;cursor:pointer;min-height:271px;display:block;animation:revealClip both linear;animation-timeline:view();animation-range:entry 0% cover 22%">
-              <img data-proj-img src="https://ferrostal.no/wp-content/uploads/2024/09/IMG_2054-768x1024.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.16,1,.3,1)">
-              <div data-proj-spot style="position:absolute;inset:0;z-index:1;opacity:0;transition:opacity .35s;pointer-events:none;mix-blend-mode:screen"></div>
-              <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,42,69,0.05) 36%,rgba(23,42,69,0.92))"></div>
-              <span style="position:absolute;top:20px;left:20px;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:#16263E;background:#fff;padding:6px 11px;border-radius:8px;letter-spacing:0.06em">03</span>
-              <span data-proj-arrow style="position:absolute;top:18px;right:18px;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.3);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;transition:background .3s,transform .3s">↗</span>
-              <div data-proj-body style="position:absolute;left:0;right:0;bottom:0;padding:26px;transition:transform .4s cubic-bezier(.16,1,.3,1)">
-                <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#9DBDE2;text-transform:uppercase">NTT AS · Nome Eiendom</span>
-                <h3 style="margin:8px 0 0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:23px;color:#fff;line-height:1.04;letter-spacing:-0.01em">Skiensvegen 740</h3>
-              </div>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <!-- TESTIMONIALS -->
-      <section style="background:transparent;padding:120px 0">
-        <div style="max-width:1240px;margin:0 auto;padding:0 32px">
-          <div style="margin-bottom:56px;animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 26%">
-            <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#2E5A8C">[ 04 ] — Tilbakemeldinger</span>
-            <h2 style="margin:14px 0 14px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(32px,4.4vw,58px);line-height:1.0;letter-spacing:-0.02em;max-width:18ch">Tilbakemeldinger fra kunder</h2>
-            <p style="margin:0;max-width:60ch;font-size:16.5px;line-height:1.65;color:#56606e">Vårt mål er å levere kvalitet til rett pris og sikre at du blir fornøyd med prosessen fra start til slutt. Vi får gode tilbakemeldinger på vårt arbeid – her er hva noen av våre kunder sier:</p>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
-            <figure style="margin:0;background:#fff;border-radius:22px;padding:34px;display:flex;flex-direction:column;gap:22px;border:1px solid rgba(20,22,24,0.06);animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 22%">
-              <span style="font-family:'Space Grotesk',sans-serif;font-size:48px;line-height:0.4;color:#2E5A8C">”</span>
-              <blockquote style="margin:0;font-size:15.5px;line-height:1.65;color:#23262A">Vi valgte en lokal leverandør da vi skulle sette opp vårt bygg i Ytre Helgen Næringspark. Den tette oppfølgingen, de gode løsningene vi fikk servert og hvor engasjerte Vegard og Ingar var, gjorde at vi raskt kunne flytte inn i et nytt og fremtidsrettet lokale.</blockquote>
-              <figcaption style="margin-top:auto;display:flex;align-items:center;gap:12px;padding-top:10px;border-top:1px solid rgba(20,22,24,0.08)">
-                <img src="https://ferrostal.no/wp-content/uploads/2025/02/NTTlogo-150x150.png" style="height:36px;width:36px;object-fit:contain">
-                <div><div style="font-weight:600;font-size:14px">Reidar Brauti</div><div style="font-size:13px;color:#6B6E6A">NTT</div></div>
-              </figcaption>
-            </figure>
-            <figure style="margin:0;background:#fff;border-radius:22px;padding:34px;display:flex;flex-direction:column;gap:22px;border:1px solid rgba(20,22,24,0.06);animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 22%">
-              <span style="font-family:'Space Grotesk',sans-serif;font-size:48px;line-height:0.4;color:#2E5A8C">”</span>
-              <blockquote style="margin:0;font-size:15.5px;line-height:1.65;color:#23262A">Tett oppfølging, tålmodige og på ballen. Etter å ha bygget Tokke Teknologipark for oss var det enkelt å også velge Ferro Stålentreprenør til å sette opp våre nye produksjonslokaler. De er gode rådgivere og passer på at vi får det vi trenger, og at vi også er rustet for fremtidig vekst.</blockquote>
-              <figcaption style="margin-top:auto;display:flex;align-items:center;gap:12px;padding-top:10px;border-top:1px solid rgba(20,22,24,0.08)">
-                <img src="https://ferrostal.no/wp-content/uploads/2025/02/DM-300x194.png" style="height:36px;width:46px;object-fit:contain">
-                <div><div style="font-weight:600;font-size:14px">Hermann Betten</div><div style="font-size:13px;color:#6B6E6A">Dalen Mekaniske</div></div>
-              </figcaption>
-            </figure>
-            <figure style="margin:0;background:#20395D;border-radius:22px;padding:34px;display:flex;flex-direction:column;gap:22px;animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 22%">
-              <span style="font-family:'Space Grotesk',sans-serif;font-size:48px;line-height:0.4;color:#9DBDE2">”</span>
-              <blockquote style="margin:0;font-size:15.5px;line-height:1.65;color:rgba(255,255,255,0.88)">Vi samarbeidet meget godt med Ferro Stålentreprenør ifm. bygging av en ny Coop Extra butikk i Folkestadvegen 3 i Bø i Telemark. Vi er også svært godt fornøyd med det arbeidet som denne entreprenøren utførte for oss og i tillegg var prisene meget konkurransedyktige.</blockquote>
-              <figcaption style="margin-top:auto;display:flex;align-items:center;gap:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.12)">
-                <img src="https://ferrostal.no/wp-content/uploads/2025/02/forberg-150x150.png" style="height:36px;width:36px;object-fit:contain;background:#fff;border-radius:6px;padding:2px">
-                <div><div style="font-weight:600;font-size:14px;color:#fff">Einar Forberg</div><div style="font-size:13px;color:rgba(255,255,255,0.6)">Forberg Eiendomsselskap AS</div></div>
-              </figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
-
-      <!-- CTA + CONTACT -->
-      <section style="background:transparent;padding:120px 0">
-        <div style="max-width:1240px;margin:0 auto;padding:0 32px">
-          <div style="background-color:#16263E;background-image:linear-gradient(rgba(157,189,226,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(157,189,226,0.08) 1px,transparent 1px);background-size:42px 42px;border-radius:30px;padding:clamp(40px,5vw,72px);display:grid;grid-template-columns:1.1fr 1fr;gap:56px;overflow:hidden;position:relative;animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 24%">
-            <div style="position:absolute;top:-50%;right:-12%;width:65%;height:200%;background:radial-gradient(circle,rgba(46,90,140,0.45),transparent 62%);pointer-events:none"></div>
-            <div style="position:absolute;left:0;top:0;bottom:0;width:120px;background:linear-gradient(90deg,rgba(157,189,226,0.12),transparent);animation:scanDown 9s ease-in-out infinite;transform:none;pointer-events:none"></div>
-            <div style="position:relative;color:#fff">
-              <span style="display:inline-flex;align-items:center;gap:9px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#9DBDE2"><span style="width:8px;height:8px;border-radius:50%;background:#2E5A8C;animation:nodePulse 3s ease-in-out infinite"></span>Uforpliktende prat</span>
-              <h2 style="margin:20px 0 0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(32px,3.9vw,52px);line-height:1.0;letter-spacing:-0.03em">La oss bygge<br>noe sammen.</h2>
-              <p style="margin:20px 0 34px;font-size:16px;line-height:1.6;color:rgba(255,255,255,0.78);max-width:38ch">Skal du i gang med et nytt prosjekt og trenger en pålitelig totalentreprenør? Ring oss for en uforpliktende prat.</p>
-              <a href="tel:95837123" style="display:flex;align-items:center;justify-content:space-between;gap:18px;text-decoration:none;background:rgba(157,189,226,0.08);border:1px solid rgba(157,189,226,0.22);border-radius:18px;padding:20px 24px;transition:background .3s,transform .3s;margin-bottom:12px" data-hover="background:rgba(157,189,226,0.16);transform:translateY(-2px)">
-                <span><span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#9DBDE2;text-transform:uppercase;margin-bottom:6px">Ring oss</span><span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(26px,2.8vw,34px);color:#fff;letter-spacing:-0.01em">958 37 123</span></span>
-                <span style="flex-shrink:0;width:48px;height:48px;border-radius:50%;background:#2E5A8C;color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px">→</span>
-              </a>
-              <a href="mailto:vegard@ferrostal.no" style="display:inline-flex;align-items:center;gap:10px;color:rgba(255,255,255,0.82);text-decoration:none;font-size:15px;padding:4px 2px" data-hover="color:#fff">✉ vegard@ferrostal.no</a>
-            </div>
-            <form data-action="submitForm" style="position:relative;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:14px;backdrop-filter:blur(6px)">
-              <div data-form-sent hidden>
-                <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;min-height:260px;color:#fff">
-                  <div style="width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,0.16);display:flex;align-items:center;justify-content:center;font-size:26px">✓</div>
-                  <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px">Takk!</div>
-                  <p style="margin:0;font-size:14px;color:rgba(255,255,255,0.82);max-width:26ch">Vi tar kontakt med deg så snart som mulig.</p>
+              <div class="sketch-panel">
+                <div class="sketch-total"><span>Grunnflate</span><strong data-total></strong></div>
+                <div class="sketch-sections" role="group" aria-label="Innstillinger"><button type="button" data-edit="form" aria-pressed="true">Byggform</button><button type="button" data-edit="facade" aria-pressed="false">Vegger og tak</button><button type="button" data-edit="openings" aria-pressed="false">Åpninger</button><button type="button" data-edit="zones" aria-pressed="false">Romplan</button></div>
+                <div data-pane="form">
+                  <div class="sketch-dimensions"><label>Lengde (m)<input type="number" name="lengde" min="3" max="200" value="30" step="1" required></label><label>Bredde (m)<input type="number" name="bredde" min="3" max="200" value="18" step="1" required></label><label>Vegghøyde (m)<input type="number" name="hoyde" min="2" max="20" value="6" step="0.5" required></label></div>
+                  <label class="sketch-field">Takform<select name="tak"><option value="gable">Saltak</option><option value="mono">Pulttak</option><option value="flat">Flatt tak</option></select></label>
+                  <label class="sketch-field" data-rise>Mønehøyde over raft (m)<input type="number" name="ridgeRise" min="0.1" max="30" step="0.01" placeholder="Automatisk"></label>
+                  <fieldset class="sketch-spec"><legend>Hva gjelder forespørselen?</legend><div class="sketch-options"><label><input type="checkbox" name="scope" value="Råbygg"> Råbygg</label><label><input type="checkbox" name="scope" value="Totalentreprise (TE)"> Totalentreprise (TE)</label><label><input type="checkbox" name="scope" value="Kun stål"> Kun stål</label><label><input type="checkbox" name="scope" value="Ombygning"> Ombygning</label></div></fieldset>
+                  <label class="sketch-field">Kommentar til prosjektet<textarea name="projectNote" maxlength="500" rows="2" placeholder="F.eks. tilbygg til eksisterende verksted"></textarea></label>
                 </div>
+                <div data-pane="facade" hidden>
+                  <div class="thermal-option"><strong data-thermal></strong><label class="sketch-check"><input type="checkbox" name="cold"> Uisolert bygg</label></div>
+                  <div class="sketch-pair"><label class="sketch-field">Yttervegg<select name="wall"><option value="horizontal">Liggende sandwichpanel (SW)</option><option value="vertical">Stående sandwichpanel (SW)</option><option value="sheet">Profilert stålplate</option><option value="other">Annen løsning</option></select></label>
+                  <label class="sketch-field">Takoppbygning<select name="cover"><option value="membrane">TRP + taktekking</option><option value="trp">TRP uten taktekking</option><option value="sandwich">Sandwichpanel (SW)</option><option value="other">Annen løsning</option></select></label></div>
+                  <label class="sketch-field">Kommentar til vegger og tak<textarea name="envelopeNote" maxlength="500" rows="2" placeholder="Paneltype, taktekking eller andre ønsker"></textarea></label>
+                </div>
+                <div data-pane="openings" hidden>
+                  <p class="opening-help">Oppgi antall og mål per fasade. Legg til en gruppe for hver størrelse.</p>
+                  <div data-opening-list></div>
+                  <div class="opening-add"><button type="button" data-opening-add="window">+ Vindu</button><button type="button" data-opening-add="door">+ Dør</button><button type="button" data-opening-add="gate">+ Port</button></div>
+                </div>
+                <div data-pane="zones" hidden>
+                  <div class="sketch-pair"><label class="sketch-field">Etasjer i bygget<select name="stories"><option value="1">1 etasje</option><option value="2">2 etasjer</option><option value="3">3 etasjer</option></select></label>
+                    <label class="sketch-field">Sone<select name="roomZone"></select></label></div>
+                  <div class="zone-placement" data-placement>
+                    <label class="sketch-field">Plasser valgt sone i forhold til<select name="zoneTarget"></select></label>
+                    <div class="room-splits" aria-label="Plassering på planen"><button type="button" data-place="above">↑ Over</button><button type="button" data-place="below">↓ Under</button><button type="button" data-place="left">← Venstre</button><button type="button" data-place="right">Høyre →</button></div>
+                    <output aria-live="polite" data-placed></output>
+                  </div>
+                  <details class="plan-zones"><summary>Endre soner og arealfordeling</summary><div class="sketch-zones" data-zones></div><button class="sketch-add" type="button" data-add>+ Legg til sone</button></details>
+                  <div data-loft-options><label class="sketch-check"><input type="checkbox" name="loft"> Loftrom under saltaket i denne sonen</label>
+                    <label class="sketch-field" data-loft-insulation hidden>Isolering av loftrom<select name="loftInsulation"><option>Avklares</option><option>Isolert</option><option>Uisolert</option></select></label></div>
+                  <label class="sketch-check"><input type="checkbox" name="mezzanine"> Mesanin i denne sonen</label>
+                  <label class="sketch-field" data-depth hidden>Mesanindybde <output></output><input type="range" name="deckDepth" min="10" max="100" step="1"></label>
+                  <div data-deck-position hidden><label class="sketch-field">Mesaninlengde <output data-deck-length></output><input type="range" name="deckLength" min="10" max="100"></label>
+                  <details><summary>Plassering i sonen</summary><label class="sketch-field">Fra starten av sonen <output data-deck-x></output><input type="range" name="deckX" min="0" max="90"></label>
+                  <label class="sketch-field">Fra langside B <output data-deck-y></output><input type="range" name="deckY" min="0" max="90"></label></details></div>
+                  <div class="sketch-levels" role="group" aria-label="Rediger etasje"><button data-room-level="ground">1. etasje</button><button data-room-level="deck">Mesanin</button><button data-room-level="second">2. etasje</button><button data-room-level="third">3. etasje</button><button data-room-level="loft" hidden>Loft</button></div>
+                  <fieldset class="sketch-spec room-editor"><legend>Innred rommet</legend>
+                    <label class="sketch-field">Valgt areal<select name="activeRoom"></select></label>
+                    <div class="room-identity"><label class="sketch-field">Romnavn<input name="roomName" list="ferro-room-types" maxlength="40"></label><output data-room-size></output></div>
+                    <div class="room-splits"><button data-split="x">Del på langs ↔</button><button data-split="y">Del på tvers ↕</button></div>
+                    <div data-room-boundary hidden><label class="sketch-field">Velg skillevegg<select name="cutPath"></select></label><label class="sketch-field">Flytt skillevegg<input type="range" name="cut" min="1" max="99"></label><button type="button" class="sketch-add" data-merge>Fjern valgt rom</button></div>
+                    <div class="wall-row-tool"><div class="sketch-pair"><label class="sketch-field">Legg rom langs<select name="rowWall"><option value="sideA">Langside A</option><option value="sideB">Langside B</option><option value="front">Fremre gavlside</option><option value="back">Bakre gavlside</option></select></label>
+                    <label class="sketch-field">Antall rom<select name="rowCount"><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option></select></label></div>
+                    <button type="button" data-row>Sett inn rom på rekke</button></div>
+                  </fieldset>
+                  <label class="sketch-field">Kommentar til romplanen<textarea name="planNote" maxlength="500" rows="2" placeholder="F.eks. garderobe ved inngangen eller kontor på mesaninen"></textarea></label>
+                </div>
+                <p class="opening-status" data-opening-status role="status" hidden></p>
+                <details class="sketch-files"><summary>Egne tegninger</summary><div data-drawing-picker></div></details>
+                <p class="sketch-limits">Idéskisse. Rammeavstand og valg av bæresystem, inkludert eventuelt fagverk, avklares nærmere i tilbudsfasen.</p>
+                <div class="sketch-actions"><a href="#kontakt" data-attach>Ta med i forespørsel ↗</a><button type="button" data-download>Last ned skisse ↓</button></div>
               </div>
-              <div data-form-fields style="display:flex;flex-direction:column;gap:14px">
-                <input placeholder="Navn" style="background:rgba(255,255,255,0.95);border:none;border-radius:12px;padding:14px 16px;font-size:15px;font-family:inherit;outline:none;color:#20395D">
-                <input placeholder="E-post" type="email" style="background:rgba(255,255,255,0.95);border:none;border-radius:12px;padding:14px 16px;font-size:15px;font-family:inherit;outline:none;color:#20395D">
-                <input placeholder="Tlf nr" style="background:rgba(255,255,255,0.95);border:none;border-radius:12px;padding:14px 16px;font-size:15px;font-family:inherit;outline:none;color:#20395D">
-                <textarea placeholder="Hva kan vi hjelpe deg med?" rows="3" style="background:rgba(255,255,255,0.95);border:none;border-radius:12px;padding:14px 16px;font-size:15px;font-family:inherit;outline:none;resize:none;color:#20395D"></textarea>
-                <button type="submit" style="margin-top:4px;background:#20395D;color:#fff;border:none;border-radius:100px;padding:15px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;transition:transform .2s,background .2s" data-hover="background:#000;transform:translateY(-1px)">Send →</button>
-              </div>
-            </form>
+            </div>
           </div>
-        </div>
-      </section>
-
+        </section>
+        <section class="h26-section h26-shell" id="h26-prosjekter" aria-labelledby="h26-projects-title">
+          <div class="h26-section-head">
+            <h2 id="h26-projects-title">Utvalgte prosjekter</h2>
+            <a class="archive-link" href="#prosjekter">Hele prosjektarkivet <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="h26-project-grid">
+            <article class="h26-project">
+              <img src="assets/photos/2024/09/IMG_8290.webp" width="1280" height="720" alt="Tilbygget i Tokke Teknologipark" loading="lazy">
+              <p class="h26-metadata">Dalen · Produksjon</p>
+              <h3>Tokke Teknologipark</h3>
+              <p>Totalentreprise for Dalen Mekaniske sitt tilbygg.</p>
+              <a class="h26-case-link" href="#prosjekt/tokke-teknologipark">Se prosjektet <span aria-hidden="true">↗</span></a>
+            </article>
+            <article class="h26-project">
+              <img src="assets/photos/2024/09/IMG_2054-rotated.webp" width="1280" height="720" alt="NTT-bygget i Skiensvegen 740" loading="lazy">
+              <p class="h26-metadata">Nome · Næringsbygg</p>
+              <h3>Skiensvegen 740</h3>
+              <p>Kontor, verksted og lager for NTT AS.</p>
+              <a class="h26-case-link" href="#prosjekt/skiensvegen-740">Se prosjektet <span aria-hidden="true">↗</span></a>
+            </article>
+            <article class="h26-project">
+              <img src="assets/photos/2024/09/image11.webp" width="1280" height="720" alt="Fasaden til Coop Extra i Bø" loading="lazy">
+              <p class="h26-metadata">Bø i Telemark · Butikk</p>
+              <h3>Folkestadvegen 3</h3>
+              <p>Nytt stålbygg for Coop Extra i Bø sentrum.</p>
+              <a class="h26-case-link" href="#prosjekt/folkestadvegen-3">Se prosjektet <span aria-hidden="true">↗</span></a>
+            </article>
+          </div>
+        </section>
+        <section class="h26-build-section" id="h26-bygg" aria-labelledby="h26-build-title">
+          <div class="h26-section h26-shell h26-build-layout">
+            <div><h2 id="h26-build-title">Plass til det<br>du skal drive med.</h2><p>Velg byggtype for å starte en prosjektforespørsel.</p></div>
+            <ul class="h26-build-list">
+              <li><a href="#kontakt" data-building="Næringslokaler">Næringslokaler<span aria-hidden="true">↗</span></a></li><li><a href="#kontakt" data-building="Produksjonslokaler">Produksjonslokaler<span aria-hidden="true">↗</span></a></li><li><a href="#kontakt" data-building="Verksted">Verksted<span aria-hidden="true">↗</span></a></li><li><a href="#kontakt" data-building="Butikk">Butikk<span aria-hidden="true">↗</span></a></li><li><a href="#kontakt" data-building="Kontor">Kontor<span aria-hidden="true">↗</span></a></li>
+            </ul>
+          </div>
+        </section>
+        <section class="h26-section h26-shell" id="h26-prosess" aria-labelledby="h26-process-title">
+          <div class="h26-section-head"><h2 id="h26-process-title">Fra idé til innflytting</h2><p>Du har én partner å forholde deg til gjennom hele byggeprosessen.</p></div>
+          <ol class="h26-steps">
+            <li><h3>Idé og rådgivning</h3><p>Vi avklarer behovene og ser på mulighetene sammen.</p></li>
+            <li><h3>Tegning og plan</h3><p>Vi utarbeider underlaget og planlegger gjennomføringen.</p></li>
+            <li><h3>Bygging</h3><p>Vi følger opp arbeidet mens stålbygget reises.</p></li>
+            <li><h3>Overlevering</h3><p>Du overtar et bygg tilpasset virksomheten din.</p></li>
+          </ol>
+        </section>
+        <section class="h26-contact" id="h26-kontakt" aria-labelledby="h26-contact-title">
+          <div class="h26-section h26-shell h26-contact-layout">
+            <div><h2 id="h26-contact-title">Hva skal du bygge?</h2><p>Fortell oss om prosjektet ditt, så tar vi en uforpliktende prat.</p></div>
+            <div class="h26-contact-links">
+              <a class="h26-button h26-button-light" href="mailto:vegard@ferrostal.no">Send e-post <span aria-hidden="true">↗</span></a>
+              <a class="h26-button h26-button-quiet" href="tel:+4795837123">Ring 958 37 123</a>
+            </div>
+          </div>
+        </section>
     </div>
 
     <!-- ================= PROSJEKTER ================= -->
     <div class="screen" data-screen="prosjekter" data-screen-label="Prosjekter">
-      <section style="background-color:#20395D;background-image:linear-gradient(rgba(157,189,226,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(157,189,226,0.06) 1px,transparent 1px);background-size:46px 46px;padding:160px 0 90px;color:#fff;position:relative;overflow:hidden">
-        <div style="position:absolute;left:0;right:0;top:0;height:170px;background:linear-gradient(180deg,rgba(157,189,226,0.12),transparent);animation:scanBeam 9s ease-in-out infinite;pointer-events:none"></div>
-        <div style="position:relative;max-width:1240px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1.08fr 0.92fr;gap:48px;align-items:center">
-          <div>
-            <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#9DBDE2;animation:fadeIn .6s both;display:inline-flex;align-items:center;gap:11px"><span style="width:30px;height:1px;background:#9DBDE2"></span>Prosjekter</span>
-            <h1 style="margin:18px 0 0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(38px,5vw,74px);line-height:0.98;letter-spacing:-0.025em;max-width:14ch;animation:revealUp .8s both">Fra første idé til ferdig bygg.</h1>
-            <p style="margin:24px 0 0;max-width:48ch;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,0.74);animation:fadeIn 1s .3s both">Vi vet at budsjettet ditt er viktig, og sikrer en effektiv prosess som gir deg mest mulig for pengene. Med stålbygg leverer vi raskt — så du får lokalene du trenger.</p>
-            <div style="margin-top:40px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.12);animation:fadeIn 1s .6s both">
-              <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#9DBDE2;margin-bottom:16px">Vi bygger blant annet</div>
-              <div style="display:flex;flex-wrap:wrap;gap:10px">
-                <span style="font-size:14px;color:#fff;background:rgba(157,189,226,0.12);border:1px solid rgba(157,189,226,0.24);padding:9px 16px;border-radius:100px">Lagerhall</span>
-                <span style="font-size:14px;color:#fff;background:rgba(157,189,226,0.12);border:1px solid rgba(157,189,226,0.24);padding:9px 16px;border-radius:100px">Driftsbygning</span>
-                <span style="font-size:14px;color:#fff;background:rgba(157,189,226,0.12);border:1px solid rgba(157,189,226,0.24);padding:9px 16px;border-radius:100px">Idrettshall</span>
-                <span style="font-size:14px;color:#fff;background:rgba(157,189,226,0.12);border:1px solid rgba(157,189,226,0.24);padding:9px 16px;border-radius:100px">Ridehall</span>
-                <span style="font-size:14px;color:#fff;background:rgba(157,189,226,0.12);border:1px solid rgba(157,189,226,0.24);padding:9px 16px;border-radius:100px">Verksted</span>
-                <span style="font-size:14px;color:#fff;background:rgba(157,189,226,0.12);border:1px solid rgba(157,189,226,0.24);padding:9px 16px;border-radius:100px">Næringslokale</span>
-                <span style="font-size:14px;color:#16263E;background:#9DBDE2;font-weight:600;padding:9px 16px;border-radius:100px">+ mye mer</span>
-              </div>
-            </div>
-          </div>
-          <div style="position:relative;height:420px;animation:fadeIn 1.2s .4s both">
-            <div style="position:absolute;top:0;right:8%;width:62%;height:64%;border-radius:18px;overflow:hidden;box-shadow:0 40px 80px -36px rgba(0,0,0,0.6);border:1px solid rgba(157,189,226,0.18);animation:floatA 7s ease-in-out infinite">
-                <img src="https://ferrostal.no/wp-content/uploads/2024/09/image11.jpg" alt="Ferro prosjekt" style="display:block;width:100%;height:100%;object-fit:cover">
-                <img src="https://ferrostal.no/wp-content/uploads/2024/08/logo-white.png" alt="" style="position:absolute;top:11px;left:11px;height:16px;opacity:.85;filter:drop-shadow(0 1px 3px rgba(0,0,0,.6))">
-              </div>
-            <div style="position:absolute;bottom:0;left:0;width:54%;height:56%;border-radius:18px;overflow:hidden;box-shadow:0 40px 80px -36px rgba(0,0,0,0.6);border:1px solid rgba(157,189,226,0.18);animation:floatB 8s ease-in-out infinite">
-                <img src="https://ferrostal.no/wp-content/uploads/2024/09/IMG_8290-1024x768.jpeg" alt="Ferro prosjekt" style="display:block;width:100%;height:100%;object-fit:cover">
-                <img src="https://ferrostal.no/wp-content/uploads/2024/08/logo-white.png" alt="" style="position:absolute;top:11px;left:11px;height:16px;opacity:.85;filter:drop-shadow(0 1px 3px rgba(0,0,0,.6))">
-              </div>
-            <div style="position:absolute;bottom:14%;right:0;display:flex;align-items:center;gap:9px;background:rgba(255,255,255,0.95);border-radius:100px;padding:9px 16px;box-shadow:0 18px 36px -18px rgba(0,0,0,0.5);animation:floatB 6.5s ease-in-out infinite">
-              <span style="width:7px;height:7px;border-radius:50%;background:#2E5A8C;box-shadow:0 0 0 3px rgba(46,90,140,0.25)"></span>
-              <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.06em;color:#20395D;font-weight:700">TELEMARK · NORGE</span>
-            </div>
-          </div>
+      <header class="h26-page-head h26-shell">
+        <div>
+          <p class="h26-kicker"><span class="h26-film-dot"></span>Prosjekter</p>
+          <h1>Bygg vi har reist.</h1>
+        </div>
+        <p>Vi vet at budsjettet ditt er viktig, og sikrer en effektiv prosess som gir deg mest mulig for pengene. Med stålbygg leverer vi raskt — så du får lokalene du trenger.</p>
+      </header>
+      <section class="h26-section h26-shell" aria-label="Alle prosjekter">
+        <div class="portfolio-tools"><label for="project-search">Finn et prosjekt</label><input id="project-search" type="search" placeholder="Søk etter navn, sted eller byggtype"><output data-result-count for="project-search" aria-live="polite"></output></div>
+        <div class="h26-project-list" data-proj-grid></div>
+      </section>
+      <section class="h26-build-section" aria-labelledby="h26-prosj-bygg-title">
+        <div class="h26-section h26-shell h26-build-layout">
+          <div><h2 id="h26-prosj-bygg-title">Vi bygger blant annet</h2><p>Velg en byggtype og fortell oss hva du planlegger.</p></div>
+          <ul class="h26-build-list">
+            <li><a href="#kontakt" data-building="Lagerhall">Lagerhall<span aria-hidden="true">↗</span></a></li>
+            <li><a href="#kontakt" data-building="Driftsbygning">Driftsbygning<span aria-hidden="true">↗</span></a></li>
+            <li><a href="#kontakt" data-building="Idrettshall">Idrettshall<span aria-hidden="true">↗</span></a></li>
+            <li><a href="#kontakt" data-building="Ridehall">Ridehall<span aria-hidden="true">↗</span></a></li>
+            <li><a href="#kontakt" data-building="Verksted">Verksted<span aria-hidden="true">↗</span></a></li>
+            <li><a href="#kontakt" data-building="Næringslokaler">Næringslokaler<span aria-hidden="true">↗</span></a></li>
+            <li><a href="#kontakt" data-building="Annet bygg">Annet bygg<span aria-hidden="true">↗</span></a></li>
+          </ul>
         </div>
       </section>
-      <section style="background:transparent;padding:90px 0 120px">
-        <div style="max-width:1240px;margin:0 auto;padding:0 32px">
-          <div data-proj-grid style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px"></div>
+      <section class="h26-contact" aria-labelledby="h26-prosj-contact-title">
+        <div class="h26-section h26-shell h26-contact-layout">
+          <div><h2 id="h26-prosj-contact-title">Har du et prosjekt på gang?</h2><p>Ta en uforpliktende prat med oss.</p></div>
+          <div class="h26-contact-links">
+            <a class="h26-button h26-button-light" href="#kontakt" data-action="goKontakt">Kontakt oss <span aria-hidden="true">↗</span></a>
+          </div>
         </div>
       </section>
     </div>
@@ -405,189 +238,71 @@
 
     <!-- ================= OM OSS ================= -->
     <div class="screen" data-screen="omoss" data-screen-label="Om oss">
-      <section style="background-color:#20395D;background-image:linear-gradient(rgba(157,189,226,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(157,189,226,0.06) 1px,transparent 1px);background-size:46px 46px;padding:160px 0 90px;color:#fff;position:relative;overflow:hidden">
-        <div style="position:absolute;inset:0;background:radial-gradient(100% 60% at 90% 0%,rgba(61,108,168,0.25),transparent 60%)"></div>
-        <div style="position:absolute;left:0;right:0;top:0;height:170px;background:linear-gradient(180deg,rgba(157,189,226,0.12),transparent);animation:scanBeam 9s ease-in-out infinite;pointer-events:none"></div>
-        <div style="position:relative;max-width:1240px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1.05fr 0.95fr;gap:48px;align-items:center">
+      <header class="h26-page-head h26-shell">
+        <div>
+          <p class="h26-kicker"><span class="h26-film-dot"></span>Om oss</p>
+          <h1>Vi bygger stålbygg som passer perfekt for deg.</h1>
+        </div>
+        <p>En lokal totalentreprenør med tett oppfølging — fra første skisse til nøkkelferdig bygg.</p>
+      </header>
+      <div class="h26-shell">
+        <img class="h26-detail-hero h26-detail-hero--wide" src="assets/photos/2024/09/IMG_8290.webp" width="1280" height="720" alt="Tilbygget i Tokke Teknologipark" loading="lazy">
+      </div>
+      <section class="h26-section h26-shell" aria-labelledby="h26-about-title">
+        <div class="h26-about-intro">
+          <h2 id="h26-about-title">Totalentreprenør — fra start til slutt.</h2>
           <div>
-            <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#9DBDE2;display:inline-flex;align-items:center;gap:11px;animation:fadeIn .6s both"><span style="width:30px;height:1px;background:#9DBDE2"></span>Om oss</span>
-            <h1 style="margin:18px 0 0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(38px,5vw,74px);line-height:0.98;letter-spacing:-0.025em;max-width:16ch;animation:revealUp .8s both">Vi bygger stålbygg som passer perfekt for deg.</h1>
-            <p style="margin:24px 0 0;max-width:46ch;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,0.74);animation:fadeIn 1s .3s both">En lokal totalentreprenør med tett oppfølging — fra første skisse til nøkkelferdig bygg.</p>
+            <p>Som totalentreprenør kan vi bistå deg helt fra starten – før tegningene er klare – og sikre en smidig prosess fra idé til ferdig bygg. Vi bygger stålbygg som passer perfekt for deg, enten du skal sette opp et lager, butikk, verksted, kontor eller noe annet.</p>
+            <p>Sammen finner vi den beste løsningen for ditt prosjekt, slik at du kan komme raskt i gang med det du liker best – i dine nye lokaler.</p>
           </div>
-          <div style="position:relative;height:380px;animation:fadeIn 1.2s .4s both">
-            <div style="position:absolute;top:0;right:6%;width:60%;height:62%;border-radius:18px;overflow:hidden;box-shadow:0 40px 80px -36px rgba(0,0,0,0.6);border:1px solid rgba(157,189,226,0.18);animation:floatA 7s ease-in-out infinite">
-              <img src="https://ferrostal.no/wp-content/uploads/2024/09/image11.jpg" alt="Ferro" style="width:100%;height:100%;object-fit:cover">
-              <img src="https://ferrostal.no/wp-content/uploads/2024/08/logo-white.png" alt="" style="position:absolute;top:11px;left:11px;height:16px;opacity:.85;filter:drop-shadow(0 1px 3px rgba(0,0,0,.6))">
-            </div>
-            <div style="position:absolute;bottom:0;left:0;width:52%;height:54%;border-radius:18px;overflow:hidden;box-shadow:0 40px 80px -36px rgba(0,0,0,0.6);border:1px solid rgba(157,189,226,0.18);animation:floatB 8s ease-in-out infinite">
-              <img src="https://ferrostal.no/wp-content/uploads/2024/09/IMG_8290-1024x768.jpeg" alt="Ferro" style="width:100%;height:100%;object-fit:cover">
-            </div>
-            <div style="position:absolute;bottom:12%;right:0;display:flex;align-items:center;gap:9px;background:rgba(255,255,255,0.95);border-radius:100px;padding:9px 16px;box-shadow:0 18px 36px -18px rgba(0,0,0,0.5);animation:floatB 6.5s ease-in-out infinite">
-              <img src="https://ferrostal.no/wp-content/uploads/2024/08/SG_GULL_MORKBAKGRUNN.png" alt="" style="height:22px;border-radius:5px">
-              <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.05em;color:#20395D;font-weight:700">SOLIDITET · GULL</span>
-            </div>
+        </div>
+        <ol class="h26-steps h26-steps--3">
+          <li><h3>Lokal og nær</h3><p>En lokal leverandør med tett oppfølging — vi er engasjerte i prosjektet ditt fra dag én.</p></li>
+          <li><h3>Raskt med stål</h3><p>Stålbygg lar oss levere raskt, så du får lokalene du trenger uten unødvendig ventetid.</p></li>
+          <li><h3>Rett pris</h3><p>Vårt mål er kvalitet til rett pris, og at du blir fornøyd med prosessen fra start til slutt.</p></li>
+        </ol>
+      </section>
+      <section class="h26-build-section" aria-labelledby="h26-team-title">
+        <div class="h26-section h26-shell">
+          <div class="h26-section-head">
+            <h2 id="h26-team-title">Våre ansatte</h2>
+            <p>Vi er et lite, men dedikert team som jobber sammen for å levere skreddersydde løsninger til våre kunder. Hos oss får du personlig oppfølging og et tett samarbeid gjennom hele prosjektet.</p>
+          </div>
+          <div class="h26-team">
+            <article class="h26-person">
+              <img src="assets/photos/2024/09/Vegard-ferro-768x1024.webp" alt="Vegard Landsdal" loading="lazy" decoding="async">
+              <h3>Vegard Landsdal</h3>
+              <p>Daglig leder</p>
+              <a class="h26-text-link" href="mailto:vegard@ferrostal.no">vegard@ferrostal.no</a>
+              <a class="h26-text-link" href="tel:+4795837123">958 37 123</a>
+            </article>
+            <article class="h26-person">
+              <img src="assets/photos/2025/02/477673771_9946373715377044_7439716856953463575_n-769x1024.webp" alt="Ingar Kaasa" loading="lazy" decoding="async">
+              <h3>Ingar Kaasa</h3>
+              <p>Prosjektleder</p>
+              <a class="h26-text-link" href="mailto:ingar@ferrostal.no">ingar@ferrostal.no</a>
+              <a class="h26-text-link" href="tel:+4795078729">950 78 729</a>
+            </article>
+            <article class="h26-person">
+              <img src="assets/photos/2025/02/aleksander.webp" alt="Aleksander Dahle Madsen" loading="lazy" decoding="async">
+              <h3>Aleksander Dahle Madsen</h3>
+              <p>Prosjektleder</p>
+              <a class="h26-text-link" href="mailto:aleksander@ferrostal.no">aleksander@ferrostal.no</a>
+              <a class="h26-text-link" href="tel:+4795979331">959 79 331</a>
+            </article>
+          </div>
+          <div class="h26-team-join">
+            <p><strong>Vi vokser.</strong> Bli en del av teamet.</p>
+            <a class="h26-text-link" href="mailto:vegard@ferrostal.no">Send søknad <span aria-hidden="true">↗</span></a>
           </div>
         </div>
       </section>
-      <section style="background:transparent;padding:100px 0">
-        <div style="max-width:1240px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start">
-          <div style="animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 24%">
-            <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#2E5A8C">Hvem vi er</span>
-            <h2 style="margin:14px 0 0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(26px,3vw,40px);line-height:1.05;letter-spacing:-0.02em">Totalentreprenør — fra start til slutt.</h2>
-            <div style="height:3px;width:0;margin-top:22px;background:linear-gradient(90deg,#2E5A8C,#9DBDE2);border-radius:3px;animation:underlineWide 1s cubic-bezier(.5,.05,.2,1) both;animation-timeline:view();animation-range:entry 0% cover 26%"></div>
-          </div>
-          <div style="font-size:17px;line-height:1.7;color:#3a3d3a;animation:fadeIn 1s both">
-            <p style="margin:0 0 18px">Som totalentreprenør kan vi bistå deg helt fra starten – før tegningene er klare – og sikre en smidig prosess fra idé til ferdig bygg. Vi bygger stålbygg som passer perfekt for deg, enten du skal sette opp et lager, butikk, verksted, kontor eller noe annet.</p>
-            <p style="margin:0">Sammen finner vi den beste løsningen for ditt prosjekt, slik at du kan komme raskt i gang med det du liker best – i dine nye lokaler.</p>
-          </div>
-        </div>
-      </section>
-      <section style="background:transparent;padding:100px 0">
-        <div style="max-width:1240px;margin:0 auto;padding:0 32px">
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
-            <div data-feat style="position:relative;overflow:hidden;background:#fff;border-radius:20px;padding:34px;border:1px solid rgba(20,22,24,0.06);box-shadow:0 12px 30px -24px rgba(32,57,93,0.25);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 20%" data-hover="transform:translateY(-6px);box-shadow:0 30px 56px -30px rgba(32,57,93,0.4)">
-              <span data-feat-bar style="position:absolute;top:0;left:0;height:3px;width:100%;transform:scaleX(0);transform-origin:left;background:#2E5A8C;transition:transform .45s cubic-bezier(.16,1,.3,1)"></span>
-              <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.14em;color:#2E5A8C">01</span>
-              <h3 style="margin:14px 0 10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:21px;color:#16263E">Lokal &amp; nær</h3>
-              <p style="margin:0;color:#6B6E6A;font-size:15px;line-height:1.6">En lokal leverandør med tett oppfølging — vi er engasjerte i prosjektet ditt fra dag én.</p>
-            </div>
-            <div data-feat style="position:relative;overflow:hidden;background:#fff;border-radius:20px;padding:34px;border:1px solid rgba(20,22,24,0.06);box-shadow:0 12px 30px -24px rgba(32,57,93,0.25);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 20%" data-hover="transform:translateY(-6px);box-shadow:0 30px 56px -30px rgba(32,57,93,0.4)">
-              <span data-feat-bar style="position:absolute;top:0;left:0;height:3px;width:100%;transform:scaleX(0);transform-origin:left;background:#2E5A8C;transition:transform .45s cubic-bezier(.16,1,.3,1)"></span>
-              <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.14em;color:#2E5A8C">02</span>
-              <h3 style="margin:14px 0 10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:21px;color:#16263E">Raskt med stål</h3>
-              <p style="margin:0;color:#6B6E6A;font-size:15px;line-height:1.6">Stålbygg lar oss levere raskt, så du får lokalene du trenger uten unødvendig ventetid.</p>
-            </div>
-            <div data-feat style="position:relative;overflow:hidden;background:#20395D;border-radius:20px;padding:34px;border:1px solid #20395D;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 20%" data-hover="transform:translateY(-6px);box-shadow:0 30px 56px -30px rgba(32,57,93,0.4)">
-              <span data-feat-bar style="position:absolute;top:0;left:0;height:3px;width:100%;transform:scaleX(0);transform-origin:left;background:#9DBDE2;transition:transform .45s cubic-bezier(.16,1,.3,1)"></span>
-              <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.14em;color:#9DBDE2">03</span>
-              <h3 style="margin:14px 0 10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:21px;color:#fff">Rett pris</h3>
-              <p style="margin:0;color:rgba(255,255,255,0.78);font-size:15px;line-height:1.6">Vårt mål er kvalitet til rett pris, og at du blir fornøyd med prosessen fra start til slutt.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section style="background:transparent;padding:100px 0 40px">
-        <div style="max-width:1240px;margin:0 auto;padding:0 32px">
-          <div style="max-width:60ch;margin-bottom:48px;animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 24%">
-            <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#2E5A8C">Teamet</span>
-            <h2 style="margin:14px 0 16px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(30px,4vw,52px);line-height:1.0;letter-spacing:-0.02em">Våre ansatte</h2>
-            <p style="margin:0;font-size:16.5px;line-height:1.65;color:#6B6E6A">Vi er et lite, men dedikert team som jobber sammen for å levere skreddersydde løsninger til våre kunder. Hos oss får du personlig oppfølging og et tett samarbeid gjennom hele prosjektet.</p>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px">
-
-            <article data-feat style="position:relative;background:#fff;border:1px solid rgba(20,22,24,0.08);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 12px 30px -24px rgba(32,57,93,0.25);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 16%" data-hover="transform:translateY(-6px);box-shadow:0 30px 56px -28px rgba(32,57,93,0.42)">
-              <span data-feat-bar style="position:absolute;top:0;left:0;height:3px;width:100%;transform:scaleX(0);transform-origin:left;background:#2E5A8C;transition:transform .45s cubic-bezier(.16,1,.3,1);z-index:3"></span>
-              <div style="position:relative;aspect-ratio:4/5;overflow:hidden;background:#E4ECF6">
-                <img src="https://ferrostal.no/wp-content/uploads/2024/09/Vegard-ferro-768x1024.jpg" alt="Vegard Landsdal" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 18%;transition:transform .65s cubic-bezier(.16,1,.3,1)" data-hover="transform:scale(1.05)">
-              </div>
-              <div style="padding:22px 22px 24px;display:flex;flex-direction:column;flex:1;gap:14px">
-                <div>
-                  <h3 style="margin:0 0 5px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;letter-spacing:-0.01em">Vegard Landsdal</h3>
-                  <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.05em;color:#2E5A8C">Daglig leder</span>
-                </div>
-                <div style="margin-top:auto;display:flex;gap:10px">
-                  <a href="mailto:vegard@ferrostal.no" title="E-post" style="width:42px;height:42px;border-radius:11px;background:#20395D;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;transition:background .2s,transform .2s" data-hover="background:#2E5A8C;transform:translateY(-2px)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"></path><path d="M22 2 15 22l-4-9-9-4 20-7z"></path></svg></a>
-                  <a href="tel:004795837123" title="Ring" style="width:42px;height:42px;border-radius:11px;background:#20395D;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;transition:background .2s,transform .2s" data-hover="background:#2E5A8C;transform:translateY(-2px)"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.3 21 3 13.7 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.3 1l-2.2 2.2z"></path></svg></a>
-                </div>
-              </div>
-            </article>
-            <article data-feat style="position:relative;background:#fff;border:1px solid rgba(20,22,24,0.08);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 12px 30px -24px rgba(32,57,93,0.25);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 16%" data-hover="transform:translateY(-6px);box-shadow:0 30px 56px -28px rgba(32,57,93,0.42)">
-              <span data-feat-bar style="position:absolute;top:0;left:0;height:3px;width:100%;transform:scaleX(0);transform-origin:left;background:#2E5A8C;transition:transform .45s cubic-bezier(.16,1,.3,1);z-index:3"></span>
-              <div style="position:relative;aspect-ratio:4/5;overflow:hidden;background:#E4ECF6">
-                <img src="https://ferrostal.no/wp-content/uploads/2025/02/477673771_9946373715377044_7439716856953463575_n-769x1024.jpg" alt="Ingar Kaasa" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 18%;transition:transform .65s cubic-bezier(.16,1,.3,1)" data-hover="transform:scale(1.05)">
-              </div>
-              <div style="padding:22px 22px 24px;display:flex;flex-direction:column;flex:1;gap:14px">
-                <div>
-                  <h3 style="margin:0 0 5px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;letter-spacing:-0.01em">Ingar Kaasa</h3>
-                  <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.05em;color:#2E5A8C">Prosjektleder</span>
-                </div>
-                <div style="margin-top:auto;display:flex;gap:10px">
-                  <a href="mailto:ingar@ferrostal.no" title="E-post" style="width:42px;height:42px;border-radius:11px;background:#20395D;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;transition:background .2s,transform .2s" data-hover="background:#2E5A8C;transform:translateY(-2px)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"></path><path d="M22 2 15 22l-4-9-9-4 20-7z"></path></svg></a>
-                  <a href="tel:004795078729" title="Ring" style="width:42px;height:42px;border-radius:11px;background:#20395D;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;transition:background .2s,transform .2s" data-hover="background:#2E5A8C;transform:translateY(-2px)"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.3 21 3 13.7 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.3 1l-2.2 2.2z"></path></svg></a>
-                </div>
-              </div>
-            </article>
-            <article data-feat style="position:relative;background:#fff;border:1px solid rgba(20,22,24,0.08);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 12px 30px -24px rgba(32,57,93,0.25);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 16%" data-hover="transform:translateY(-6px);box-shadow:0 30px 56px -28px rgba(32,57,93,0.42)">
-              <span data-feat-bar style="position:absolute;top:0;left:0;height:3px;width:100%;transform:scaleX(0);transform-origin:left;background:#2E5A8C;transition:transform .45s cubic-bezier(.16,1,.3,1);z-index:3"></span>
-              <div style="position:relative;aspect-ratio:4/5;overflow:hidden;background:#E4ECF6">
-                <img src="https://ferrostal.no/wp-content/uploads/2025/02/aleksander.jpg" alt="Aleksander Dahle Madsen" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;transition:transform .65s cubic-bezier(.16,1,.3,1)" data-hover="transform:scale(1.05)">
-              </div>
-              <div style="padding:22px 22px 24px;display:flex;flex-direction:column;flex:1;gap:14px">
-                <div>
-                  <h3 style="margin:0 0 5px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;letter-spacing:-0.01em">Aleksander Dahle Madsen</h3>
-                  <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.05em;color:#2E5A8C">Prosjektleder</span>
-                </div>
-                <div style="margin-top:auto;display:flex;gap:10px">
-                  <a href="mailto:aleksander@ferrostal.no" title="E-post" style="width:42px;height:42px;border-radius:11px;background:#20395D;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;transition:background .2s,transform .2s" data-hover="background:#2E5A8C;transform:translateY(-2px)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"></path><path d="M22 2 15 22l-4-9-9-4 20-7z"></path></svg></a>
-                  <a href="tel:004795979331" title="Ring" style="width:42px;height:42px;border-radius:11px;background:#20395D;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;transition:background .2s,transform .2s" data-hover="background:#2E5A8C;transform:translateY(-2px)"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.3 21 3 13.7 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.3 1l-2.2 2.2z"></path></svg></a>
-                </div>
-              </div>
-            </article>
-            <article data-feat style="position:relative;background:#fff;border:1px solid rgba(20,22,24,0.08);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 12px 30px -24px rgba(32,57,93,0.25);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 16%" data-hover="transform:translateY(-6px);box-shadow:0 30px 56px -28px rgba(32,57,93,0.42)">
-              <span data-feat-bar style="position:absolute;top:0;left:0;height:3px;width:100%;transform:scaleX(0);transform-origin:left;background:#2E5A8C;transition:transform .45s cubic-bezier(.16,1,.3,1);z-index:3"></span>
-              <div style="position:relative;aspect-ratio:4/5;overflow:hidden;background:linear-gradient(160deg,#EAF0F8,#D8E4F3);display:flex;align-items:flex-end;justify-content:center">
-                <svg width="92" height="92" viewBox="0 0 24 24" fill="rgba(32,57,93,0.18)" style="margin-bottom:-2px"><circle cx="12" cy="8" r="4.3"></circle><path d="M3.4 22c0-4.8 3.85-8.2 8.6-8.2s8.6 3.4 8.6 8.2z"></path></svg>
-              </div>
-              <div style="padding:22px 22px 24px;display:flex;flex-direction:column;flex:1;gap:14px">
-                <div>
-                  <h3 style="margin:0 0 5px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;letter-spacing:-0.01em;color:#20395D">Ny medarbeider</h3>
-                  <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.05em;color:#2E5A8C">Ferro-teamet</span>
-                </div>
-              </div>
-            </article>
-
-            <article data-feat style="position:relative;background:#fff;border:1px solid rgba(20,22,24,0.08);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 12px 30px -24px rgba(32,57,93,0.25);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 16%" data-hover="transform:translateY(-6px);box-shadow:0 30px 56px -28px rgba(32,57,93,0.42)">
-              <span data-feat-bar style="position:absolute;top:0;left:0;height:3px;width:100%;transform:scaleX(0);transform-origin:left;background:#2E5A8C;transition:transform .45s cubic-bezier(.16,1,.3,1);z-index:3"></span>
-              <div style="position:relative;aspect-ratio:4/5;overflow:hidden;background:linear-gradient(160deg,#EAF0F8,#D8E4F3);display:flex;align-items:flex-end;justify-content:center">
-                <svg width="92" height="92" viewBox="0 0 24 24" fill="rgba(32,57,93,0.18)" style="margin-bottom:-2px"><circle cx="12" cy="8" r="4.3"></circle><path d="M3.4 22c0-4.8 3.85-8.2 8.6-8.2s8.6 3.4 8.6 8.2z"></path></svg>
-              </div>
-              <div style="padding:22px 22px 24px;display:flex;flex-direction:column;flex:1;gap:14px">
-                <div>
-                  <h3 style="margin:0 0 5px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;letter-spacing:-0.01em;color:#20395D">Ny medarbeider</h3>
-                  <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.05em;color:#2E5A8C">Ferro-teamet</span>
-                </div>
-              </div>
-            </article>
-
-            <article data-feat style="position:relative;background:#fff;border:1px solid rgba(20,22,24,0.08);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 12px 30px -24px rgba(32,57,93,0.25);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 16%" data-hover="transform:translateY(-6px);box-shadow:0 30px 56px -28px rgba(32,57,93,0.42)">
-              <span data-feat-bar style="position:absolute;top:0;left:0;height:3px;width:100%;transform:scaleX(0);transform-origin:left;background:#2E5A8C;transition:transform .45s cubic-bezier(.16,1,.3,1);z-index:3"></span>
-              <div style="position:relative;aspect-ratio:4/5;overflow:hidden;background:linear-gradient(160deg,#EAF0F8,#D8E4F3);display:flex;align-items:flex-end;justify-content:center">
-                <svg width="92" height="92" viewBox="0 0 24 24" fill="rgba(32,57,93,0.18)" style="margin-bottom:-2px"><circle cx="12" cy="8" r="4.3"></circle><path d="M3.4 22c0-4.8 3.85-8.2 8.6-8.2s8.6 3.4 8.6 8.2z"></path></svg>
-              </div>
-              <div style="padding:22px 22px 24px;display:flex;flex-direction:column;flex:1;gap:14px">
-                <div>
-                  <h3 style="margin:0 0 5px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;letter-spacing:-0.01em;color:#20395D">Ny medarbeider</h3>
-                  <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.05em;color:#2E5A8C">Ferro-teamet</span>
-                </div>
-              </div>
-            </article>
-          </div>
-          <div style="margin-top:18px;position:relative;overflow:hidden;background-color:#20395D;background-image:linear-gradient(rgba(157,189,226,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(157,189,226,0.07) 1px,transparent 1px);background-size:38px 38px;border-radius:20px;padding:clamp(26px,3.2vw,40px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:22px;color:#fff;animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 18%">
-            <div style="display:flex;align-items:center;gap:18px">
-              <span style="flex-shrink:0;width:52px;height:52px;border-radius:14px;background:#2E5A8C;display:flex;align-items:center;justify-content:center"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span>
-              <div>
-                <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#9DBDE2;margin-bottom:6px">Vi vokser</div>
-                <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(20px,2.2vw,26px);letter-spacing:-0.01em">Bli en del av teamet</div>
-              </div>
-            </div>
-            <a href="mailto:vegard@ferrostal.no" style="display:inline-flex;align-items:center;gap:9px;background:#fff;color:#16263E;text-decoration:none;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;padding:15px 26px;border-radius:100px;transition:transform .25s,background .25s" data-hover="background:#E4ECF6;transform:translateY(-2px)">Send søknad <span>→</span></a>
-          </div>
-        </div>
-      </section>
-      <section style="background:transparent;padding:60px 0 120px">
-        <div style="max-width:1240px;margin:0 auto;padding:0 32px">
-          <div style="position:relative;overflow:hidden;background-color:#16263E;background-image:linear-gradient(rgba(157,189,226,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(157,189,226,0.08) 1px,transparent 1px);background-size:42px 42px;border-radius:28px;padding:clamp(36px,4vw,64px);display:grid;grid-template-columns:1.15fr 1fr;gap:44px;align-items:center;color:#fff;animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 22%">
-            <div style="position:absolute;top:-50%;right:-12%;width:60%;height:200%;background:radial-gradient(circle,rgba(46,90,140,0.45),transparent 62%);pointer-events:none"></div>
-            <div style="position:absolute;left:0;top:0;bottom:0;width:120px;background:linear-gradient(90deg,rgba(157,189,226,0.12),transparent);animation:scanDown 9s ease-in-out infinite;pointer-events:none"></div>
-            <div>
-              <span style="display:inline-flex;align-items:center;gap:9px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#9DBDE2"><span style="width:8px;height:8px;border-radius:50%;background:#2E5A8C;animation:nodePulse 3s ease-in-out infinite"></span>Uforpliktende prat</span>
-              <h2 style="margin:18px 0 16px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,3.2vw,44px);line-height:1.0;letter-spacing:-0.02em">Teamet vårt står<br>klare for en prat.</h2>
-              <p style="margin:0;color:rgba(255,255,255,0.74);font-size:16px;line-height:1.6;max-width:40ch">Ring oss for en uforpliktende prat om ditt prosjekt — vi er med hele veien.</p>
-            </div>
-            <div style="position:relative;display:flex;flex-direction:column;gap:14px">
-              <a href="tel:95837123" style="display:flex;align-items:center;justify-content:space-between;gap:16px;background:rgba(157,189,226,0.08);border:1px solid rgba(157,189,226,0.22);border-radius:18px;padding:20px 24px;color:#fff;text-decoration:none;transition:background .3s,transform .3s" data-hover="background:rgba(157,189,226,0.16);transform:translateY(-2px)"><span><span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#9DBDE2;text-transform:uppercase;margin-bottom:6px">Ring oss</span><span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(24px,2.6vw,30px);letter-spacing:-0.01em">958 37 123</span></span><span style="flex-shrink:0;width:46px;height:46px;border-radius:50%;background:#2E5A8C;display:flex;align-items:center;justify-content:center;font-size:19px">→</span></a>
-              <a href="mailto:vegard@ferrostal.no" style="display:inline-flex;align-items:center;gap:10px;color:rgba(255,255,255,0.82);text-decoration:none;font-size:15px;padding:2px" data-hover="color:#fff">✉ vegard@ferrostal.no</a>
-            </div>
+      <section class="h26-contact" aria-labelledby="h26-omoss-contact-title">
+        <div class="h26-section h26-shell h26-contact-layout">
+          <div><h2 id="h26-omoss-contact-title">Teamet vårt står klare for en prat.</h2><p>Ring oss for en uforpliktende prat om ditt prosjekt — vi er med hele veien.</p></div>
+          <div class="h26-contact-links">
+            <a class="h26-button h26-button-light" href="tel:+4795837123">Ring 958 37 123</a>
+            <a class="h26-button h26-button-quiet" href="mailto:vegard@ferrostal.no">Send e-post <span aria-hidden="true">↗</span></a>
           </div>
         </div>
       </section>
@@ -595,145 +310,99 @@
 
     <!-- ================= KONTAKT ================= -->
     <div class="screen" data-screen="kontakt" data-screen-label="Kontakt">
-      <section style="background-color:#20395D;background-image:linear-gradient(rgba(157,189,226,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(157,189,226,0.06) 1px,transparent 1px);background-size:46px 46px;padding:160px 0 90px;color:#fff;position:relative;overflow:hidden">
-        <div style="position:absolute;left:0;right:0;top:0;height:170px;background:linear-gradient(180deg,rgba(157,189,226,0.12),transparent);animation:scanBeam 9s ease-in-out infinite;pointer-events:none"></div>
-        <div style="position:relative;max-width:1240px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1.05fr 0.95fr;gap:48px;align-items:center">
-          <div>
-            <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#9DBDE2;display:inline-flex;align-items:center;gap:11px;animation:fadeIn .6s both"><span style="width:30px;height:1px;background:#9DBDE2"></span>Kontakt oss</span>
-            <h1 style="margin:18px 0 0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(38px,5vw,74px);line-height:0.98;letter-spacing:-0.025em;max-width:13ch;animation:revealUp .8s both">La oss snakke om ditt prosjekt.</h1>
-            <p style="margin:24px 0 0;max-width:42ch;font-size:16.5px;line-height:1.6;color:rgba(255,255,255,0.74);animation:fadeIn 1s .3s both">Vi svarer raskt og gir deg gjerne en uforpliktende prat om hva vi kan bygge sammen.</p>
-            <a href="tel:95837123" style="display:inline-flex;align-items:center;gap:12px;margin-top:30px;background:rgba(157,189,226,0.1);border:1px solid rgba(157,189,226,0.26);border-radius:100px;padding:13px 22px;text-decoration:none;animation:fadeIn 1s .5s both;transition:background .25s" data-hover="background:rgba(157,189,226,0.2)"><span style="width:8px;height:8px;border-radius:50%;background:#2E5A8C;animation:nodePulse 3s ease-in-out infinite"></span><span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;color:#fff">958 37 123</span></a>
+      <header class="h26-page-head h26-shell">
+        <div>
+          <p class="h26-kicker"><span class="h26-film-dot"></span>Kontakt oss</p>
+          <h1>La oss snakke om ditt prosjekt.</h1>
+        </div>
+        <p>Vi svarer raskt og gir deg gjerne en uforpliktende prat om hva vi kan bygge sammen.</p>
+      </header>
+      <section class="h26-section h26-shell h26-contact-page" aria-label="Kontaktinformasjon og skjema">
+        <dl class="h26-facts">
+          <div><dt>Telefon</dt><dd><a href="tel:+4795837123">958 37 123</a></dd></div>
+          <div><dt>E-post</dt><dd><a href="mailto:vegard@ferrostal.no">vegard@ferrostal.no</a></dd></div>
+          <div><dt>Adresse</dt><dd><a href="https://www.google.com/maps/search/?api=1&amp;query=Ringsevja+3+3830+Ulefoss" target="_blank" rel="noopener">Ringsevja 3, 3830 Ulefoss ↗</a></dd></div>
+          <div><dt>Org.nr.</dt><dd>926 542 680</dd></div>
+          <div><dt>Facebook</dt><dd><a href="https://www.facebook.com/Ferro-St%C3%A5lentrepren%C3%B8r-102850358506375" target="_blank" rel="noopener">Ferro Stålentreprenør ↗</a></dd></div>
+          <div><dt>Brosjyre</dt><dd><a href="https://www.visbrosjyre.no/Ferro_Staalentreprenor/MailView/" target="_blank" rel="noopener">Les brosjyren vår ↗</a></dd></div>
+        </dl>
+        <form class="h26-form" id="inquiry">
+          <h2 class="h26-form-title">Fortell om prosjektet</h2>
+          <p class="form-intro">Lag et e-postutkast til Ferro. Du sender meldingen fra ditt eget e-postprogram.</p>
+          <label class="h26-field"><span>Byggtype (valgfritt)</span><select name="byggtype"><option value="">Velg byggtype</option><option>Næringslokaler</option><option>Produksjonslokaler</option><option>Verksted</option><option>Butikk</option><option>Kontor</option><option>Lagerhall</option><option>Driftsbygning</option><option>Idrettshall</option><option>Ridehall</option><option>Annet bygg</option></select></label>
+          <label class="h26-field"><span>Navn</span><input required maxlength="100" name="navn" autocomplete="name"></label>
+          <label class="h26-field"><span>E-post</span><input required maxlength="254" type="email" name="epost" autocomplete="email"></label>
+          <label class="h26-field"><span>Telefon (valgfritt)</span><input maxlength="32" type="tel" name="telefon" autocomplete="tel"></label>
+          <div id="included-sketch" hidden><strong>Din byggskisse</strong><p data-sketch-summary></p><button type="button" data-remove-sketch>Fjern skissen</button></div>
+          <div data-drawing-picker></div>
+          <label class="h26-field"><span>Hva skal du bygge?</span><textarea required maxlength="3000" name="melding" rows="4"></textarea></label>
+          <button type="submit" class="h26-button h26-button-dark">Lag e-postutkast <span aria-hidden="true">→</span></button>
+          <div id="draft" hidden>
+            <h3 tabindex="-1">E-postutkastet er klart</h3>
+            <p data-draft-instructions>Åpne utkastet og send det. Du kan også kopiere teksten og sende den til vegard@ferrostal.no.</p>
+            <textarea rows="6" aria-label="Tekst til e-post" readonly></textarea>
+            <button type="button" class="h26-button h26-button-dark" id="download-email" hidden>Last ned e-post med vedlegg (.eml)</button><p data-drawing-error role="status"></p>
+            <a class="h26-button h26-button-dark" id="compose">Åpne e-postprogram ↗</a>
           </div>
-          <div style="position:relative;height:360px;animation:fadeIn 1.2s .4s both">
-            <div style="position:absolute;top:0;right:4%;width:62%;height:64%;border-radius:18px;overflow:hidden;box-shadow:0 40px 80px -36px rgba(0,0,0,0.6);border:1px solid rgba(157,189,226,0.18);animation:floatA 7s ease-in-out infinite">
-              <img src="https://ferrostal.no/wp-content/uploads/2024/09/IMG_8290-1024x768.jpeg" alt="Ferro" style="width:100%;height:100%;object-fit:cover">
-              <img src="https://ferrostal.no/wp-content/uploads/2024/08/logo-white.png" alt="" style="position:absolute;top:11px;left:11px;height:16px;opacity:.85;filter:drop-shadow(0 1px 3px rgba(0,0,0,.6))">
-            </div>
-            <div style="position:absolute;bottom:0;left:0;width:50%;height:52%;border-radius:18px;overflow:hidden;box-shadow:0 40px 80px -36px rgba(0,0,0,0.6);border:1px solid rgba(157,189,226,0.18);animation:floatB 8s ease-in-out infinite">
-              <img src="https://ferrostal.no/wp-content/uploads/2024/09/image11.jpg" alt="Ferro" style="width:100%;height:100%;object-fit:cover">
-            </div>
-          </div>
-        </div>
-      </section>
-      <section style="background:transparent;padding:80px 0 120px">
-        <div style="max-width:1240px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start">
-          <div data-stagger style="display:flex;flex-direction:column;gap:16px">
-            <a href="tel:95837123" style="position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:16px;background-color:#20395D;background-image:linear-gradient(rgba(157,189,226,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(157,189,226,0.08) 1px,transparent 1px);background-size:34px 34px;border-radius:20px;padding:26px 28px;text-decoration:none;transition:transform .3s,box-shadow .3s" data-hover="transform:translateY(-3px);box-shadow:0 28px 54px -26px rgba(32,57,93,0.55)">
-              <span><span style="display:flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#9DBDE2;margin-bottom:9px"><span style="width:7px;height:7px;border-radius:50%;background:#2E5A8C;animation:nodePulse 3s ease-in-out infinite"></span>Ring oss</span><span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,3.2vw,36px);color:#fff;letter-spacing:-0.01em">958 37 123</span></span>
-              <span style="flex-shrink:0;width:50px;height:50px;border-radius:50%;background:#2E5A8C;color:#fff;display:flex;align-items:center;justify-content:center;font-size:21px">→</span>
-            </a>
-            <a href="mailto:vegard@ferrostal.no" data-feat style="position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:14px;background:#fff;border:1px solid rgba(20,22,24,0.08);border-radius:20px;padding:24px 26px;text-decoration:none;color:#20395D;box-shadow:0 12px 30px -24px rgba(32,57,93,0.25);transition:transform .3s,box-shadow .3s" data-hover="transform:translateY(-3px);box-shadow:0 24px 46px -26px rgba(32,57,93,0.4)">
-              <span data-feat-bar style="position:absolute;top:0;left:0;height:3px;width:100%;transform:scaleX(0);transform-origin:left;background:#2E5A8C;transition:transform .45s cubic-bezier(.16,1,.3,1);z-index:3"></span>
-              <span><span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#2E5A8C;margin-bottom:7px">E-post</span><span style="font-weight:600;font-size:19px">vegard@ferrostal.no</span></span>
-              <span style="flex-shrink:0;width:42px;height:42px;border-radius:50%;background:#E4ECF6;color:#20395D;display:flex;align-items:center;justify-content:center;font-size:17px">✉</span>
-            </a>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-              <a href="https://www.facebook.com/Ferro-St%C3%A5lentrepren%C3%B8r-102850358506375" target="_blank" data-feat style="position:relative;overflow:hidden;display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid rgba(20,22,24,0.08);border-radius:20px;padding:24px;text-decoration:none;color:#20395D;box-shadow:0 12px 30px -24px rgba(32,57,93,0.25);transition:transform .3s,box-shadow .3s" data-hover="transform:translateY(-3px);box-shadow:0 24px 46px -26px rgba(32,57,93,0.4)">
-                <span data-feat-bar style="position:absolute;top:0;left:0;height:3px;width:100%;transform:scaleX(0);transform-origin:left;background:#2E5A8C;transition:transform .45s cubic-bezier(.16,1,.3,1);z-index:3"></span>
-                <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#2E5A8C">Sosialt</span>
-                <span style="font-weight:600;font-size:17px">Facebook ↗</span>
-              </a>
-              <div style="position:relative;overflow:hidden;display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid rgba(20,22,24,0.08);border-radius:20px;padding:24px;box-shadow:0 12px 30px -24px rgba(32,57,93,0.25)">
-                <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#2E5A8C">Org.nr</span>
-                <span style="font-weight:600;font-size:17px">926 542 680</span>
-              </div>
-              <a href="https://www.google.com/maps/search/?api=1&query=Ringsevja+3+3830+Ulefoss" target="_blank" data-feat style="position:relative;overflow:hidden;display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid rgba(20,22,24,0.08);border-radius:20px;padding:24px;text-decoration:none;color:#20395D;box-shadow:0 12px 30px -24px rgba(32,57,93,0.25);transition:transform .3s,box-shadow .3s" data-hover="transform:translateY(-3px);box-shadow:0 24px 46px -26px rgba(32,57,93,0.4)">
-                <span data-feat-bar style="position:absolute;top:0;left:0;height:3px;width:100%;transform:scaleX(0);transform-origin:left;background:#2E5A8C;transition:transform .45s cubic-bezier(.16,1,.3,1);z-index:3"></span>
-                <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#2E5A8C">Adresse</span>
-                <span style="font-weight:600;font-size:16px">Ringsevja 3, 3830 Ulefoss ↗</span>
-              </a>
-            </div>
-          </div>
-          <form data-action="submitForm" style="background:#fff;border:1px solid rgba(20,22,24,0.08);border-radius:24px;padding:34px;display:flex;flex-direction:column;gap:14px;box-shadow:0 30px 60px -40px rgba(20,22,24,0.3)">
-            <h2 style="margin:0 0 6px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px">Send oss en melding</h2>
-            <div data-form-sent hidden>
-              <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;min-height:280px">
-                <div style="width:60px;height:60px;border-radius:50%;background:#E4ECF6;display:flex;align-items:center;justify-content:center;font-size:28px;color:#2E5A8C">✓</div>
-                <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px">Takk for henvendelsen!</div>
-                <p style="margin:0;font-size:15px;color:#6B6E6A;max-width:30ch">Vi tar kontakt med deg så snart som mulig.</p>
-              </div>
-            </div>
-            <div data-form-fields style="display:flex;flex-direction:column;gap:14px">
-              <input placeholder="Navn" style="background:#F3F1EC;border:1px solid transparent;border-radius:12px;padding:15px 16px;font-size:15px;font-family:inherit;outline:none;transition:border .2s" data-focus="border-color:#2E5A8C;background:#fff">
-              <input placeholder="E-post" type="email" style="background:#F3F1EC;border:1px solid transparent;border-radius:12px;padding:15px 16px;font-size:15px;font-family:inherit;outline:none;transition:border .2s" data-focus="border-color:#2E5A8C;background:#fff">
-              <input placeholder="Tlf nr" style="background:#F3F1EC;border:1px solid transparent;border-radius:12px;padding:15px 16px;font-size:15px;font-family:inherit;outline:none;transition:border .2s" data-focus="border-color:#2E5A8C;background:#fff">
-              <textarea placeholder="Hva kan vi hjelpe deg med?" rows="4" style="background:#F3F1EC;border:1px solid transparent;border-radius:12px;padding:15px 16px;font-size:15px;font-family:inherit;outline:none;resize:none;transition:border .2s" data-focus="border-color:#2E5A8C;background:#fff"></textarea>
-              <button type="submit" style="margin-top:4px;background:#2E5A8C;color:#fff;border:none;border-radius:100px;padding:16px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;transition:background .2s,transform .2s" data-hover="background:#3D6FA8;transform:translateY(-1px)">Send →</button>
-            </div>
-          </form>
-        </div>
-      </section>
-      <section style="background:transparent;padding:10px 0 70px">
-        <div style="max-width:1240px;margin:0 auto;padding:0 32px">
-          <a href="https://www.visbrosjyre.no/Ferro_Staalentreprenor/MailView/" target="_blank" style="position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:12px;background-color:#16263E;background-image:linear-gradient(rgba(157,189,226,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(157,189,226,0.08) 1px,transparent 1px);background-size:38px 38px;border-radius:20px;padding:30px;text-decoration:none;color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(18px,2.2vw,24px);letter-spacing:-0.01em;transition:transform .25s,box-shadow .25s" data-hover="transform:translateY(-2px);box-shadow:0 26px 54px -26px rgba(32,57,93,0.55)">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9DBDE2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-            Les vår brosjyre her<span style="color:#9DBDE2">↗</span>
-          </a>
-        </div>
-      </section>
-      <section style="background:transparent;padding:0 0 84px;position:relative;z-index:1">
-        <div style="max-width:1240px;margin:0 auto;padding:0 32px">
-          <a href="https://www.google.com/maps/search/?api=1&query=Ringsevja+3+3830+Ulefoss" target="_blank" style="position:relative;display:block;overflow:hidden;border-radius:24px;height:clamp(280px,34vw,380px);background-color:#20395D;background-image:linear-gradient(rgba(157,189,226,0.1) 1px,transparent 1px),linear-gradient(90deg,rgba(157,189,226,0.1) 1px,transparent 1px);background-size:40px 40px;border:1px solid rgba(157,189,226,0.16);box-shadow:0 26px 60px -36px rgba(32,57,93,0.5);text-decoration:none;transition:transform .3s,box-shadow .3s" data-hover="transform:translateY(-3px);box-shadow:0 36px 74px -36px rgba(32,57,93,0.6)">
-            <div style="position:absolute;inset:0;background:radial-gradient(70% 80% at 50% 45%,rgba(46,90,140,0.35),transparent 70%);pointer-events:none"></div>
-            <div style="position:absolute;top:-10%;left:8%;width:130%;height:14px;background:rgba(157,189,226,0.12);transform:rotate(24deg);pointer-events:none"></div>
-            <div style="position:absolute;top:62%;left:-12%;width:130%;height:10px;background:rgba(157,189,226,0.1);transform:rotate(-14deg);pointer-events:none"></div>
-            <div style="position:absolute;top:18%;left:30%;width:8px;height:120%;background:rgba(157,189,226,0.08);transform:rotate(10deg);pointer-events:none"></div>
-            <span style="position:absolute;top:20px;left:22px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#9DBDE2">Finn oss</span>
-            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;padding:24px">
-              <span style="position:relative;display:flex;align-items:center;justify-content:center;width:60px;height:60px">
-                <span style="position:absolute;width:60px;height:60px;border-radius:50%;background:#2E5A8C;animation:nodePulse 2.6s ease-in-out infinite"></span>
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff" style="position:relative;filter:drop-shadow(0 3px 6px rgba(0,0,0,0.4))"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"></path></svg>
-              </span>
-              <div>
-                <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(20px,2.6vw,28px);color:#fff;letter-spacing:-0.01em">Ringsevja 3, 3830 Ulefoss</div>
-                <div style="font-size:14px;color:rgba(255,255,255,0.65);margin-top:6px">Ferro Stålentreprenør AS</div>
-              </div>
-              <span style="display:inline-flex;align-items:center;gap:9px;background:#fff;color:#16263E;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14.5px;padding:13px 24px;border-radius:100px">Åpne i Google Maps <span style="color:#2E5A8C">↗</span></span>
-            </div>
-          </a>
-        </div>
+        </form>
       </section>
     </div>
+
   </main>
 
   <!-- ============ FOOTER ============ -->
-  <footer style="background-color:#172A45;background-image:linear-gradient(rgba(157,189,226,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(157,189,226,0.05) 1px,transparent 1px);background-size:46px 46px;color:#fff;padding:72px 0 96px;position:relative;z-index:1">
-    <div style="max-width:1240px;margin:0 auto;padding:0 32px">
-      <div data-stagger style="display:grid;grid-template-columns:1.4fr 1fr 1fr auto;gap:40px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.1)">
-        <div>
-          <img src="https://ferrostal.no/wp-content/uploads/2024/08/logo-white.png" style="height:34px;width:auto;margin-bottom:18px">
-          <p style="margin:0;max-width:32ch;font-size:14.5px;line-height:1.6;color:rgba(255,255,255,0.6)">Ferro Stålentreprenør AS — totalentreprenør for stålbygg. Fra idé til ferdig bygg, vi er med hele veien.</p>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__grid">
+        <div class="site-footer__brand">
+          <img class="site-footer__logo" src="assets/img/ferro-logo.svg" alt="Ferro Stålentreprenør" width="82" height="55" loading="lazy" decoding="async">
+          <p class="site-footer__text">Ferro Stålentreprenør AS — totalentreprenør for stålbygg. Fra idé til ferdig bygg, vi er med hele veien.</p>
         </div>
-        <div style="display:flex;flex-direction:column;gap:12px;font-size:14.5px">
-          <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:4px">Meny</span>
-          <span data-action="goHome" style="cursor:pointer;color:rgba(255,255,255,0.78)" data-hover="color:#fff">Hjem</span>
-          <span data-action="goProsjekter" style="cursor:pointer;color:rgba(255,255,255,0.78)" data-hover="color:#fff">Prosjekter</span>
-          <span data-action="goOmOss" style="cursor:pointer;color:rgba(255,255,255,0.78)" data-hover="color:#fff">Om oss</span>
-          <span data-action="goKontakt" style="cursor:pointer;color:rgba(255,255,255,0.78)" data-hover="color:#fff">Kontakt oss</span>
+        <nav class="site-footer__col" aria-labelledby="footer-menu">
+          <p class="site-footer__heading" id="footer-menu">Meny</p>
+          <a class="site-footer__link" href="#hjem" data-action="goHome">Hjem</a>
+          <a class="site-footer__link" href="#prosjekter" data-action="goProsjekter">Prosjekter</a>
+          <a class="site-footer__link" href="#omoss" data-action="goOmOss">Om oss</a>
+          <a class="site-footer__link" href="#kontakt" data-action="goKontakt">Kontakt oss</a>
+        </nav>
+        <div class="site-footer__col">
+          <p class="site-footer__heading">Kontakt</p>
+          <a class="site-footer__link" href="tel:+4795837123">958 37 123</a>
+          <a class="site-footer__link" href="mailto:vegard@ferrostal.no">vegard@ferrostal.no</a>
+          <a class="site-footer__link" href="https://www.facebook.com/Ferro-St%C3%A5lentrepren%C3%B8r-102850358506375" target="_blank" rel="noopener">Facebook ↗</a>
         </div>
-        <div style="display:flex;flex-direction:column;gap:12px;font-size:14.5px">
-          <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:4px">Kontakt</span>
-          <a href="tel:95837123" style="color:rgba(255,255,255,0.78);text-decoration:none" data-hover="color:#fff">958 37 123</a>
-          <a href="mailto:vegard@ferrostal.no" style="color:rgba(255,255,255,0.78);text-decoration:none" data-hover="color:#fff">vegard@ferrostal.no</a>
-          <a href="https://www.facebook.com/Ferro-St%C3%A5lentrepren%C3%B8r-102850358506375" target="_blank" style="color:rgba(255,255,255,0.78);text-decoration:none" data-hover="color:#fff">Facebook ↗</a>
+        <div class="site-footer__badge">
+          <img src="assets/photos/2024/08/SG_GULL_MORKBAKGRUNN.webp" alt="Sentralt godkjent" width="78" height="78" loading="lazy" decoding="async">
         </div>
-        <div style="display:flex;align-items:flex-start"><img src="https://ferrostal.no/wp-content/uploads/2024/08/SG_GULL_MORKBAKGRUNN.png" style="height:78px;width:auto"></div>
       </div>
-      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:28px;font-size:13px;color:rgba(255,255,255,0.45)">
+      <div class="site-footer__bottom">
         <span>© 2026 Ferro Stålentreprenør AS</span>
+        <a class="site-footer__link" href="https://app.adminkit.com/legal/privacy/no/01ca9bcb-9bf4-4863-b597-9ea8efa0b419">Personvernerklæring</a>
         <span>Org.nr. 926 542 680</span>
       </div>
     </div>
   </footer>
 
   <!-- ============ LIGHTBOX ============ -->
-  <div data-lightbox hidden style="position:fixed;inset:0;z-index:200;background:rgba(16,26,40,0.93);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:40px;cursor:zoom-out;animation:fadeIn .25s both">
-    <span data-action="closeLb" style="position:absolute;top:24px;right:28px;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.28);color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer">✕</span>
-    <img data-lightbox-img src="" alt="Stålbygg av Ferro" style="max-width:92vw;max-height:86vh;border-radius:14px;box-shadow:0 50px 120px -30px rgba(0,0,0,0.75);animation:lbZoom .35s cubic-bezier(.2,.85,.3,1) both">
-    <img src="https://ferrostal.no/wp-content/uploads/2024/08/logo-white.png" alt="" style="position:absolute;left:50%;bottom:40px;transform:translateX(-50%);height:26px;opacity:.55;pointer-events:none">
-  </div>
+  <dialog class="lightbox" data-lightbox aria-label="Prosjektbilder">
+    <button class="lightbox__close" aria-label="Lukk galleriet" type="button">✕</button>
+    <img class="lightbox__img" data-lightbox-img alt="">
+    <div class="gallery-controls">
+      <button type="button" data-prev aria-label="Forrige bilde">←</button>
+      <span data-position aria-live="polite"></span>
+      <button type="button" data-next aria-label="Neste bilde">→</button>
+    </div>
+  </dialog>
 
 </div>
-<script src="js/app.js"></script>
+<script src="js/ferro.min.js"></script>
+
+
+
+
+
+
+
+
 </body>
 </html>
