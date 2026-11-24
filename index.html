@@ -20,7 +20,7 @@
 </script>
 <link rel="preload" as="image" href="assets/img/hero-drone-v4-poster-480.webp" type="image/webp" media="(max-width: 600px)" fetchpriority="high">
 <link rel="preload" as="image" href="assets/img/hero-drone-v4-poster-1080.webp" type="image/webp" media="(min-width: 600.02px)" fetchpriority="high">
-<link rel="stylesheet" href="css/ferro.min.css?v=2d5de29df758">
+<link rel="stylesheet" href="css/ferro.min.css?v=3adc2b5c6f7e">
 
 
 
@@ -68,8 +68,8 @@
             <header class="sketch-head"><h2 id="sketch-title" tabindex="-1">Skisser ditt bygg.</h2><p>Velg leveranse, tegn inn rom og se hallen uten tak. Ta med idéskissen til en samtale med Ferro.</p></header>
             <div class="sketch-workbench">
               <div class="sketch-sheet">
-                <div class="sketch-toolbar"><img class="sketch-brand" src="assets/img/ferro-logo.svg" alt="Ferro Stålentreprenør" width="72" height="48"><div role="group" aria-label="Visning"><button type="button" data-view="volume" aria-pressed="true">3D</button><button type="button" data-view="plan" aria-pressed="false">Plan</button><button type="button" data-view="facade" aria-pressed="false">Fasade</button></div><button type="button" data-rotate aria-label="Roter bygget 45 grader">Roter ↻</button></div>
-                <div class="sketch-layer" data-model-tools role="group" aria-label="Modellvisning"><button data-layer="shell" aria-pressed="true">Utvendig</button><button data-layer="open" aria-pressed="false">Åpen modell</button><button type="button" data-layer="steel" aria-pressed="false">Stål</button><button type="button" data-measurements aria-pressed="false">Vis mål</button><button type="button" data-tilt>Vipp ↕</button></div>
+                <div class="sketch-toolbar"><img class="sketch-brand" src="assets/img/ferro-logo.svg" alt="Ferro Stålentreprenør" width="72" height="48"><div role="group" aria-label="Visning"><button type="button" data-view="volume" aria-pressed="true">3D</button><button type="button" data-view="plan" aria-pressed="false">Plan</button><button type="button" data-view="facade" aria-pressed="false">Fasade</button></div><button type="button" data-rotate aria-label="Roter bygget 45 grader">Roter ↻</button><button type="button" class="tool-toggle" data-tools-toggle aria-label="Åpne verktøy" title="Verktøy" aria-expanded="false" aria-controls="sketch-tools"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h7m4 0h7M3 12h12m4 0h2M3 18h2m4 0h12"/><circle cx="12" cy="6" r="2"/><circle cx="17" cy="12" r="2"/><circle cx="7" cy="18" r="2"/></svg></button></div>
+                <div class="sketch-layer" data-model-tools role="group" aria-label="Modellvisning"><button data-layer="shell" aria-pressed="true">Utvendig</button><button data-layer="open" aria-pressed="false">Åpen modell</button><button type="button" data-layer="steel" aria-pressed="false">Stål</button><button type="button" data-layer="foundation" aria-pressed="false">Fundament</button><button type="button" data-measurements aria-pressed="false">Vis mål</button><button type="button" data-tilt>Vipp ↕</button></div>
                 <label class="sketch-layer elevation-picker" data-section-tools hidden>Vis til og med <select name="cutFloor"></select></label>
                 <div class="sketch-layer" data-plan-tools role="group" aria-label="Plannivå" hidden><button data-level="ground" aria-pressed="true">1. etasje</button><button data-level="deck" aria-pressed="false">Mesanin</button><button data-level="second">2. etasje</button><button data-level="third">3. etasje</button><button data-level="loft" hidden>Loft</button><button type="button" data-plan-axes aria-pressed="false">Vis akser</button></div>
                 <details class="plan-figures" data-figure-tools hidden>
@@ -87,16 +87,31 @@
                   <button type="button" data-add-loft>+ Loftrom</button>
                 </div>
                 <label class="sketch-layer elevation-picker" hidden data-elevation>Vis fasade <select name="elevation"></select></label>
-                <svg id="sketch-drawing" viewBox="0 0 720 440" role="img" aria-label="Romskisse av hallen"></svg>
+                <div class="model-stage"><div class="model-paper">
+                  <svg id="sketch-drawing" viewBox="0 0 720 440" role="img" aria-label="Romskisse av hallen"></svg>
+                  <div class="model-handles" data-model-handles hidden>
+                    <button type="button" data-model-dimension="length"><small>Lengde</small><b></b></button>
+                    <button type="button" data-model-dimension="width"><small>Bredde</small><b></b></button>
+                    <button type="button" data-model-dimension="height"><small>Høyde</small><b></b></button>
+                  </div>
+                  <div class="dimension-editor" data-dimension-editor hidden role="group" aria-label="Endre modellmål">
+                    <div class="sketch-dimensions"><label>Lengde (m)<input type="number" name="lengde" min="3" max="200" value="10" step="1" required></label><label>Bredde (m)<input type="number" name="bredde" min="3" max="200" value="8" step="1" required></label><label>Vegghøyde (m)<input type="number" name="hoyde" min="2" max="20" value="4" step="0.5" required></label></div>
+                    <button type="button" data-apply-dimension>Bruk</button>
+                    <button type="button" data-cancel-dimension aria-label="Avbryt">×</button>
+                  </div>
+                </div></div>
                 <div class="sheet-caption"><span data-sheet-title></span><span data-measure></span></div>
                 <p class="sheet-note" data-gesture></p>
+                <div class="model-footer"><span class="model-area">Grunnflate <strong data-total></strong></span>
+                <div class="sketch-actions"><a href="#kontakt" data-attach>Ta med i forespørsel ↗</a><button type="button" data-download>Last ned komplett PDF ↓</button></div>
+                <div data-pdf-status role="status"></div>
+                </div>
               </div>
-              <div class="sketch-panel">
-                <div class="sketch-total"><span>Grunnflate</span><strong data-total></strong></div>
-                <div class="sketch-sections" role="group" aria-label="Innstillinger"><button type="button" data-edit="form" aria-pressed="true">Byggform</button><button type="button" data-edit="facade" aria-pressed="false">Vegger og tak</button><button type="button" data-edit="openings" aria-pressed="false">Åpninger</button><button type="button" data-edit="zones" aria-pressed="false">Romplan</button></div>
+              <div class="sketch-panel" id="sketch-tools" hidden>
+                <div class="tools-heading"><strong>Verktøy</strong><button type="button" data-close-tools aria-label="Lukk verktøy">×</button></div>
+                <div class="sketch-sections" role="group" aria-label="Innstillinger"><button type="button" data-edit="form" aria-pressed="true">Byggform</button><button type="button" data-edit="facade" aria-pressed="false">Vegger og tak</button><button type="button" data-edit="openings" aria-pressed="false">Åpninger</button><button type="button" data-edit="zones" aria-pressed="false">Romplan</button><button type="button" data-edit="details" aria-pressed="false">Prosjektdetaljer</button></div>
                 <div data-pane="form">
                   <label class="sketch-field">Byggtype<select name="sketchUse"><option>Lagerhall</option><option>Verksted</option><option>Butikk</option><option>Kontor</option></select></label>
-                  <div class="sketch-dimensions"><label>Lengde (m)<input type="number" name="lengde" min="3" max="200" value="10" step="1" required></label><label>Bredde (m)<input type="number" name="bredde" min="3" max="200" value="8" step="1" required></label><label>Vegghøyde (m)<input type="number" name="hoyde" min="2" max="20" value="4" step="0.5" required></label></div>
                   <label class="sketch-field">Takform<select name="tak"><option value="gable">Saltak</option><option value="mono">Pulttak</option><option value="flat">Flatt tak</option></select></label>
                   <label class="sketch-field" data-rise>Mønehøyde over raft (m)<input type="number" name="ridgeRise" min="0.1" max="30" step="0.01" placeholder="Automatisk"></label>
                   <details class="plan-zones massing-controls">
@@ -163,11 +178,25 @@
                   </fieldset>
                   <label class="sketch-field">Kommentar til romplanen<textarea name="planNote" maxlength="500" rows="2" placeholder="F.eks. garderobe ved inngangen eller kontor på mesaninen"></textarea></label>
                 </div>
+                <div data-pane="details" hidden>
+                  <div data-project-fields></div>
+                  <details class="project-group" data-stair-group>
+                    <summary>Innvendige trapper</summary>
+                    <label class="sketch-field">Sone<select name="stairZone"></select></label>
+                    <label class="sketch-field">Trapp fra 1. etasje<select name="stairType"><option value="">Ingen trapp tegnet</option></select></label>
+                    <div data-stair-options hidden>
+                      <label class="sketch-field">Opp til<select name="stairTo"></select></label>
+                      <label class="sketch-field">Plassering i sonen<select name="stairCorner"></select></label>
+                      <label class="sketch-field">Materiale<select name="stairMaterial"><option value="">Avklares</option></select></label>
+                      <p class="sketch-limits" data-stair-hint></p>
+                    </div>
+                  </details>
+                  <label class="sketch-field">Andre behov eller kjente laster<textarea name="detailNote" maxlength="500" rows="2" placeholder="F.eks. punktlast fra maskin, betongkvalitet fra tegning eller ønsket fri høyde"></textarea></label>
+                </div>
                 <p class="opening-status" data-opening-status role="status" hidden></p>
                 <details class="sketch-files"><summary>Egne tegninger</summary><div data-drawing-picker></div></details>
                 <p class="sketch-limits">Idéskisse. Rammeavstand og valg av bæresystem, inkludert eventuelt fagverk, avklares nærmere i tilbudsfasen.</p>
-                <div class="sketch-actions"><a href="#kontakt" data-attach>Ta med i forespørsel ↗</a><button type="button" data-download>Last ned komplett PDF ↓</button></div>
-                <div data-pdf-status role="status"></div>
+
               </div>
             </div>
           </div>
@@ -428,7 +457,8 @@
   </dialog>
 
 </div>
-<script src="js/ferro.min.js?v=80e6f8ff4ae4"></script>
+<script src="js/ferro.min.js?v=94b5511bdadc"></script>
+
 
 
 
