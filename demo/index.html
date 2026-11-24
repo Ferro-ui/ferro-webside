@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="nb" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ferro Stålentreprenør — Vi reiser stålbygg raskt og presist</title>
+<meta name="description" content="Ferro Stålentreprenør AS — totalentreprenør for stålbygg. Fra idé til ferdig bygg, vi er med hele veien. Hele Norge.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FFFFFF">
+<script>
+  /* Theme and intro flags are set before first paint to avoid a flash. Light is the default. */
+  (function () {
+    var root = document.documentElement;
+    var theme = 'light';
+    try { if (localStorage.getItem('ferro-theme') === 'dark') theme = 'dark'; } catch (e) {}
+    root.setAttribute('data-theme', theme);
+    root.classList.add('js');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduce) root.classList.add('motion', 'logo-intro');
+  })();
+</script>
+<link rel="preload" as="image" href="assets/img/hero-drone-v4-poster-480.webp" type="image/webp" media="(max-width: 600px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/img/hero-drone-v4-poster-1080.webp" type="image/webp" media="(min-width: 600.02px)" fetchpriority="high">
+<link rel="stylesheet" href="css/ferro.min.css">
+
+
+
+</head>
+<body>
+<a class="skip-link" href="#innhold">Hopp til innhold</a>
+<div class="site">
+
+  <!-- ============ HEADER (shared by all screens) ============ -->
+  <div class="home26">
+    <header class="h26-header h26-shell">
+      <a class="h26-brand" href="#hjem" data-action="goHome" aria-label="Ferro – hjem"><img src="assets/img/ferro-logo.svg" width="88" height="58" alt="Ferro Stålentreprenør"></a>
+      <nav aria-label="Hovedmeny">
+        <a href="#prosjekter" data-action="goProsjekter" data-nav="prosjekter">Prosjekter</a>
+        <a href="#omoss" data-action="goOmOss" data-nav="omoss">Om oss</a>
+      </nav>
+      <a class="h26-header-contact" href="#kontakt" data-action="goKontakt" data-nav="kontakt">Kontakt <span aria-hidden="true">↗</span></a>
+    </header>
+  </div>
+
+  <main tabindex="-1" id="innhold" class="home26">
+    <!-- ================= HOME ================= -->
+    <div class="screen is-active" data-screen="home" data-screen-label="Hjem">
+        <section class="flight" aria-label="Utforsk Ferros stålbygg i Telemark">
+          <div class="flight-frame">
+            <picture class="flight-media"><source media="(max-width:600px)" srcset="assets/img/hero-drone-v4-poster-480.webp"><img src="assets/img/hero-drone-v4-poster-1080.webp" width="1920" height="1080" alt="" fetchpriority="high"></picture>
+            <video class="flight-media" data-film muted playsinline loop preload="none" aria-hidden="true"></video>
+            <div class="flight-tools">
+              <span class="flight-location"><i aria-hidden="true"></i>Telemark, Norge</span>
+            </div>
+            <div class="flight-intro">
+              <h1>Bygget i <em>stål.</em></h1>
+              <p>Vi bygger næringsbygg, fra første skisse til siste bolt.</p>
+              <a class="sketch-launch" href="#byggskisse" data-sketch-launch hidden>Skisser ditt bygg <span aria-hidden="true">↘</span></a>
+            </div>
+
+            <div class="film-readout">
+              <button type="button" data-toggle hidden aria-label="Spill av dronefilm"><span data-play-icon aria-hidden="true">▶</span></button>
+              <span data-caption>Tokke Teknologipark · Dalen</span>
+            </div>
+          </div>
+        </section>
+        <section class="sketch" id="byggskisse" aria-labelledby="sketch-title" hidden>
+          <div class="h26-shell">
+            <header class="sketch-head"><h2 id="sketch-title" tabindex="-1">Skisser ditt bygg.</h2><p>Velg leveranse, tegn inn rom og se hallen uten tak. Ta med idéskissen til en samtale med Ferro.</p></header>
+            <div class="sketch-workbench">
+              <div class="sketch-sheet">
+                <div class="sketch-toolbar"><img class="sketch-brand" src="assets/img/ferro-logo.svg" alt="Ferro Stålentreprenør" width="72" height="48"><div role="group" aria-label="Visning"><button type="button" data-view="volume" aria-pressed="true">3D</button><button type="button" data-view="plan" aria-pressed="false">Plan</button><button type="button" data-view="facade" aria-pressed="false">Fasade</button></div><button type="button" data-rotate aria-label="Roter bygget 45 grader">Roter ↻</button></div>
+                <div class="sketch-layer" data-model-tools role="group" aria-label="Modellvisning"><button data-layer="shell" aria-pressed="true">Utvendig</button><button data-layer="open" aria-pressed="false">Åpen modell</button><button type="button" data-layer="steel" aria-pressed="false">Stål</button><button type="button" data-tilt>Vipp ↕</button></div>
+                <label class="sketch-layer elevation-picker" data-section-tools hidden>Vis til og med <select name="cutFloor"></select></label>
+                <div class="sketch-layer" data-plan-tools role="group" aria-label="Plannivå" hidden><button data-level="ground" aria-pressed="true">1. etasje</button><button data-level="deck" aria-pressed="false">Mesanin</button><button data-level="second">2. etasje</button><button data-level="third">3. etasje</button><button data-level="loft" hidden>Loft</button></div>
+                <div class="sketch-layer roof-section" data-roof-section hidden>
+                  <svg viewBox="0 0 104 54" width="104" height="54" aria-hidden="true"><g data-roof-profile><path data-roof-walls fill="#e2eaf1" stroke="#4a6883"/><path data-roof-space fill="#bbd8e9" stroke="#294f70"/><path data-loft-floor stroke="#193451" stroke-dasharray="3 2"/></g></svg>
+                  <div><strong>Saltak · tverrsnitt</strong><small data-roof-description></small></div>
+                  <button type="button" data-add-loft>+ Loftrom</button>
+                </div>
+                <label class="sketch-layer elevation-picker" hidden data-elevation>Vis fasade <select name="elevation"></select></label>
+                <svg id="sketch-drawing" viewBox="0 0 720 440" role="img" aria-label="Romskisse av hallen"></svg>
+                <div class="sheet-caption"><span data-sheet-title></span><span data-measure></span></div>
+                <p class="sheet-note" data-gesture></p>
+              </div>
+              <div class="sketch-panel">
+                <div class="sketch-total"><span>Grunnflate</span><strong data-total></strong></div>
+                <div class="sketch-sections" role="group" aria-label="Innstillinger"><button type="button" data-edit="form" aria-pressed="true">Byggform</button><button type="button" data-edit="facade" aria-pressed="false">Vegger og tak</button><button type="button" data-edit="openings" aria-pressed="false">Åpninger</button><button type="button" data-edit="zones" aria-pressed="false">Romplan</button></div>
+                <div data-pane="form">
+                  <div class="sketch-dimensions"><label>Lengde (m)<input type="number" name="lengde" min="3" max="200" value="30" step="1" required></label><label>Bredde (m)<input type="number" name="bredde" min="3" max="200" value="18" step="1" required></label><label>Vegghøyde (m)<input type="number" name="hoyde" min="2" max="20" value="6" step="0.5" required></label></div>
+                  <label class="sketch-field">Takform<select name="tak"><option value="gable">Saltak</option><option value="mono">Pulttak</option><option value="flat">Flatt tak</option></select></label>
+                  <label class="sketch-field" data-rise>Mønehøyde over raft (m)<input type="number" name="ridgeRise" min="0.1" max="30" step="0.01" placeholder="Automatisk"></label>
+                  <fieldset class="sketch-spec"><legend>Hva gjelder forespørselen?</legend><div class="sketch-options"><label><input type="checkbox" name="scope" value="Råbygg"> Råbygg</label><label><input type="checkbox" name="scope" value="Totalentreprise (TE)"> Totalentreprise (TE)</label><label><input type="checkbox" name="scope" value="Kun stål"> Kun stål</label><label><input type="checkbox" name="scope" value="Ombygning"> Ombygning</label></div></fieldset>
+                  <label class="sketch-field">Kommentar til prosjektet<textarea name="projectNote" maxlength="500" rows="2" placeholder="F.eks. tilbygg til eksisterende verksted"></textarea></label>
+                </div>
+                <div data-pane="facade" hidden>
+                  <div class="thermal-option"><strong data-thermal></strong><label class="sketch-check"><input type="checkbox" name="cold"> Uisolert bygg</label></div>
+                  <div class="sketch-pair"><label class="sketch-field">Yttervegg<select name="wall"><option value="horizontal">Liggende sandwichpanel (SW)</option><option value="vertical">Stående sandwichpanel (SW)</option><option value="sheet">Profilert stålplate</option><option value="other">Annen løsning</option></select></label>
+                  <label class="sketch-field">Takoppbygning<select name="cover"><option value="membrane">TRP + taktekking</option><option value="trp">TRP uten taktekking</option><option value="sandwich">Sandwichpanel (SW)</option><option value="other">Annen løsning</option></select></label></div>
+                  <label class="sketch-field">Kommentar til vegger og tak<textarea name="envelopeNote" maxlength="500" rows="2" placeholder="Paneltype, taktekking eller andre ønsker"></textarea></label>
+                </div>
+                <div data-pane="openings" hidden>
+                  <p class="opening-help">Oppgi antall og mål per fasade. Legg til en gruppe for hver størrelse.</p>
+                  <div data-opening-list></div>
+                  <div class="opening-add"><button type="button" data-opening-add="window">+ Vindu</button><button type="button" data-opening-add="door">+ Dør</button><button type="button" data-opening-add="gate">+ Port</button></div>
+                </div>
+                <div data-pane="zones" hidden>
+                  <div class="sketch-pair"><label class="sketch-field">Etasjer i bygget<select name="stories"><option value="1">1 etasje</option><option value="2">2 etasjer</option><option value="3">3 etasjer</option></select></label>
+                    <label class="sketch-field">Sone<select name="roomZone"></select></label></div>
+                  <div class="zone-placement" data-placement>
+                    <label class="sketch-field">Plasser valgt sone i forhold til<select name="zoneTarget"></select></label>
+                    <div class="room-splits" aria-label="Plassering på planen"><button type="button" data-place="above">↑ Over</button><button type="button" data-place="below">↓ Under</button><button type="button" data-place="left">← Venstre</button><button type="button" data-place="right">Høyre →</button></div>
+                    <output aria-live="polite" data-placed></output>
+                  </div>
+                  <details class="plan-zones"><summary>Endre soner og arealfordeling</summary><div class="sketch-zones" data-zones></div><button class="sketch-add" type="button" data-add>+ Legg til sone</button></details>
+                  <div data-loft-options><label class="sketch-check"><input type="checkbox" name="loft"> Loftrom under saltaket i denne sonen</label>
+                    <label class="sketch-field" data-loft-insulation hidden>Isolering av loftrom<select name="loftInsulation"><option>Avklares</option><option>Isolert</option><option>Uisolert</option></select></label></div>
+                  <label class="sketch-check"><input type="checkbox" name="mezzanine"> Mesanin i denne sonen</label>
+                  <label class="sketch-field" data-depth hidden>Mesanindybde <output></output><input type="range" name="deckDepth" min="10" max="100" step="1"></label>
+                  <div data-deck-position hidden><label class="sketch-field">Mesaninlengde <output data-deck-length></output><input type="range" name="deckLength" min="10" max="100"></label>
+                  <details><summary>Plassering i sonen</summary><label class="sketch-field">Fra starten av sonen <output data-deck-x></output><input type="range" name="deckX" min="0" max="90"></label>
+                  <label class="sketch-field">Fra langside B <output data-deck-y></output><input type="range" name="deckY" min="0" max="90"></label></details></div>
+                  <div class="sketch-levels" role="group" aria-label="Rediger etasje"><button data-room-level="ground">1. etasje</button><button data-room-level="deck">Mesanin</button><button data-room-level="second">2. etasje</button><button data-room-level="third">3. etasje</button><button data-room-level="loft" hidden>Loft</button></div>
+                  <fieldset class="sketch-spec room-editor"><legend>Innred rommet</legend>
+                    <label class="sketch-field">Valgt areal<select name="activeRoom"></select></label>
+                    <div class="room-identity"><label class="sketch-field">Romnavn<input name="roomName" list="ferro-room-types" maxlength="40"></label><output data-room-size></output></div>
+                    <div class="room-splits"><button data-split="x">Del på langs ↔</button><button data-split="y">Del på tvers ↕</button></div>
+                    <div data-room-boundary hidden><label class="sketch-field">Velg skillevegg<select name="cutPath"></select></label><label class="sketch-field">Flytt skillevegg<input type="range" name="cut" min="1" max="99"></label><button type="button" class="sketch-add" data-merge>Fjern valgt rom</button></div>
+                    <div class="wall-row-tool"><div class="sketch-pair"><label class="sketch-field">Legg rom langs<select name="rowWall"><option value="sideA">Langside A</option><option value="sideB">Langside B</option><option value="front">Fremre gavlside</option><option value="back">Bakre gavlside</option></select></label>
+                    <label class="sketch-field">Antall rom<select name="rowCount"><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option></select></label></div>
+                    <button type="button" data-row>Sett inn rom på rekke</button></div>
+                  </fieldset>
+                  <label class="sketch-field">Kommentar til romplanen<textarea name="planNote" maxlength="500" rows="2" placeholder="F.eks. garderobe ved inngangen eller kontor på mesaninen"></textarea></label>
+                </div>
+                <p class="opening-status" data-opening-status role="status" hidden></p>
+                <details class="sketch-files"><summary>Egne tegninger</summary><div data-drawing-picker></div></details>
+                <p class="sketch-limits">Idéskisse. Rammeavstand og valg av bæresystem, inkludert eventuelt fagverk, avklares nærmere i tilbudsfasen.</p>
+                <div class="sketch-actions"><a href="#kontakt" data-attach>Ta med i forespørsel ↗</a><button type="button" data-download>Last ned skisse ↓</button></div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="h26-section h26-shell" id="h26-prosjekter" aria-labelledby="h26-projects-title">
+          <div class="h26-section-head">
+            <h2 id="h26-projects-title">Utvalgte prosjekter</h2>
+            <a class="archive-link" href="#prosjekter">Hele prosjektarkivet <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="h26-project-grid">
+            <article class="h26-project">
+              <img src="assets/photos/2024/09/IMG_8290.webp" width="1280" height="720" alt="Tilbygget i Tokke Teknologipark" loading="lazy">
+              <p class="h26-metadata">Dalen · Produksjon</p>
+              <h3>Tokke Teknologipark</h3>
+              <p>Totalentreprise for Dalen Mekaniske sitt tilbygg.</p>
+              <a class="h26-case-link" href="#prosjekt/tokke-teknologipark">Se prosjektet <span aria-hidden="true">↗</span></a>
+            </article>
+            <article class="h26-project">
+              <img src="assets/photos/2024/09/IMG_2054-rotated.webp" width="1280" height="720" alt="NTT-bygget i Skiensvegen 740" loading="lazy">
+              <p class="h26-metadata">Nome · Næringsbygg</p>
+              <h3>Skiensvegen 740</h3>
+              <p>Kontor, verksted og lager for NTT AS.</p>
+              <a class="h26-case-link" href="#prosjekt/skiensvegen-740">Se prosjektet <span aria-hidden="true">↗</span></a>
+            </article>
+            <article class="h26-project">
+              <img src="assets/photos/2024/09/image11.webp" width="1280" height="720" alt="Fasaden til Coop Extra i Bø" loading="lazy">
+              <p class="h26-metadata">Bø i Telemark · Butikk</p>
+              <h3>Folkestadvegen 3</h3>
+              <p>Nytt stålbygg for Coop Extra i Bø sentrum.</p>
+              <a class="h26-case-link" href="#prosjekt/folkestadvegen-3">Se prosjektet <span aria-hidden="true">↗</span></a>
+            </article>
+          </div>
+        </section>
+        <section class="h26-build-section" id="h26-bygg" aria-labelledby="h26-build-title">
+          <div class="h26-section h26-shell h26-build-layout">
+            <div><h2 id="h26-build-title">Plass til det<br>du skal drive med.</h2><p>Velg byggtype for å starte en prosjektforespørsel.</p></div>
+            <ul class="h26-build-list">
+              <li><a href="#kontakt" data-building="Næringslokaler">Næringslokaler<span aria-hidden="true">↗</span></a></li><li><a href="#kontakt" data-building="Produksjonslokaler">Produksjonslokaler<span aria-hidden="true">↗</span></a></li><li><a href="#kontakt" data-building="Verksted">Verksted<span aria-hidden="true">↗</span></a></li><li><a href="#kontakt" data-building="Butikk">Butikk<span aria-hidden="true">↗</span></a></li><li><a href="#kontakt" data-building="Kontor">Kontor<span aria-hidden="true">↗</span></a></li>
+            </ul>
+          </div>
+        </section>
+        <section class="h26-section h26-shell" id="h26-prosess" aria-labelledby="h26-process-title">
+          <div class="h26-section-head"><h2 id="h26-process-title">Fra idé til innflytting</h2><p>Du har én partner å forholde deg til gjennom hele byggeprosessen.</p></div>
+          <ol class="h26-steps">
+            <li><h3>Idé og rådgivning</h3><p>Vi avklarer behovene og ser på mulighetene sammen.</p></li>
+            <li><h3>Tegning og plan</h3><p>Vi utarbeider underlaget og planlegger gjennomføringen.</p></li>
+            <li><h3>Bygging</h3><p>Vi følger opp arbeidet mens stålbygget reises.</p></li>
+            <li><h3>Overlevering</h3><p>Du overtar et bygg tilpasset virksomheten din.</p></li>
+          </ol>
+        </section>
+        <section class="h26-contact" id="h26-kontakt" aria-labelledby="h26-contact-title">
+          <div class="h26-section h26-shell h26-contact-layout">
+            <div><h2 id="h26-contact-title">Hva skal du bygge?</h2><p>Fortell oss om prosjektet ditt, så tar vi en uforpliktende prat.</p></div>
+            <div class="h26-contact-links">
+              <a class="h26-button h26-button-light" href="mailto:vegard@ferrostal.no">Send e-post <span aria-hidden="true">↗</span></a>
+              <a class="h26-button h26-button-quiet" href="tel:+4795837123">Ring 958 37 123</a>
+            </div>
+          </div>
+        </section>
+    </div>
+
+    <!-- ================= PROSJEKTER ================= -->
+    <div class="screen" data-screen="prosjekter" data-screen-label="Prosjekter">
+      <header class="h26-page-head h26-shell">
+        <div>
+          <p class="h26-kicker"><span class="h26-film-dot"></span>Prosjekter</p>
+          <h1>Bygg vi har reist.</h1>
+        </div>
+        <p>Vi vet at budsjettet ditt er viktig, og sikrer en effektiv prosess som gir deg mest mulig for pengene. Med stålbygg leverer vi raskt — så du får lokalene du trenger.</p>
+      </header>
+      <section class="h26-section h26-shell" aria-label="Alle prosjekter">
+        <div class="portfolio-tools"><label for="project-search">Finn et prosjekt</label><input id="project-search" type="search" placeholder="Søk etter navn, sted eller byggtype"><output data-result-count for="project-search" aria-live="polite"></output></div>
+        <div class="h26-project-list" data-proj-grid></div>
+      </section>
+      <section class="h26-build-section" aria-labelledby="h26-prosj-bygg-title">
+        <div class="h26-section h26-shell h26-build-layout">
+          <div><h2 id="h26-prosj-bygg-title">Vi bygger blant annet</h2><p>Velg en byggtype og fortell oss hva du planlegger.</p></div>
+          <ul class="h26-build-list">
+            <li><a href="#kontakt" data-building="Lagerhall">Lagerhall<span aria-hidden="true">↗</span></a></li>
+            <li><a href="#kontakt" data-building="Driftsbygning">Driftsbygning<span aria-hidden="true">↗</span></a></li>
+            <li><a href="#kontakt" data-building="Idrettshall">Idrettshall<span aria-hidden="true">↗</span></a></li>
+            <li><a href="#kontakt" data-building="Ridehall">Ridehall<span aria-hidden="true">↗</span></a></li>
+            <li><a href="#kontakt" data-building="Verksted">Verksted<span aria-hidden="true">↗</span></a></li>
+            <li><a href="#kontakt" data-building="Næringslokaler">Næringslokaler<span aria-hidden="true">↗</span></a></li>
+            <li><a href="#kontakt" data-building="Annet bygg">Annet bygg<span aria-hidden="true">↗</span></a></li>
+          </ul>
+        </div>
+      </section>
+      <section class="h26-contact" aria-labelledby="h26-prosj-contact-title">
+        <div class="h26-section h26-shell h26-contact-layout">
+          <div><h2 id="h26-prosj-contact-title">Har du et prosjekt på gang?</h2><p>Ta en uforpliktende prat med oss.</p></div>
+          <div class="h26-contact-links">
+            <a class="h26-button h26-button-light" href="#kontakt" data-action="goKontakt">Kontakt oss <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ================= PROSJEKT DETALJ ================= -->
+    <div class="screen" data-screen="prosjekt" data-screen-label="Prosjekt"></div>
+
+    <!-- ================= OM OSS ================= -->
+    <div class="screen" data-screen="omoss" data-screen-label="Om oss">
+      <header class="h26-page-head h26-shell">
+        <div>
+          <p class="h26-kicker"><span class="h26-film-dot"></span>Om oss</p>
+          <h1>Vi bygger stålbygg som passer perfekt for deg.</h1>
+        </div>
+        <p>En lokal totalentreprenør med tett oppfølging — fra første skisse til nøkkelferdig bygg.</p>
+      </header>
+      <div class="h26-shell">
+        <img class="h26-detail-hero h26-detail-hero--wide" src="assets/photos/2024/09/IMG_8290.webp" width="1280" height="720" alt="Tilbygget i Tokke Teknologipark" loading="lazy">
+      </div>
+      <section class="h26-section h26-shell" aria-labelledby="h26-about-title">
+        <div class="h26-about-intro">
+          <h2 id="h26-about-title">Totalentreprenør — fra start til slutt.</h2>
+          <div>
+            <p>Som totalentreprenør kan vi bistå deg helt fra starten – før tegningene er klare – og sikre en smidig prosess fra idé til ferdig bygg. Vi bygger stålbygg som passer perfekt for deg, enten du skal sette opp et lager, butikk, verksted, kontor eller noe annet.</p>
+            <p>Sammen finner vi den beste løsningen for ditt prosjekt, slik at du kan komme raskt i gang med det du liker best – i dine nye lokaler.</p>
+          </div>
+        </div>
+        <ol class="h26-steps h26-steps--3">
+          <li><h3>Lokal og nær</h3><p>En lokal leverandør med tett oppfølging — vi er engasjerte i prosjektet ditt fra dag én.</p></li>
+          <li><h3>Raskt med stål</h3><p>Stålbygg lar oss levere raskt, så du får lokalene du trenger uten unødvendig ventetid.</p></li>
+          <li><h3>Rett pris</h3><p>Vårt mål er kvalitet til rett pris, og at du blir fornøyd med prosessen fra start til slutt.</p></li>
+        </ol>
+      </section>
+      <section class="h26-build-section" aria-labelledby="h26-team-title">
+        <div class="h26-section h26-shell">
+          <div class="h26-section-head">
+            <h2 id="h26-team-title">Våre ansatte</h2>
+            <p>Vi er et lite, men dedikert team som jobber sammen for å levere skreddersydde løsninger til våre kunder. Hos oss får du personlig oppfølging og et tett samarbeid gjennom hele prosjektet.</p>
+          </div>
+          <div class="h26-team">
+            <article class="h26-person">
+              <img src="assets/photos/2024/09/Vegard-ferro-768x1024.webp" alt="Vegard Landsdal" loading="lazy" decoding="async">
+              <h3>Vegard Landsdal</h3>
+              <p>Daglig leder</p>
+              <a class="h26-text-link" href="mailto:vegard@ferrostal.no">vegard@ferrostal.no</a>
+              <a class="h26-text-link" href="tel:+4795837123">958 37 123</a>
+            </article>
+            <article class="h26-person">
+              <img src="assets/photos/2025/02/477673771_9946373715377044_7439716856953463575_n-769x1024.webp" alt="Ingar Kaasa" loading="lazy" decoding="async">
+              <h3>Ingar Kaasa</h3>
+              <p>Prosjektleder</p>
+              <a class="h26-text-link" href="mailto:ingar@ferrostal.no">ingar@ferrostal.no</a>
+              <a class="h26-text-link" href="tel:+4795078729">950 78 729</a>
+            </article>
+            <article class="h26-person">
+              <img src="assets/photos/2025/02/aleksander.webp" alt="Aleksander Dahle Madsen" loading="lazy" decoding="async">
+              <h3>Aleksander Dahle Madsen</h3>
+              <p>Prosjektleder</p>
+              <a class="h26-text-link" href="mailto:aleksander@ferrostal.no">aleksander@ferrostal.no</a>
+              <a class="h26-text-link" href="tel:+4795979331">959 79 331</a>
+            </article>
+          </div>
+          <div class="h26-team-join">
+            <p><strong>Vi vokser.</strong> Bli en del av teamet.</p>
+            <a class="h26-text-link" href="mailto:vegard@ferrostal.no">Send søknad <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </section>
+      <section class="h26-contact" aria-labelledby="h26-omoss-contact-title">
+        <div class="h26-section h26-shell h26-contact-layout">
+          <div><h2 id="h26-omoss-contact-title">Teamet vårt står klare for en prat.</h2><p>Ring oss for en uforpliktende prat om ditt prosjekt — vi er med hele veien.</p></div>
+          <div class="h26-contact-links">
+            <a class="h26-button h26-button-light" href="tel:+4795837123">Ring 958 37 123</a>
+            <a class="h26-button h26-button-quiet" href="mailto:vegard@ferrostal.no">Send e-post <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ================= KONTAKT ================= -->
+    <div class="screen" data-screen="kontakt" data-screen-label="Kontakt">
+      <header class="h26-page-head h26-shell">
+        <div>
+          <p class="h26-kicker"><span class="h26-film-dot"></span>Kontakt oss</p>
+          <h1>La oss snakke om ditt prosjekt.</h1>
+        </div>
+        <p>Vi svarer raskt og gir deg gjerne en uforpliktende prat om hva vi kan bygge sammen.</p>
+      </header>
+      <section class="h26-section h26-shell h26-contact-page" aria-label="Kontaktinformasjon og skjema">
+        <dl class="h26-facts">
+          <div><dt>Telefon</dt><dd><a href="tel:+4795837123">958 37 123</a></dd></div>
+          <div><dt>E-post</dt><dd><a href="mailto:vegard@ferrostal.no">vegard@ferrostal.no</a></dd></div>
+          <div><dt>Adresse</dt><dd><a href="https://www.google.com/maps/search/?api=1&amp;query=Ringsevja+3+3830+Ulefoss" target="_blank" rel="noopener">Ringsevja 3, 3830 Ulefoss ↗</a></dd></div>
+          <div><dt>Org.nr.</dt><dd>926 542 680</dd></div>
+          <div><dt>Facebook</dt><dd><a href="https://www.facebook.com/Ferro-St%C3%A5lentrepren%C3%B8r-102850358506375" target="_blank" rel="noopener">Ferro Stålentreprenør ↗</a></dd></div>
+          <div><dt>Brosjyre</dt><dd><a href="https://www.visbrosjyre.no/Ferro_Staalentreprenor/MailView/" target="_blank" rel="noopener">Les brosjyren vår ↗</a></dd></div>
+        </dl>
+        <form class="h26-form" id="inquiry">
+          <h2 class="h26-form-title">Fortell om prosjektet</h2>
+          <p class="form-intro">Lag et e-postutkast til Ferro. Du sender meldingen fra ditt eget e-postprogram.</p>
+          <label class="h26-field"><span>Byggtype (valgfritt)</span><select name="byggtype"><option value="">Velg byggtype</option><option>Næringslokaler</option><option>Produksjonslokaler</option><option>Verksted</option><option>Butikk</option><option>Kontor</option><option>Lagerhall</option><option>Driftsbygning</option><option>Idrettshall</option><option>Ridehall</option><option>Annet bygg</option></select></label>
+          <label class="h26-field"><span>Navn</span><input required maxlength="100" name="navn" autocomplete="name"></label>
+          <label class="h26-field"><span>E-post</span><input required maxlength="254" type="email" name="epost" autocomplete="email"></label>
+          <label class="h26-field"><span>Telefon (valgfritt)</span><input maxlength="32" type="tel" name="telefon" autocomplete="tel"></label>
+          <div id="included-sketch" hidden><strong>Din byggskisse</strong><p data-sketch-summary></p><button type="button" data-remove-sketch>Fjern skissen</button></div>
+          <div data-drawing-picker></div>
+          <label class="h26-field"><span>Hva skal du bygge?</span><textarea required maxlength="3000" name="melding" rows="4"></textarea></label>
+          <button type="submit" class="h26-button h26-button-dark">Lag e-postutkast <span aria-hidden="true">→</span></button>
+          <div id="draft" hidden>
+            <h3 tabindex="-1">E-postutkastet er klart</h3>
+            <p data-draft-instructions>Åpne utkastet og send det. Du kan også kopiere teksten og sende den til vegard@ferrostal.no.</p>
+            <textarea rows="6" aria-label="Tekst til e-post" readonly></textarea>
+            <button type="button" class="h26-button h26-button-dark" id="download-email" hidden>Last ned e-post med vedlegg (.eml)</button><p data-drawing-error role="status"></p>
+            <a class="h26-button h26-button-dark" id="compose">Åpne e-postprogram ↗</a>
+          </div>
+        </form>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__grid">
+        <div class="site-footer__brand">
+          <img class="site-footer__logo" src="assets/img/ferro-logo.svg" alt="Ferro Stålentreprenør" width="82" height="55" loading="lazy" decoding="async">
+          <p class="site-footer__text">Ferro Stålentreprenør AS — totalentreprenør for stålbygg. Fra idé til ferdig bygg, vi er med hele veien.</p>
+        </div>
+        <nav class="site-footer__col" aria-labelledby="footer-menu">
+          <p class="site-footer__heading" id="footer-menu">Meny</p>
+          <a class="site-footer__link" href="#hjem" data-action="goHome">Hjem</a>
+          <a class="site-footer__link" href="#prosjekter" data-action="goProsjekter">Prosjekter</a>
+          <a class="site-footer__link" href="#omoss" data-action="goOmOss">Om oss</a>
+          <a class="site-footer__link" href="#kontakt" data-action="goKontakt">Kontakt oss</a>
+        </nav>
+        <div class="site-footer__col">
+          <p class="site-footer__heading">Kontakt</p>
+          <a class="site-footer__link" href="tel:+4795837123">958 37 123</a>
+          <a class="site-footer__link" href="mailto:vegard@ferrostal.no">vegard@ferrostal.no</a>
+          <a class="site-footer__link" href="https://www.facebook.com/Ferro-St%C3%A5lentrepren%C3%B8r-102850358506375" target="_blank" rel="noopener">Facebook ↗</a>
+        </div>
+        <div class="site-footer__badge">
+          <img src="assets/photos/2024/08/SG_GULL_MORKBAKGRUNN.webp" alt="Sentralt godkjent" width="78" height="78" loading="lazy" decoding="async">
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <span>© 2026 Ferro Stålentreprenør AS</span>
+        <a class="site-footer__link" href="https://app.adminkit.com/legal/privacy/no/01ca9bcb-9bf4-4863-b597-9ea8efa0b419">Personvernerklæring</a>
+        <span>Org.nr. 926 542 680</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ LIGHTBOX ============ -->
+  <dialog class="lightbox" data-lightbox aria-label="Prosjektbilder">
+    <button class="lightbox__close" aria-label="Lukk galleriet" type="button">✕</button>
+    <img class="lightbox__img" data-lightbox-img alt="">
+    <div class="gallery-controls">
+      <button type="button" data-prev aria-label="Forrige bilde">←</button>
+      <span data-position aria-live="polite"></span>
+      <button type="button" data-next aria-label="Neste bilde">→</button>
+    </div>
+  </dialog>
+
+</div>
+<script src="js/ferro.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
