@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Ferro Stålentreprenør — Vi reiser stålbygg raskt og presist</title>
-<meta name="description" content="Totalentreprenør for stålbygg til næring og landbruk. Hele Norge.">
+<title>Stålbygg for næring og landbruk | Ferro Stålentreprenør</title>
+<meta name="description" content="Ferro leverer stålbygg til næring og landbruk i hele Norge. Se lagerbygg, verksteder og driftsbygninger, eller skisser ditt eget bygg i 3D.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#FFFFFF">
 <script>
@@ -21,7 +21,7 @@
 </script>
 <link rel="preload" as="image" href="assets/img/hero-drone-v4-poster-480.webp" type="image/webp" media="(max-width: 600px)" fetchpriority="high">
 <link rel="preload" as="image" href="assets/img/hero-drone-v4-poster-1080.webp" type="image/webp" media="(min-width: 600.02px)" fetchpriority="high">
-<link rel="stylesheet" href="css/ferro.min.css?v=2be668f75224">
+<link rel="stylesheet" href="css/ferro.min.css?v=cb0618e8ccc4">
 
 
 
@@ -49,8 +49,8 @@
     <div class="screen is-active" data-screen="home" data-screen-label="Hjem">
         <section class="flight" aria-label="Utforsk Ferros stålbygg i Telemark">
           <div class="flight-intro h26-shell">
-            <h1>Bygget i <em>stål.</em></h1>
-            <p>Vi bygger næringsbygg, fra første skisse til siste bolt.</p>
+            <h1>Stålbygg for næring og landbruk</h1>
+            <p>Som totalentreprenør tar vi ansvar fra første skisse til ferdig bygg.</p>
             <a class="sketch-launch" href="#byggskisse" data-sketch-launch hidden>Skisser ditt bygg <span aria-hidden="true">↘</span></a>
           </div>
           <figure class="flight-reel">
@@ -93,7 +93,7 @@
                   <p data-figure-message role="status"></p>
                 </details>
                 <div class="sketch-layer roof-section" data-roof-section hidden>
-                  <svg viewBox="0 0 104 54" width="104" height="54" aria-hidden="true"><g data-roof-profile><path data-roof-walls fill="#e2eaf1" stroke="#4a6883"/><path data-roof-space fill="#bbd8e9" stroke="#294f70"/><path data-loft-floor stroke="#193451" stroke-dasharray="3 2"/></g></svg>
+                  <svg viewBox="0 0 104 54" width="104" height="54" aria-hidden="true"><g data-roof-profile><path data-roof-walls fill="#e2eaf1" stroke="#4a6883"/><path data-roof-space fill="#bbd8e9" stroke="#294f70"/><path data-loft-floor fill="#79accd" stroke="#193451"/></g></svg>
                   <div><strong>Saltak · tverrsnitt</strong><small data-roof-description></small></div>
                   <button type="button" data-add-loft>+ Loftrom</button>
                 </div>
@@ -170,8 +170,10 @@
                     <output aria-live="polite" data-placed></output>
                   </div>
                   <details class="plan-zones"><summary>Endre soner og arealfordeling</summary><div class="sketch-zones" data-zones></div><button class="sketch-add" type="button" data-add>+ Legg til sone</button></details>
-                  <div data-loft-options><label class="sketch-check"><input type="checkbox" name="loft"> Loftrom under saltaket i denne sonen</label>
-                    <label class="sketch-field" data-loft-insulation hidden>Isolering av loftrom<select name="loftInsulation"><option>Avklares</option><option>Isolert</option><option>Uisolert</option></select></label></div>
+                  <div data-loft-options><label class="sketch-check"><input type="checkbox" name="loft"> Loftrom under mønet</label>
+                    <div data-loft-size hidden><label class="sketch-field">Bredde under mønet <output data-loft-width></output><input name="loftWidth" type="range" min="10" max="95" step="1"></label>
+                      <label class="sketch-field">Lengde langs mønet <output data-loft-length></output><input name="loftLength" type="range" min="10" max="100" step="1"></label>
+                    </div><label class="sketch-field" data-loft-insulation hidden>Isolering av loftrom<select name="loftInsulation"><option>Avklares</option><option>Isolert</option><option>Uisolert</option></select></label></div>
                   <label class="sketch-check"><input type="checkbox" name="mezzanine"> Mesanin i denne sonen</label>
                   <label class="sketch-field" data-depth hidden>Mesanindybde <output></output><input type="range" name="deckDepth" min="10" max="100" step="1"></label>
                   <div data-deck-position hidden><label class="sketch-field">Mesaninlengde <output data-deck-length></output><input type="range" name="deckLength" min="10" max="100"></label>
@@ -446,7 +448,7 @@
   </dialog>
 
 </div>
-<script src="js/ferro.min.js?v=c8cd2952af8b"></script>
+<script src="js/ferro.min.js?v=5eae1c2ca9d1"></script>
 
 
 
