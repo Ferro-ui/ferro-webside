@@ -21,7 +21,7 @@
 </script>
 <link rel="preload" as="image" href="assets/img/hero-drone-v4-poster-480.webp" type="image/webp" media="(max-width: 600px)" fetchpriority="high">
 <link rel="preload" as="image" href="assets/img/hero-drone-v4-poster-1080.webp" type="image/webp" media="(min-width: 600.02px)" fetchpriority="high">
-<link rel="stylesheet" href="css/ferro.min.css?v=7369a7395843">
+<link rel="stylesheet" href="css/ferro.min.css?v=2be668f75224">
 
 
 
@@ -48,19 +48,29 @@
     <!-- ================= HOME ================= -->
     <div class="screen is-active" data-screen="home" data-screen-label="Hjem">
         <section class="flight" aria-label="Utforsk Ferros stålbygg i Telemark">
-          <div class="flight-intro">
+          <div class="flight-intro h26-shell">
             <h1>Bygget i <em>stål.</em></h1>
             <p>Vi bygger næringsbygg, fra første skisse til siste bolt.</p>
             <a class="sketch-launch" href="#byggskisse" data-sketch-launch hidden>Skisser ditt bygg <span aria-hidden="true">↘</span></a>
           </div>
           <figure class="flight-reel">
-            <div class="flight-frame">
+            <div class="flight-strip">
+              <button class="flight-peek" type="button" data-neighbor="-1" aria-label="Vis Lunde" tabindex="-1"><img alt="" src="assets/flight/lunde.webp"></button>
+              <div class="flight-frame">
             <picture class="flight-media"><source media="(max-width:600px)" srcset="assets/img/hero-drone-v4-poster-480.webp"><img src="assets/img/hero-drone-v4-poster-1080.webp" width="1920" height="1080" alt="" fetchpriority="high"></picture>
             <video class="flight-media" data-film muted playsinline loop preload="none" aria-hidden="true"></video>
             </div>
-            <figcaption class="film-readout">
+              <button class="flight-peek" type="button" data-neighbor="1" aria-label="Vis Nome" tabindex="-1"><img alt="" src="assets/flight/nome.webp"></button>
+            </div>
+            <figcaption class="film-readout h26-shell">
               <button type="button" data-toggle hidden aria-label="Spill av dronefilm"><span data-play-icon aria-hidden="true">▶</span></button>
               <a href="#prosjekt/tokke-teknologipark" data-film-link><span data-caption>Tokke Teknologipark · Dalen</span> <span aria-hidden="true">↗</span></a>
+              <div class="flight-chapters" role="group" aria-label="Velg sted i filmen" hidden>
+                <button type="button" data-chapter="0" aria-pressed="true">Dalen</button>
+                <button type="button" data-chapter="1" aria-pressed="false">Nome</button>
+                <button type="button" data-chapter="2" aria-pressed="false">Bø</button>
+                <button type="button" data-chapter="3" aria-pressed="false">Lunde</button>
+              </div>
             </figcaption>
           </figure>
         </section>
@@ -436,7 +446,7 @@
   </dialog>
 
 </div>
-<script src="js/ferro.min.js?v=c22e0ff5aa5a"></script>
+<script src="js/ferro.min.js?v=c8cd2952af8b"></script>
 
 
 
