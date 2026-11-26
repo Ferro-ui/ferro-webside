@@ -1,5 +1,5 @@
 /* Minimal zero-dependency static server for local preview.
-   Root is this file's directory (no process.cwd() — avoids sandbox getcwd). */
+   Serves this file's directory. */
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
@@ -42,7 +42,30 @@ const server = http.createServer((req, res) => {
       fs.readFile(target, (e, data) => {
         if (e) { res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' }); res.end('404 Not Found'); return; }
         const ext = path.extname(target).toLowerCase();
-        res.writeHead(200, { 'Content-Type': MIME[ext] || 'application/octet-stream', 'Cache-Control': 'no-cache' });
+        const headers = {
+          'Content-Type': MIME[ext] || 'application/octet-stream',
+          'Cache-Control': 'no-cache',
+          'Accept-Ranges': 'bytes'
+        };
+        // byte ranges: needed for video playback and seeking (Safari requires them)
+        const range = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range || '');
+        if (range && (range[1] || range[2])) {
+          const size = data.length;
+          let start = range[1] ? Number(range[1]) : size - Number(range[2]);
+          let end = range[1] && range[2] ? Number(range[2]) : size - 1;
+          if (start < 0) start = 0;
+          if (end >= size) end = size - 1;
+          if (start > end) {
+            res.writeHead(416, { 'Content-Range': 'bytes */' + size }); res.end(); return;
+          }
+          headers['Content-Range'] = 'bytes ' + start + '-' + end + '/' + size;
+          headers['Content-Length'] = end - start + 1;
+          res.writeHead(206, headers);
+          res.end(data.subarray(start, end + 1));
+          return;
+        }
+        headers['Content-Length'] = data.length;
+        res.writeHead(200, headers);
         res.end(data);
       });
     });
