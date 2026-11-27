@@ -172,7 +172,7 @@
     const related=ferroProjects.filter(p=>p!==d).sort((a,b)=>Number(b.category===d.category)-Number(a.category===d.category)).slice(0,3);
     return '<nav class="h26-shell h26-detail-top path-links" aria-label="Brødsmuler"><a href="#hjem">Forside</a> / <a href="#prosjekter">Prosjekter</a> / <span aria-current="page">'+esc(d.title)+'</span></nav>'+
       '<header class="h26-page-head h26-shell"><h1>'+esc(d.headline || d.title)+'</h1><p>'+esc(d.lead)+'</p></header>'+
-      (d.hero?'<div class="h26-shell"><img class="h26-detail-hero" src="'+esc(d.hero)+'" alt="'+esc(d.title+' i '+d.sted)+'"></div>':'')+
+      (d.hero?'<div class="h26-shell"><img class="h26-detail-hero" src="'+esc(d.hero)+'" alt="'+esc(d.heroAlt || d.title+' i '+d.sted)+'"></div>':'')+
       '<section class="h26-section h26-shell h26-detail-body"><div class="h26-detail-text">'+(d.body || []).map(p=>'<p>'+esc(p)+'</p>').join('')+
       (d.specs?'<h2>Leveransen</h2><ul class="h26-build-list h26-spec-list">'+d.specs.map(s=>'<li>'+esc(s)+'</li>').join('')+'</ul>':'')+
       '<a class="h26-text-link" href="#prosjekter/'+d.category+'">Flere bygg i kategorien '+esc(projectCategories[d.category])+' →</a></div>'+

@@ -1,0 +1,38 @@
+{
+  "slug": "tokke-teknologipark",
+  "published": true,
+  "order": 20,
+  "category": "kontor",
+  "title": "Tokke Teknologipark",
+  "sted": "Dalen",
+  "lead": "Tilbygg på 540 m² for Dalen Mekaniske AS.",
+  "headline": "",
+  "hero": "assets/photos/2024/09/IMG_8290.webp",
+  "heroAlt": "Tokke Teknologipark i Dalen",
+  "body": [],
+  "specs": [
+    "270 m² grunnflate fordelt på to etasjer",
+    "Stålkonstruksjon med sandwichelementer",
+    "Hulldekker i etasjeskillet"
+  ],
+  "client": "Dalen Mekaniske AS",
+  "byggetid": "Oktober 2022 – april 2023",
+  "facts": [
+    {
+      "label": "Entreprise",
+      "value": "Totalentreprise"
+    },
+    {
+      "label": "Areal",
+      "value": "540 m²"
+    }
+  ],
+  "gallery": [
+    "assets/photos/2024/09/image13.webp"
+  ],
+  "quote": {
+    "text": "Tett oppfølging, tålmodige og på ballen. De er gode rådgivere og passer på at vi får det vi trenger.",
+    "name": "Hermann Betten",
+    "org": "Dalen Mekaniske AS"
+  }
+}
