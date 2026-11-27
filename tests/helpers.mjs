@@ -6,10 +6,12 @@ export const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '
 export const read = file => fs.readFileSync(path.join(root, file), 'utf8')
 export const readJson = file => JSON.parse(read(file))
 
+// A frozen copy of the content as seeded from today's site, so tests do not
+// break when editors change content/ through the admin.
 export function loadSeed() {
-  const site = readJson('content/site.json')
-  const projects = fs.readdirSync(path.join(root, 'content/projects')).filter(f => f.endsWith('.json'))
-    .map(f => readJson('content/projects/' + f))
+  const site = readJson('tests/fixtures/site.json')
+  const projects = fs.readdirSync(path.join(root, 'tests/fixtures/projects')).filter(f => f.endsWith('.json'))
+    .map(f => readJson('tests/fixtures/projects/' + f))
   return {site, projects}
 }
 
