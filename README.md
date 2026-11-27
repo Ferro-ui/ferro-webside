@@ -1,7 +1,9 @@
 # Ferro Stålentreprenør — nettside
 
 Statisk nettside for **Ferro Stålentreprenør AS**, en totalentreprenør for stålbygg.
-Ren HTML/CSS/JS — uten byggesteg og uten rammeverk.
+Ren HTML/CSS/JS uten rammeverk. Innholdet ligger i `content/` og redigeres i admin på `/admin/`.
+`index.html` er malen; `node scripts/build.mjs` fyller den med innholdet og legger nettstedet i `_site/`.
+GitHub Actions bygger og publiserer ved hver endring i `main`. Se [docs/admin.md](docs/admin.md).
 
 ## Innhold
 
