@@ -4,8 +4,7 @@ function drawFerroSketch(drawing, model, view, angle, interactive=false) {
   const studio=view==='volume';
   const outlineView=view==='facade' || (studio && ['drawing','shell'].includes(model.layer));
   const dimensioned=studio && outlineView && (model.layer==='drawing' || model.measurements);
-  const baseHeight=model.concreteBase?Math.min(height,model.concreteHeight ?? 1):0;
-  const moduleWidth=Number(model.panelModule) || 1.1;
+  const moduleWidth=1.1; // Sketch spacing of the sandwich panel seams.
   const prefix=interactive?'ferro-live':'ferro-sheet-'+model.level;
   const finish={gable:'#e6edf6',side:'#f7f9fc',glass:'#d6ebf8',shutter:'#e4e8eb','roof-lit':'#fafbfd','roof-shade':'#e9eef4',seam:'#93a7ba'};
   const {layer,level,wall,cover,tilt}=model;
@@ -67,42 +66,8 @@ function drawFerroSketch(drawing, model, view, angle, interactive=false) {
     if(wall==='front' || wall==='back') return p(wall==='front'?-out:length+out,t,z);
     return p(t,wall==='sideA'?width+out:-out,z);
   }
-  const retail=model.buildingUse==='Butikk', office=model.buildingUse==='Kontor', workshop=model.buildingUse==='Verksted';
-  // A folded metal canopy projects from the wall in model space when the view rotates.
-  function canopy(wall,a,b,z,depth) {
-    const q=(t,h,d)=>wallPoint(wall,t,h,d);
-    const lip=Math.min(.16,depth*.22,height*.035);
-    face([q(a,z,0),q(b,z,0),q(b,z,depth),q(a,z,depth)],'#c9d9e5','#829bb1',.65);
-    face([q(a,z,depth),q(b,z,depth),q(b,z-lip,depth),q(a,z-lip,depth)],'#34516c','#7590a7',.7);
-    for(const t of [a,b]) face([q(t,z,0),q(t,z,depth),q(t,z-lip,depth),q(t,z-lip,0)],'#526e87','none');
-  }
   function facadeBase(wall) {
     const span=wall.startsWith('side')?length:width;
-    const q=(t,z)=>wallPoint(wall,t,z);
-    if(baseHeight>0) {
-      const out=Math.min(.04,baseHeight*.06);
-      const section=(a,b,lo,hi)=>{
-        if(b<=a || hi<=lo) return;
-        const f=(t,z)=>wallPoint(wall,t,z,out);
-        const panel=face([f(a,lo),f(b,lo),f(b,hi),f(a,hi)],'#e2e3df','#859095',.7);
-        panel.dataset.concrete='';panel.dataset.height=String(hi-lo);
-        face([q(a,hi),q(b,hi),f(b,hi),f(a,hi)],'#d8dcda','#96a0a2',.55);
-        for(const t of [a,b]) face([q(t,lo),f(t,lo),f(t,hi),q(t,hi)],'#939a99','none');
-      };
-      let cursor=0;
-      for(const op of placed.filter(o=>o.wall===wall && o.bottom<baseHeight)) {
-        section(cursor,op.start,0,baseHeight);
-        section(op.start,op.end,0,op.bottom);
-        section(op.start,op.end,op.top,baseHeight);
-        cursor=op.end;
-      }
-      section(cursor,span,0,baseHeight);
-    }
-    if(retail || office) {
-      const z=height*.94, depth=height*(retail?.095:.035);
-      face([q(0,z),q(span,z),q(span,z-depth),q(0,z-depth)],retail?'#355571':'#7890a4','none');
-      line(q(0,z),q(span,z),'#dce7ed',1.2);
-    }
     if(wall.startsWith('side') && (roof==='gable' || (roof==='mono' && wall==='sideB'))) {
       const t=Math.min(.25,span*.035), radius=Math.min(.06,span*.007);
       if(placed.some(op=>op.wall===wall && op.start<t+radius && op.end>t-radius)) return;
@@ -133,32 +98,11 @@ function drawFerroSketch(drawing, model, view, angle, interactive=false) {
           line(q(l,z),q(r,z),'#657e94',.9);
           line(q(l,z+inset*.24),q(r,z+inset*.24),'#dbe5ec',.65);
         }
-        if(workshop) {
-          for(let i=0;i<3;i++){
-            const x=l+(r-l)*(.08+i*.30), z=sill+(head-sill)*.57;
-            const w=(r-l)*.23,h=(head-sill)*.11;
-            face([q(x,z),q(x+w,z),q(x+w,z+h),q(x,z+h)],finish.glass,'#445b6f',1.3);
-          }
-        }
       } else if(type==='window') {
         line(q(a,top),q(b,top),'#e8f3f9',1.4);
         if((b-a)*scale>35) line(q((l+r)/2,sill),q((l+r)/2,head),'#48657e',1.6);
         line(q(l,sill),q(r,sill),'#c9e5ef',1.3);
-        if(retail || office) {
-          const rail=sill+(head-sill)*(retail?.78:.68);
-          line(q(l,rail),q(r,rail),'#547187',1.65);
-          const glint=face([q(l,sill),q(l+(r-l)*.23,sill),q(r,head),q(l+(r-l)*.57,head)],'#effbff','none');
-          glint.setAttribute('fill-opacity','.17');
-          if(office) canopy(wall,a,b,Math.min(height,top+.08),Math.min(.45,(r-l)*.18));
-        }
       } else {
-        if(retail || office) {
-          const bar=sill+(head-sill)*.18;
-          face([q(l,bar),q(r,bar),q(r,head),q(l,head)],finish.glass,'#7893a7',1.2);
-          line(q((l+r)/2,sill),q((l+r)/2,head),'#455e74',2);
-          const overhang=Math.min(.22,(r-l)*.12);
-          canopy(wall,Math.max(0,a-overhang),Math.min(wall.startsWith('side')?length:width,b+overhang),Math.min(height,top+.14),Math.min(1.1,(b-a)*.6));
-        }
         line(q(a+(b-a)*.66,top*.48),q(a+(b-a)*.85,top*.48),'#e8eff5',2);
       }
     }
@@ -216,20 +160,20 @@ function drawFerroSketch(drawing, model, view, angle, interactive=false) {
     const profile=end?folds:[0,span];
     const head=end?top:()=>top(side==='sideA'?width:0);
     const q=(t,z)=>wallPoint(side,t,z);
-    // Clip the joints to the actual roof slope and to the top of the concrete.
-    const outline=[q(0,baseHeight),q(span,baseHeight),...profile.slice().reverse().map(t=>q(t,head(t)))];
+    // Clip the joints to the actual roof slope.
+    const outline=[q(0,0),q(span,0),...profile.slice().reverse().map(t=>q(t,head(t)))];
     const id=prefix+'-cladding-'+side;
     const clip=element('clipPath',{id});
     clip.append(face(outline,'white','none'));defs.append(clip);
     const joints=element('g',{'clip-path':'url(#'+id+')','data-cladding':side});
     const horizontal=wall==='horizontal';
     const increment=wall==='sheet'?span/(end?40:50):moduleWidth;
-    const origin=horizontal?baseHeight:0,limit=horizontal?Math.max(...profile.map(head)):span;
+    const limit=horizontal?Math.max(...profile.map(head)):span;
     const bevel=Math.min(.018,increment*.02);
-    for(let i=1;origin+i*increment<limit-1e-7;i++){
-      const t=origin+i*increment;
+    for(let i=1;i*increment<limit-1e-7;i++){
+      const t=i*increment;
       const point=(u,offset)=>horizontal?q(u,t+offset):q(t+offset,u);
-      const lo=horizontal?0:baseHeight,hi=horizontal?span:head(t);
+      const lo=0,hi=horizontal?span:head(t);
       const joint=face([point(lo,-bevel),point(hi,-bevel),point(hi,0),point(lo,0)],'#8497a6',finish.seam,.65);
       joint.dataset.station=String(Math.round(t*1000));
       joints.append(joint);

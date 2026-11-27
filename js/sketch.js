@@ -25,26 +25,22 @@
   const dimensions = [['length','lengde'],['width','bredde'],['height','hoyde']];
   const state = {
     ...Object.fromEntries(dimensions.map(([prop,name])=>[prop,field(name).valueAsNumber])),
-    bays:null,parts:{},figures:[],panelModule:'',concreteBase:false,concreteHeight:null,stories:1,roof:'gable',cold:false,wall:'horizontal',cover:'membrane',
-    scope:[],projectNote:'',envelopeNote:'',planNote:'',openings:[],buildingUse:'Lagerhall',customOpenings:false,
+    bays:null,parts:{},figures:[],stories:1,roof:'gable',cold:false,wall:'horizontal',cover:'membrane',
+    scope:[],projectNote:'',envelopeNote:'',planNote:'',openings:[],
     zones:[{name:'Lager',share:100}]
   };
   const key = 'ferro.sketch.v2';
   const choices = {roof:['gable','mono','flat'],wall:['horizontal','vertical','sheet','other'],cover:['membrane','trp','sandwich','other']};
-  // CMS hooks (all optional): an in-memory preview sketch, then the visitor's own saved sketch, then a default template.
+  // Optional CMS hook: an in-memory preview sketch replaces the visitor's own saved sketch.
   const preview = window.ferroSketchPreview;
-  const templates = Array.isArray(window.ferroSketchTemplates) ? window.ferroSketchTemplates : [];
   const stored = () => { try { return JSON.parse(localStorage.getItem(key)); } catch { return null; } };
   try {
-    const saved = preview ? JSON.parse(JSON.stringify(preview.sketch)) : stored() ?? structuredClone(templates.find(t=>t.isDefault)?.sketch ?? null);
+    const saved = preview ? JSON.parse(JSON.stringify(preview.sketch)) : stored();
     if (saved) {
       state.zoneTree=saved.zoneTree;
       state.parts=ferroMassing.restore(saved.parts);
       if(Number.isInteger(saved.bays) && saved.bays>=1 && saved.bays<=24) state.bays=saved.bays;
       state.figures=ferroFigures.restore(saved.figures);
-      if(['1','1.1','1.15'].includes(saved.panelModule)) state.panelModule=saved.panelModule;
-      state.concreteBase=saved.concreteBase===true;
-      if(Number.isFinite(saved.concreteHeight) && saved.concreteHeight>=.01 && saved.concreteHeight<=20) state.concreteHeight=saved.concreteHeight;
       if(Number.isFinite(saved.ridgeRise) && saved.ridgeRise>=.1 && saved.ridgeRise<=30) state.ridgeRise=saved.ridgeRise;
       if([1,2,3].includes(saved.stories)) state.stories=saved.stories;
       for (const [prop,name] of dimensions) {
@@ -53,9 +49,8 @@
         if (input.validity.valid) state[prop] = input.valueAsNumber;
       }
       for (const [prop,options] of Object.entries(choices)) if (options.includes(saved[prop])) state[prop]=saved[prop];
-      state.openings=ferroOpenings.restore(saved,state);
-      if([...field('sketchUse').options].some(o=>o.value===saved.buildingUse)) state.buildingUse=saved.buildingUse;
-      state.customOpenings=saved.customOpenings ?? state.openings.length>0;
+      // Older sketches marked automatic building-type suggestions with customOpenings:false; only manual openings are kept.
+      state.openings=saved.customOpenings===false?[]:ferroOpenings.restore(saved,state);
       state.cold=saved.cold===true;
       if (Array.isArray(saved.scope)) state.scope=scopeInputs.map(input=>input.value).filter(value=>saved.scope.includes(value));
       for (const name of noteFields) if (typeof saved[name]==='string') state[name]=saved[name].slice(0,500);
@@ -72,7 +67,6 @@
   let view='volume', angle=-.64, editor='form', projection, drag=null;
   let rows=[], roomPath='', section='all';
   field('stories').value=state.stories;
-  field('sketchUse').value=state.buildingUse;
   for (const [prop,name] of dimensions) field(name).value=state[prop];
   field('tak').value=state.roof;field('ridgeRise').value=state.ridgeRise ?? '';
   for(const [v,label] of Object.entries(ferroOpenings.walls)) field('elevation').add(new Option(label,v));
@@ -94,7 +88,6 @@
         input.value=g[prop];
         input.addEventListener(prop==='wall'?'change':'input',()=>{
           if(!input.validity.valid) return;
-          state.customOpenings=true;
           g[prop]=prop==='wall'?input.value:input.valueAsNumber;
           field('elevation').value=g.wall;view='facade';update();
         });
@@ -102,35 +95,16 @@
       }
       const remove=document.createElement('button');remove.type='button';remove.textContent='Fjern';
       remove.setAttribute('aria-label','Fjern '+legend.textContent);
-      remove.onclick=()=>{state.customOpenings=true;state.openings.splice(index,1);editOpenings();update();find('[data-opening-add]').focus();};
+      remove.onclick=()=>{state.openings.splice(index,1);editOpenings();update();find('[data-opening-add]').focus();};
       box.append(remove);list.append(box);
     });
   }
   root.querySelectorAll('[data-opening-add]').forEach(button=>button.onclick=()=>{
     if(!validDimensions()) return;
-    state.customOpenings=true;
     const g=ferroOpenings.example(button.dataset.openingAdd);g.wall=field('elevation').value;state.openings.push(g);
     editOpenings();view='facade';update();find('[data-opening-list]').lastElementChild.querySelector('input').select();
   });
   editOpenings();
-  function suggestOpenings() {
-    if(state.customOpenings) return;
-    state.openings=ferroOpenings.forBuilding(state);editOpenings();
-  }
-  const inquiryType=document.querySelector('#inquiry [name=byggtype]');
-  const useName=use=>use==='Lagerhall'?'Lager':use;
-  function selectBuilding(use) {
-    if(use===state.buildingUse || ![...field('sketchUse').options].some(o=>o.value===use)) return;
-    const zone=state.zones[0];
-    if(state.zones.length===1 && zone.name===useName(state.buildingUse) && !zone.layouts.ground.children && !zone.layouts.ground.name) zone.name=useName(use);
-    state.buildingUse=use;field('sketchUse').value=use;
-    suggestOpenings();buildRows();update();
-  }
-  field('sketchUse').onchange=e=>{
-    selectBuilding(e.target.value);inquiryType.value=state.buildingUse;
-    inquiryType.dispatchEvent(new Event('input',{bubbles:true}));
-  };
-  inquiryType.addEventListener('change',()=>selectBuilding(inquiryType.value));
   function zoneLabel(z) {return z.layouts[level].name?.trim() || z.name;}
   function refreshTargets() {
     const target=field('zoneTarget'), prev=target.value;
@@ -157,13 +131,10 @@
   function summary() {
     const lines=[
       'Hovedbygg · '+state.length+' × '+state.width+' m · '+fmt.format(state.length*state.width)+' m²',
-      'Byggtype: '+state.buildingUse,
       'Vegghøyde '+fmt.format(state.height)+' m · '+selectedText('tak'),
       ...(state.roof==='gable'?['Fra raft til møne · '+fmt.format(ferroRooms.ridgeRise(state))+' m']:[]),
       'Forespørsel: '+(state.scope.join(', ') || 'Avklares'),
       (state.cold?'Uisolert':'Isolert')+' bygg · '+selectedText('wall')+' · '+selectedText('cover'),
-      ...(['horizontal','vertical'].includes(state.wall)?['SW-modul: '+(state.panelModule?fmt.format(Number(state.panelModule)*1000)+' mm':'Avklares (vist med 1100 mm)')]:[]),
-      ...(state.concreteBase?['Betongbrystning: '+(state.concreteHeight===null?'Høyde avklares (vist med 1000 mm)':fmt.format(state.concreteHeight*1000)+' mm')]:[]),
       ...state.openings.map(g=>ferroOpenings.types[g.type]+' · '+g.count+' stk. · '+fmt.format(g.width)+' × '+fmt.format(g.height)+' m · '+ferroOpenings.walls[g.wall]),
       ...(openingLayout?.issues || [])
     ];
@@ -244,14 +215,6 @@
   let measurements=false,showAxes=false;
   find('[data-plan-axes]').onclick=e=>{showAxes=!showAxes;e.currentTarget.setAttribute('aria-pressed',showAxes);render();};
   find('[data-measurements]').onclick=()=>{measurements=!measurements;render();};
-  field('panelModule').value=state.panelModule;
-  field('panelModule').onchange=e=>{state.panelModule=e.target.value;update();};
-  field('concreteBase').checked=state.concreteBase;
-  field('concreteBase').onchange=e=>{state.concreteBase=e.target.checked;update();};
-  field('concreteHeight').value=state.concreteHeight ?? '';
-  field('concreteHeight').oninput=e=>{
-    if(e.target.validity.valid){state.concreteHeight=e.target.value?e.target.valueAsNumber:null;update();}
-  };
   field('cold').checked=state.cold;
   field('cold').onchange=e=>{state.cold=e.target.checked;update();};
   for(const name of ['wall','cover']) {
@@ -522,9 +485,6 @@
     }
     const bays=ferroMassing.fields(state);
     find('[data-bay-note]').textContent='Prinsippskisse: '+bays+' like felt à ca. '+fmt.format(state.length/bays)+' m. Endelig rammeavstand avklares i tilbudsfasen.';
-    find('[data-panel-module]').hidden=!['horizontal','vertical'].includes(state.wall);
-    find('[data-concrete-height]').hidden=!state.concreteBase;
-    field('concreteHeight').max=state.height;
     find('[data-measurements]').hidden=layer!=='shell';
     find('[data-measurements]').setAttribute('aria-pressed',measurements);
     find('[data-total]').textContent=fmt.format(ferroMassing.enclosedArea(state))+' m²';
@@ -679,9 +639,6 @@
     const extra=[field('bayCount'),...(part?[field('partDepth')]:[]),...(part && part.type!=='terrace'?[field('partHeight')]:[])].find(el=>!el.validity.valid);
     if(extra){toggleTools(true);setEditor('form');extra.closest('details').open=true;extra.reportValidity();return false;}
     if(state.roof==='gable' && !field('ridgeRise').validity.valid) {toggleTools(true);setEditor('form');field('ridgeRise').reportValidity();return false;}
-    if(state.concreteBase && !field('concreteHeight').validity.valid) {
-      toggleTools(true);setEditor('facade');find('[data-cladding-details]').open=true;field('concreteHeight').reportValidity();return false;
-    }
     const invalid=find('[data-opening-list] input:invalid');
     if(invalid) {toggleTools(true);setEditor('openings');invalid.reportValidity();return false;}
     return true;
@@ -847,7 +804,7 @@
     try {
       const blob=await ferroSketchPdf(model,rotation,brief,files,find('.sketch-brand'));
       const url=URL.createObjectURL(blob);
-      const link=document.createElement('a');link.href=url;link.download='Ferro-'+model.buildingUse+'-'+model.length+'x'+model.width+'.pdf';
+      const link=document.createElement('a');link.href=url;link.download='Ferro-byggskisse-'+model.length+'x'+model.width+'.pdf';
       document.body.append(link);link.click();link.remove();
       setTimeout(()=>URL.revokeObjectURL(url),60000);
       downloadStatus.textContent='';
@@ -857,35 +814,10 @@
   };
   find('[data-attach]').onclick=e=>{
     if (!validDimensions()){e.preventDefault();return;}
-    inquiryType.value=state.buildingUse;
     attachment.querySelector('[data-sketch-summary]').textContent=summary();
     attachment.hidden=false;document.querySelector('#draft').hidden=true;
   };
   attachment.querySelector('button').onclick=()=>{attachment.hidden=true;document.querySelector('#draft').hidden=true;};
-  const listed=preview?[]:templates.filter(t=>t.showOnSite!==false && t.sketch);
-  if(listed.length) {
-    const label=document.createElement('label');label.className='sketch-field';label.textContent='Start fra mal';
-    const select=document.createElement('select');
-    select.append(new Option('Velg en ferdig skisse',''));
-    listed.forEach((t,i)=>select.append(new Option(t.name+(t.description?' · '+t.description:''),String(i))));
-    select.onchange=()=>{
-      const t=listed[Number(select.value)];
-      if(!t) return;
-      if(stored() && !confirm('Skissen din blir erstattet av «'+t.name+'». Vil du fortsette?')) {select.value='';return;}
-      try {localStorage.setItem(key,JSON.stringify(t.sketch));} catch {}
-      location.hash='byggskisse';location.reload();
-    };
-    label.append(select);find('[data-pane="form"]').prepend(label);
-  }
-  if(new URLSearchParams(location.search).get('cms')==='1') {
-    const copy=document.createElement('button');copy.type='button';copy.textContent='Kopier skisse som JSON';
-    copy.onclick=async()=>{
-      const text=JSON.stringify(state,null,2);
-      try {await navigator.clipboard.writeText(text);downloadStatus.textContent='Skissen er kopiert. Lim den inn i 3D-malen.';}
-      catch {window.prompt('Kopier skissen:',text);}
-    };
-    find('.sketch-actions').append(copy);
-  }
   buildRows();
   const panel=new URLSearchParams(location.search).get('panel');
   if(['stal','bygningsdeler','detaljer','romplan'].includes(panel)) toggleTools(true);

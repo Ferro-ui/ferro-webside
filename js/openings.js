@@ -11,27 +11,6 @@ const ferroOpenings = (() => {
       Number.isInteger(g.count) && g.count>0 && g.count<=999 &&
       [g.width,g.height].every(n=>Number.isFinite(n) && n>0 && n<=200);
   }
-  // Starting suggestions only. Widths share the available facade on small sketches.
-  function forBuilding(model) {
-    const group=(type,wall,count,w,h)=>({type,wall,count,width:Math.round(w*100)/100,height:Math.round(h*100)/100});
-    const {length,width,height}=model;
-    const entrance=group('door','front',1,Math.min(1.6,width*.24),Math.min(2.35,height*.85));
-    if(model.buildingUse==='Butikk') return [
-      entrance,group('window','front',1,Math.min(6,width*.57),Math.min(2.65,height*.72)),
-      group('window','sideA',2,Math.min(5,length*.39),Math.min(2.65,height*.72))
-    ];
-    if(model.buildingUse==='Kontor') {
-      const count=Math.max(2,Math.min(10,Math.round(length/3)));
-      return [entrance,...['sideA','sideB'].map(wall=>group('window',wall,count,Math.min(2.2,length*.68/count),Math.min(1.65,height*.45))),
-        group('window','front',1,Math.min(2.4,width*.4),Math.min(1.65,height*.45))];
-    }
-    if(model.buildingUse==='Verksted') return [
-      group('gate','front',width>=12?2:1,Math.min(4,width*.42),Math.min(4.5,height*.82)),
-      group('door','sideA',1,Math.min(1,length*.2),Math.min(2.1,height*.85)),
-      group('window','sideA',2,Math.min(1.8,length*.23),Math.min(.95,height*.24))
-    ];
-    return [];
-  }
   function restore(saved, model) {
     if (Array.isArray(saved.openings)) return saved.openings.filter(valid);
     const groups=[];
@@ -61,13 +40,12 @@ const ferroOpenings = (() => {
       const count=groups.reduce((n,g)=>n+g.count,0), gap=Math.max(0,span-used)/(count+1);
       let start=gap;
       for(const g of groups) for(let i=0;i<g.count;i++) {
-        const sillFraction={Butikk:.15,Verksted:.72}[model.buildingUse] ?? .5;
-        const bottom=g.type==='window'?(model.height-g.height)*sillFraction:0;
+        const bottom=g.type==='window'?(model.height-g.height)*.5:0;
         placed.push({type:g.type,wall,start,end:start+g.width,bottom,top:bottom+g.height});
         start+=g.width+gap;
       }
     }
     return {placed,issues};
   }
-  return {walls,types,restore,layout,example,forBuilding};
+  return {walls,types,restore,layout,example};
 })();

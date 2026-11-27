@@ -2,7 +2,7 @@
 async function ferroSketchPdf(model,angle,brief,files,brand) {
   const {PDFDocument,StandardFonts,rgb}=await import('./vendor/pdf-lib.min.mjs');
   const pdf=await PDFDocument.create();
-  pdf.setTitle('Ferro · Byggskisse · '+model.buildingUse);
+  pdf.setTitle('Ferro · Byggskisse');
   pdf.setAuthor('Ferro Stålentreprenør');
   const regular=await pdf.embedFont(StandardFonts.Helvetica);
   const bold=await pdf.embedFont(StandardFonts.HelveticaBold);
@@ -52,7 +52,7 @@ async function ferroSketchPdf(model,angle,brief,files,brand) {
     box(335,165,75,16,ink);
     text(339,172,'IDÉSKISSE',12,bold,rgb(1,1,1));
     text(339,178,'Ikke for bygging',9,regular,rgb(1,1,1));
-    field(181,'PROSJEKT',model.buildingUse+' · '+fmt.format(ferroMassing.enclosedArea(model))+' m²');
+    field(181,'PROSJEKT','Byggskisse · '+fmt.format(ferroMassing.enclosedArea(model))+' m²');
     field(200,'TEGNING','3D-perspektiv');
     field(219,'MÅLESTOKK','Ikke i målestokk');
     field(238,'TEGNET','Ferro');
@@ -64,7 +64,7 @@ async function ferroSketchPdf(model,angle,brief,files,brand) {
     if(logo) page.drawImage(logo,{x:margin,y:height-54,width:57,height:38});
     else page.drawText('FERRO',{x:margin,y:height-39,size:16,font:bold,color:ink});
     page.drawText(title,{x:margin+80,y:height-39,size:21,font:bold,color:ink});
-    const dimensions=model.buildingUse+'   /   Hovedbygg '+[model.length,model.width,model.height].map(n=>fmt.format(n)).join(' × ')+' m';
+    const dimensions='Hovedbygg '+[model.length,model.width,model.height].map(n=>fmt.format(n)).join(' × ')+' m';
     page.drawText(dimensions,{x:width-margin-regular.widthOfTextAtSize(dimensions,11),y:height-38,size:11,font:regular,color:muted});
     page.drawLine({start:{x:margin,y:height-66},end:{x:width-margin,y:height-66},thickness:.8,color:muted});
     return page;
