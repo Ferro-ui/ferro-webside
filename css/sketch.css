@@ -213,3 +213,10 @@
 .model-area {font-size:.85rem;color:#405970}.model-area strong{margin-left:.4rem;color:#203b5b;font:600 1.6rem var(--flight-display)}
 .model-footer [data-pdf-status]:empty{display:none}
 @media(max-width:450px){.sketch-toolbar .tool-toggle{min-width:36px}.model-footer{gap:6px;padding:9px}.model-footer .sketch-actions{gap:5px}.model-footer .sketch-actions :is(button,a){font-size:.9rem}.sketch .model-handles button{min-height:40px;min-width:51px;padding:3px 6px}}
+
+.sketch-start {background:white;border:1px solid #afc0d1;padding:clamp(16px,3vw,36px);display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:16px;align-items:end}
+.sketch-start h3 {grid-column:1/-1;margin:0}
+.sketch-start label {font-weight:600}
+.sketch-start :is(input,select,button){width:100%;min-height:44px;padding:8px;font:inherit}
+.sketch-start button {background:#21395d;color:white;border:0}
+.sketch-start[hidden],.sketch-workbench[hidden]{display:none}

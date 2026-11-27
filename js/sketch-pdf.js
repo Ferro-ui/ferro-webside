@@ -71,7 +71,7 @@ async function ferroSketchPdf(model,angle,brief,files,brand) {
   }
   const views=[
     {view:'volume',title:'Tegningsvisning',layer:'drawing'},
-    ...[['open','Åpen modell'],['steel','Stålmodell']].map(([layer,title])=>({view:'volume',title,layer})),
+    ...[['open','Åpen modell']].map(([layer,title])=>({view:'volume',title,layer})),
     ...Object.entries(ferroRooms.titles).filter(([level])=>model.zones.some(z=>ferroRooms.levels(z,model).includes(level)))
       .map(([level,name])=>({view:'plan',title:'Plan · '+name,level})),
     ...Object.entries(ferroOpenings.walls).map(([elevationWall,name])=>({view:'facade',title:'Fasade · '+name,elevationWall}))
@@ -81,7 +81,7 @@ async function ferroSketchPdf(model,angle,brief,files,brand) {
     const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
     svg.setAttribute('viewBox','0 0 720 440');
     svg.setAttribute('width',drawing.width);svg.setAttribute('height',drawing.height);
-    drawFerroSketch(svg,{...model,...descriptor,showAxes:true,section:'all'},descriptor.view,angle);
+    drawFerroSketch(svg,{...model,...descriptor,showAxes:false,section:'all'},descriptor.view,angle);
     const blob=new Blob([new XMLSerializer().serializeToString(svg)],{type:'image/svg+xml;charset=utf-8'});
     const url=URL.createObjectURL(blob);
     try {

@@ -17,7 +17,7 @@
     }
     const percent=(value,min,max,fallback)=>Number.isInteger(value)?Math.max(min,Math.min(max,value)):fallback;
     const deckLength=percent(z.deckLength,10,100,100), depth=percent(z.depth,10,100,50);
-    return {name:z.name,share:z.share,stair:ferroStairs.stair(z.stair),layouts,figures:ferroFigures.restore(z.figures),deckLength,depth,deckX:percent(z.deckX,0,100-deckLength,0),deckY:percent(z.deckY,0,100-depth,0),
+    return {name:z.name,share:z.share,stair:ferroStairs.stair(null),layouts,figures:ferroFigures.restore(z.figures),deckLength,depth,deckX:percent(z.deckX,0,100-deckLength,0),deckY:percent(z.deckY,0,100-depth,0),
       loftWidth:percent(z.loftWidth,10,95,50),loftLength:percent(z.loftLength,10,100,100),
       loft:z.loft===true,loftInsulation:['Isolert','Uisolert'].includes(z.loftInsulation)?z.loftInsulation:'Avklares',mezzanine:z.mezzanine===true};
   }
@@ -39,7 +39,6 @@
     if (saved) {
       state.zoneTree=saved.zoneTree;
       state.parts=ferroMassing.restore(saved.parts);
-      if(Number.isInteger(saved.bays) && saved.bays>=1 && saved.bays<=24) state.bays=saved.bays;
       state.figures=ferroFigures.restore(saved.figures);
       if(Number.isFinite(saved.ridgeRise) && saved.ridgeRise>=.1 && saved.ridgeRise<=30) state.ridgeRise=saved.ridgeRise;
       if([1,2,3].includes(saved.stories)) state.stories=saved.stories;
@@ -130,6 +129,7 @@
   }
   function summary() {
     const lines=[
+      'Byggtype: '+(state.purpose || 'Lager'),
       'Hovedbygg · '+state.length+' × '+state.width+' m · '+fmt.format(state.length*state.width)+' m²',
       'Vegghøyde '+fmt.format(state.height)+' m · '+selectedText('tak'),
       ...(state.roof==='gable'?['Fra raft til møne · '+fmt.format(ferroRooms.ridgeRise(state))+' m']:[]),
@@ -138,8 +138,6 @@
       ...state.openings.map(g=>ferroOpenings.types[g.type]+' · '+g.count+' stk. · '+fmt.format(g.width)+' × '+fmt.format(g.height)+' m · '+ferroOpenings.walls[g.wall]),
       ...(openingLayout?.issues || [])
     ];
-    const bays=ferroMassing.fields(state);
-    lines.push('Skjematiske akser for hovedbygg: '+bays+' felt à ca. '+fmt.format(state.length/bays)+' m. Endelig bæresystem avklares.');
     for(const part of ferroMassing.parts(state)){
       lines.push(ferroMassing.types[part.type]+' · '+ferroOpenings.walls[part.side]+' · '+fmt.format(part.along)+' × '+fmt.format(part.depth)+' m · '+fmt.format(part.area)+' m² · start '+fmt.format(part.start)+' m'+
         (part.type==='wing'?' · flatt tak +'+fmt.format(part.height)+' m':part.type==='balcony'?' · gulv +'+fmt.format(part.floor)+' m':' · på terreng'));
@@ -167,7 +165,6 @@
       }
     }
     for(const [i,name] of noteFields.entries()) if(state[name].trim()) lines.push(['Prosjekt','Vegger og tak','Romplan'][i]+': '+state[name].trim());
-    lines.push(...ferroStairs.summary({...state,zoneGeometry}));
     return lines.join('\n');
   }
   function update() {render();persist();}
@@ -208,12 +205,8 @@
       if(e.target.validity.valid) {state.parts[field('partSide').value][key]=e.target.valueAsNumber/(e.target.type==='range'?100:1);update();}
     };
   }
-  field('bayCount').value=state.bays ?? '';
-  field('bayCount').oninput=e=>{
-    if(e.target.validity.valid) {state.bays=e.target.value?e.target.valueAsNumber:null;view='volume';layer='steel';update();}
-  };
-  let measurements=false,showAxes=false;
-  find('[data-plan-axes]').onclick=e=>{showAxes=!showAxes;e.currentTarget.setAttribute('aria-pressed',showAxes);render();};
+  let measurements=false; const showAxes=false;
+
   find('[data-measurements]').onclick=()=>{measurements=!measurements;render();};
   field('cold').checked=state.cold;
   field('cold').onchange=e=>{state.cold=e.target.checked;update();};
@@ -441,34 +434,13 @@
     root.querySelectorAll('[data-pane]').forEach(p=>p.hidden=p.dataset.pane!==editor);
     root.querySelectorAll('[data-edit]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.edit===editor));
   }
-  for(const [name,options] of [['stairType',ferroStairs.flights],['stairCorner',ferroStairs.corners],['stairMaterial',ferroStairs.materials]])
-    for(const value of options) field(name).add(new Option(value,value));
-  for(const [name,key] of [['stairType','type'],['stairCorner','corner'],['stairTo','to'],['stairMaterial','material']]) {
-    field(name).onchange=e=>{
-      state.zones[selected].stair[key]=e.target.value;
-      if(ferroStairs.destination(state.zones[selected],state)){view='volume';layer='open';section='all';field('cutFloor').value='all';}
-      else {view='plan';level='ground';roomPath='';buildRoomEditor();}
-      update();
-    };
-  }
-  function syncStairFields(){
-    const z=state.zones[selected],stair=z.stair;
-    field('stairType').value=stair.type;field('stairCorner').value=stair.corner;field('stairMaterial').value=stair.material;
-    const targets=ferroRooms.levels(z,state).filter(k=>k!=='ground');
-    field('stairTo').replaceChildren(new Option('Avklares',''),...targets.map(k=>new Option(ferroRooms.titles[k],k)));
-    field('stairTo').value=ferroStairs.destination(z,state);
-    find('[data-stair-options]').hidden=!stair.type;
-    const disconnected=field('stairTo').value==='loft' && !ferroStairs.landing({...state,zoneGeometry},selected,'loft');
-    find('[data-stair-hint]').textContent=disconnected?'Loftet ligger utenfor denne sonen. Plassering av trappen må avklares.':field('stairTo').value?'Trapp og repos viser ønsket plassering. Mål og åpning i dekket avklares.':'Trappen vises på grunnplanet. Velg et målnivå for å vise løpet i 3D. Du kan legge til nivåer under Romplan.';
-
-  }
   const framePreview=document.querySelector('[data-frame-preview]');
   let lastFrame='';
   function renderFramePreview(model) {
     const geometry=JSON.stringify([model.length,model.width,model.height,model.roof,model.ridgeRise,model.bays,model.parts]);
     if(geometry===lastFrame) return;
     lastFrame=geometry;
-    drawFerroSketch(framePreview,{...model,layer:'steel',framePreview:true,tilt:.38},'volume',-.64);
+    drawFerroSketch(framePreview,{...model,layer:'shell',framePreview:true,tilt:.38},'volume',-.64);
   }
   function render() {
     const zones=state.zones;
@@ -483,8 +455,6 @@
       find('[data-part-offset]').textContent=fmt.format(part.start)+' m';
       field('partPosition').disabled=part.share===1;
     }
-    const bays=ferroMassing.fields(state);
-    find('[data-bay-note]').textContent='Prinsippskisse: '+bays+' like felt à ca. '+fmt.format(state.length/bays)+' m. Endelig rammeavstand avklares i tilbudsfasen.';
     find('[data-measurements]').hidden=layer!=='shell';
     find('[data-measurements]').setAttribute('aria-pressed',measurements);
     find('[data-total]').textContent=fmt.format(ferroMassing.enclosedArea(state))+' m²';
@@ -558,7 +528,7 @@
     find('[data-sheet-title]').textContent={volume:{shell:'Utvendig',open:'Åpen modell',steel:''}[layer],plan:ferroRooms.titles[level],facade:selectedText('elevation')}[view];
     find('[data-measure]').textContent=[state.length,state.width,state.height].map(n=>fmt.format(n)).join(' × ')+' m';
     find('[data-gesture]').textContent={volume:layer==='steel'?find('[data-bay-note]').textContent:'Trykk på et mål for å endre det. Dra modellen for å rotere.',plan:level==='loft'?'Loftrommet er sentrert under mønet. Dra en kant for å endre bredde eller lengde.':level==='deck'?'Dra krysset for å flytte mesaninen. Dra i kanten for å endre størrelsen.':'Dra en hel sone mot en kant av en annen sone for å plassere den der. Dra en skillevegg for å endre størrelsen.',facade:'Åpningene er fordelt skjematisk langs fasaden.'}[view];
-    if(editor==='zones') syncStairFields();
+
     const preview=figureUI();
     drawingModel={...state,figureDraft:preview,activeFigure,measurements,showAxes,zoneGeometry,roomPath,section,layer,level,tilt,selected,placed:openingLayout.placed,elevationWall:field('elevation').value,zones:zones.map((z,i)=>({...z,color:colors[i]}))};
     projection=drawFerroSketch(drawing,drawingModel,view,angle,true);
@@ -636,7 +606,7 @@
       if (!field(name).validity.valid) {view='volume';layer='shell';render();startDimension(dimensions.find(d=>d[1]===name)[0]);field(name).reportValidity();return false;}
     }
     const part=state.parts[field('partSide').value];
-    const extra=[field('bayCount'),...(part?[field('partDepth')]:[]),...(part && part.type!=='terrace'?[field('partHeight')]:[])].find(el=>!el.validity.valid);
+    const extra=[...(part?[field('partDepth')]:[]),...(part && part.type!=='terrace'?[field('partHeight')]:[])].find(el=>!el.validity.valid);
     if(extra){toggleTools(true);setEditor('form');extra.closest('details').open=true;extra.reportValidity();return false;}
     if(state.roof==='gable' && !field('ridgeRise').validity.valid) {toggleTools(true);setEditor('form');field('ridgeRise').reportValidity();return false;}
     const invalid=find('[data-opening-list] input:invalid');
@@ -820,10 +790,30 @@
   attachment.querySelector('button').onclick=()=>{attachment.hidden=true;document.querySelector('#draft').hidden=true;};
   buildRows();
   const panel=new URLSearchParams(location.search).get('panel');
-  if(['stal','bygningsdeler','detaljer','romplan'].includes(panel)) toggleTools(true);
+  if(['bygningsdeler','detaljer','romplan'].includes(panel)) toggleTools(true);
   if(panel==='tegning') measurements=true;
-  if(panel==='stal'){layer='steel';field('bayCount').closest('details').open=true;}
   if(panel==='bygningsdeler') field('partSide').closest('details').open=true;
   if(panel==='romplan' || panel==='detaljer') {setEditor('zones');view='plan';}
+  const start=find('.sketch-start'), bench=find('.sketch-workbench');
+  const saved=stored();
+  state.purpose=[...start.elements.purpose.options].some(o=>o.value===saved?.purpose)?saved.purpose:'Lager';
+  start.elements.purpose.value=state.purpose;
+  for(const [prop] of dimensions) start.elements.namedItem(prop).value=state[prop];
+  start.onsubmit=e=>{
+    e.preventDefault();
+    for(const [prop,name] of dimensions){
+      state[prop]=start.elements.namedItem(prop).valueAsNumber;
+      field(name).value=state[prop];
+    }
+    state.purpose=start.elements.purpose.value;
+    start.hidden=true;bench.hidden=false;update();
+    find('[data-view=volume]').focus();
+  };
+  find('[data-reset-sketch]').onclick=()=>{
+    if(!confirm('Slette denne skissen og starte på nytt?')) return;
+    try {localStorage.removeItem(key);} catch {}
+    location.reload();
+  };
+  if(preview){start.hidden=true;bench.hidden=false;}
   render();document.querySelector('[data-sketch-launch]').hidden=root.hidden=false;
 })();

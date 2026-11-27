@@ -79,12 +79,20 @@
         <section class="sketch" id="byggskisse" aria-labelledby="sketch-title" hidden>
           <div class="h26-shell">
             <header class="sketch-head"><h2 id="sketch-title" tabindex="-1">Skisser ditt bygg.</h2><p>Velg leveranse, tegn inn rom og se hallen uten tak. Ta med idéskissen til en samtale med Ferro.</p></header>
-            <div class="sketch-workbench">
+            <form class="sketch-start">
+              <h3>Hva skal du bygge?</h3>
+              <label>Byggtype<select name="purpose"><option>Lager</option><option>Verksted</option><option>Butikk</option><option>Kontor</option><option>Produksjon</option><option>Annet</option></select></label>
+              <label>Lengde (m)<input name="length" type="number" min="3" max="200" step="1" value="10" required></label>
+              <label>Bredde (m)<input name="width" type="number" min="3" max="200" step="1" value="8" required></label>
+              <label>Vegghøyde (m)<input name="height" type="number" min="2" max="20" step="0.5" value="4" required></label>
+              <button type="submit">Vis i 3D ↗</button>
+            </form>
+            <div class="sketch-workbench" hidden>
               <div class="sketch-sheet">
-                <div class="sketch-toolbar"><img class="sketch-brand" src="assets/img/ferro-logo.svg" alt="Ferro Stålentreprenør" width="72" height="48"><div role="group" aria-label="Visning"><button type="button" data-view="volume" aria-pressed="true">3D</button><button type="button" data-view="plan" aria-pressed="false">Plan</button><button type="button" data-view="facade" aria-pressed="false">Fasade</button></div><button type="button" data-rotate aria-label="Roter bygget 45 grader">Roter ↻</button><button type="button" class="tool-toggle" data-tools-toggle aria-label="Åpne verktøy" title="Verktøy" aria-expanded="false" aria-controls="sketch-tools"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h7m4 0h7M3 12h12m4 0h2M3 18h2m4 0h12"/><circle cx="12" cy="6" r="2"/><circle cx="17" cy="12" r="2"/><circle cx="7" cy="18" r="2"/></svg></button></div>
-                <div class="sketch-layer" data-model-tools role="group" aria-label="Modellvisning"><button data-layer="shell" aria-pressed="true">Utvendig</button><button data-layer="open" aria-pressed="false">Åpen modell</button><button type="button" data-layer="steel" aria-pressed="false">Stål</button><button type="button" data-measurements aria-pressed="false">Vis mål</button><button type="button" data-tilt>Vipp ↕</button></div>
+                <div class="sketch-toolbar"><button type="button" data-reset-sketch>Start på nytt</button><img class="sketch-brand" src="assets/img/ferro-logo.svg" alt="Ferro Stålentreprenør" width="72" height="48"><div role="group" aria-label="Visning"><button type="button" data-view="volume" aria-pressed="true">3D</button><button type="button" data-view="plan" aria-pressed="false">Plan</button><button type="button" data-view="facade" aria-pressed="false">Fasade</button></div><button type="button" data-rotate aria-label="Roter bygget 45 grader">Roter ↻</button><button type="button" class="tool-toggle" data-tools-toggle aria-label="Åpne verktøy" title="Verktøy" aria-expanded="false" aria-controls="sketch-tools"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h7m4 0h7M3 12h12m4 0h2M3 18h2m4 0h12"/><circle cx="12" cy="6" r="2"/><circle cx="17" cy="12" r="2"/><circle cx="7" cy="18" r="2"/></svg></button></div>
+                <div class="sketch-layer" data-model-tools role="group" aria-label="Modellvisning"><button data-layer="shell" aria-pressed="true">Utvendig</button><button data-layer="open" aria-pressed="false">Åpen modell</button><button type="button" data-measurements aria-pressed="false">Vis mål</button><button type="button" data-tilt>Vipp ↕</button></div>
                 <label class="sketch-layer elevation-picker" data-section-tools hidden>Vis til og med <select name="cutFloor"></select></label>
-                <div class="sketch-layer" data-plan-tools role="group" aria-label="Plannivå" hidden><button data-level="ground" aria-pressed="true">1. etasje</button><button data-level="deck" aria-pressed="false">Mesanin</button><button data-level="second">2. etasje</button><button data-level="third">3. etasje</button><button data-level="loft" hidden>Loft</button><button type="button" data-plan-axes aria-pressed="false">Vis akser</button></div>
+                <div class="sketch-layer" data-plan-tools role="group" aria-label="Plannivå" hidden><button data-level="ground" aria-pressed="true">1. etasje</button><button data-level="deck" aria-pressed="false">Mesanin</button><button data-level="second">2. etasje</button><button data-level="third">3. etasje</button><button data-level="loft" hidden>Loft</button></div>
                 <details class="plan-figures" data-figure-tools hidden>
                   <summary>Tegn og merk figurer</summary>
                   <div class="figure-actions"><button type="button" data-figure-start="polygon">+ Fri kontur</button><button type="button" data-figure-start="rectangle">+ Rektangel</button></div>
@@ -139,10 +147,7 @@
                       <label class="sketch-field" data-part-z><span data-part-height-label></span> (m)<input name="partHeight" type="number" min="0.1" max="30" step="0.01" required></label></div>
                     </div>
                   </details>
-                  <details class="plan-zones"><summary>Akser i hovedbygget</summary>
-                    <label class="sketch-field">Antall aksefelt i lengderetningen<input type="number" name="bayCount" min="1" max="24" step="1" placeholder="Automatisk"></label>
-                    <p class="opening-help" data-bay-note></p>
-                  </details>
+
                   <fieldset class="sketch-spec"><legend>Hva gjelder forespørselen?</legend><div class="sketch-options"><label><input type="checkbox" name="scope" value="Råbygg"> Råbygg</label><label><input type="checkbox" name="scope" value="Totalentreprise (TE)"> Totalentreprise (TE)</label><label><input type="checkbox" name="scope" value="Kun stål"> Kun stål</label><label><input type="checkbox" name="scope" value="Ombygning"> Ombygning</label></div></fieldset>
                   <label class="sketch-field">Kommentar til prosjektet<textarea name="projectNote" maxlength="500" rows="2" placeholder="F.eks. tilbygg til eksisterende verksted"></textarea></label>
                 </div>
@@ -185,16 +190,7 @@
                     <label class="sketch-field">Antall rom<select name="rowCount"><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option></select></label></div>
                     <button type="button" data-row>Sett inn rom på rekke</button></div>
                   </fieldset>
-                  <details class="plan-zones" data-stair-group>
-                    <summary>Trapp i valgt sone</summary>
-                    <label class="sketch-field">Trapp fra 1. etasje<select name="stairType"><option value="">Ingen trapp tegnet</option></select></label>
-                    <div data-stair-options hidden>
-                      <label class="sketch-field">Opp til<select name="stairTo"></select></label>
-                      <label class="sketch-field">Plassering i sonen<select name="stairCorner"></select></label>
-                      <label class="sketch-field">Materiale<select name="stairMaterial"><option value="">Avklares</option></select></label>
-                      <p class="sketch-limits" data-stair-hint></p>
-                    </div>
-                  </details>
+
                   <label class="sketch-field">Kommentar til romplanen<textarea name="planNote" maxlength="500" rows="2" placeholder="F.eks. garderobe ved inngangen eller kontor på mesaninen"></textarea></label>
                 </div>
                 <p class="opening-status" data-opening-status role="status" hidden></p>
