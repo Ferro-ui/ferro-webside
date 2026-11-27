@@ -57,7 +57,7 @@ export function renderField(def, obj, ctx, path) {
         const reader=new FileReader()
         const dataUrl=await new Promise((resolve,reject)=>{reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(file)})
         store.uploads.set(path,{bytes,dataUrl,committed:false})
-        set(path);status.textContent=file.name+' – klar til lagring.'
+        set(path);input.dispatchEvent(new Event('filmselected', {bubbles:true}));status.textContent=file.name+' – klar til lagring.'
       } catch {status.textContent='Filmen kunne ikke leses.'} finally {input.disabled=false}
     }})
     return wrap(def,path,input,id,[status])

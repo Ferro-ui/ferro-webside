@@ -20,7 +20,7 @@
   function loadFilm() {
 
     const width = film.clientWidth * Math.min(devicePixelRatio, 2);
-    const src = scenes[current]?.video || 'assets/video/hero-drone-v4-' + (width <= 900 ? 480 : width <= 1500 ? 720 : 1080) + '.mp4';
+    const src = scenes[current]?.video || window.ferroMainFilm || 'assets/video/hero-drone-v4-' + (width <= 900 ? 480 : width <= 1500 ? 720 : 1080) + '.mp4';
     if(film.getAttribute('src')!==src) film.src=src;
   }
   function syncPlayback() {
