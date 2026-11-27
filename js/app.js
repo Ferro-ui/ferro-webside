@@ -1,57 +1,18 @@
 /* ============================================================
    Ferro Stålentreprenør — front-end runtime
    Small, dependency-free runtime for the site:
-     · inline-style normalization (so the responsive [style*=] rules match)
-     · data-hover / data-focus  → JS-driven :hover/:focus merge
      · hash-routed single-page navigation between the 5 screens
+     · light / dark theme toggle (remembered in localStorage)
+     · logo intro clean-up · scroll reveal · service cards on touch
+     · hero drone film (lazy start, pause/play, project captions)
      · project grid + project-detail rendering from data
-     · contact form "sent" state · image lightbox · card parallax tilt
-     · hero <video> autoplay nudge
+     · contact form "sent" state · image lightbox
+     · legacy helpers for the screens that still use inline styles:
+       inline-style normalization, data-hover / data-focus merging,
+       card parallax tilt
    ============================================================ */
 (function () {
   'use strict';
-
-  var U = 'https://ferrostal.no/wp-content/uploads/';
-
-  /* ---- project grid cards (the /prosjekter listing) ---- */
-  var GRID = [
-    { img: U + '2024/09/image11.jpg',                       badge: 'Butikk',      title: 'Folkestadvegen 3',                  sub: 'Coop Extra · Forberg Eiendomsselskap' },
-    { img: U + '2024/09/IMG_8290-1024x768.jpeg',            badge: 'Produksjon',  title: 'Storvegen 42 — Tokke Teknologipark', sub: 'Dalen Mekaniske AS' },
-    { img: U + '2024/09/IMG_2054-768x1024.jpg',            badge: 'Næringsbygg', title: 'Skiensvegen 740',                   sub: 'NTT AS · Nome Eiendom AS' },
-    { img: U + '2025/02/Orevella-2-e1738919120806.jpeg',   badge: 'Industri',    title: 'Ørevellavegen 6',                   sub: 'Ørevella Industrier AS' },
-    { img: U + '2025/02/Mekan-1024x768.jpeg',              badge: 'Verksted',    title: 'Storvegen 97 — Mekan',              sub: 'G7 Eiendom' },
-    { img: U + '2024/09/image9.jpg',                        badge: 'Næringsbygg', title: 'Torshølvegen 5',                    sub: 'Eika Eigedom AS' },
-    { img: U + '2024/09/DJI_0031-1024x768.jpg',            badge: 'Lager',       title: 'Sætrevegen 265',                    sub: 'Bård Langkaas Transport AS' },
-    { img: U + '2024/09/image5.jpg',                        badge: 'Vaskehall',   title: 'Hydrovegen 55 — Vaskehall Herøya',  sub: 'Alltidrenbil' },
-    { img: U + '2024/09/image1.png',                        badge: 'Bolig',       title: 'Ringsevja 9',                       sub: 'Nye leiligheter' }
-  ];
-
-  /* ---- full project records (the detail view) ---- */
-  var PROJECTS = [
-    { title: 'Folkestadvegen 3', client: 'Coop Extra · Forberg Eiendomsselskap AS', type: 'Butikk', sted: 'Bø i Telemark', hero: U + '2024/09/image11.jpg',
-      headline: 'Nytt Coop-bygg i Bø – solid og effektiv leveranse',
-      body: ['Forberg Eiendomsselskap AS valgte oss til å oppføre stålbygget for den nye Coop-butikken i Bø sentrum. Vi leverte en komplett løsning med montering av skallvegger, hulldekker, stålkonstruksjon, vegger og tak – alt tilpasset kundens behov.', 'Med fokus på kvalitet og effektiv gjennomføring sørget vi for en smidig byggeprosess og et bygg som vil tjene lokalsamfunnet i mange år fremover.'],
-      specs: ['2000 m² hulldekker for et stabilt og varig bygg', '1000 m² parkeringskjeller for god tilgjengelighet', '1000 m² butikkareal med praktisk utforming', '800 m² kontorlokaler i 2. etasje'],
-      byggetid: '', gallery: [U + '2024/09/image12.jpg', U + '2024/09/image10.jpg', U + '2024/09/image8.jpg'] },
-    { title: 'Storvegen 42 — Tokke Teknologipark', client: 'Dalen Mekaniske AS', type: 'Produksjon', sted: 'Tokke', hero: U + '2024/09/IMG_8290.jpeg',
-      headline: 'Tokke Teknologipark – skreddersydd løsning for Dalen Mekaniske AS',
-      body: ['Dalen Mekaniske AS valgte oss som totalentreprenør for utvidelsen av Tokke Teknologipark. Tilbygget på totalt 540 m² er skreddersydd for deres behov og gir økt kapasitet og funksjonalitet.', 'Med byggetid fra oktober 2022 til april 2023 sørget vi for en effektiv og kvalitetssikker leveranse.'],
-      specs: ['270 m² grunnflate fordelt på to etasjer', 'Stålkonstruksjon med sandwichelementer', 'Hulldekker i etasjeskillet'],
-      byggetid: 'Oktober 2022 – april 2023', gallery: [U + '2024/09/image13.jpg'] },
-    { title: 'Skiensvegen 740', client: 'NTT AS · Nome Eiendom AS', type: 'Næringsbygg', sted: 'Nome', hero: U + '2024/09/IMG_2054-rotated.jpg',
-      headline: 'Nytt kontor, verksted og lager for NTT AS – levert som totalentreprise',
-      body: ['Da NTT AS skulle bygge nytt kontor, verksted og lager i Nome, valgte de oss som totalentreprenør. Resultatet er et moderne og funksjonelt bygg med 505 m² grunnflate fordelt på to etasjer, totalt 756 m².', 'Med en byggetid fra juni til november 2023 sørget vi for en smidig og kostnadseffektiv gjennomføring.'],
-      specs: ['Stålkonstruksjon med sandwichelementer', 'Hulldekker i etasjeskillet', 'Skreddersydd for NTT AS sine behov'],
-      byggetid: 'Juni – november 2023', gallery: [U + '2024/09/IMG_8596.jpeg', U + '2024/09/DJI_0024.jpg', U + '2024/09/DJI_0018.jpg', U + '2024/09/DJI_0030.jpg'] },
-    { title: 'Ørevellavegen 6', client: 'Ørevella Industrier AS', type: 'Industri', sted: 'Telemark', hero: U + '2025/02/Orevella-2-e1738919120806.jpeg', headline: '', body: [], specs: [], byggetid: '', gallery: [] },
-    { title: 'Storvegen 97 — Mekan', client: 'G7 Eiendom', type: 'Verksted', sted: 'Tokke', hero: U + '2025/02/Mekan-1024x768.jpeg', headline: '', body: [], specs: [], byggetid: '', gallery: [] },
-    { title: 'Torshølvegen 5', client: 'Eika Eigedom AS', type: 'Næringsbygg', sted: 'Telemark', hero: U + '2024/09/image9.jpg', headline: '', body: [], specs: [], byggetid: '', gallery: [] },
-    { title: 'Sætrevegen 265', client: 'Bård Langkaas Transport AS', type: 'Lager', sted: 'Telemark', hero: U + '2024/09/DJI_0031-1024x768.jpg', headline: '', body: [], specs: [], byggetid: '', gallery: [] },
-    { title: 'Hydrovegen 55 — Vaskehall Herøya', client: 'Alltidrenbil', type: 'Vaskehall', sted: 'Herøya', hero: U + '2024/09/image5.jpg', headline: '', body: [], specs: [], byggetid: '', gallery: [] },
-    { title: 'Ringsevja 9', client: 'Nye leiligheter', type: 'Bolig', sted: 'Ulefoss', hero: U + '2024/09/image1.png', headline: '', body: [], specs: [], byggetid: '', gallery: [] }
-  ];
-
-  var LOGO_WHITE = U + '2024/08/logo-white.png';
 
   /* ---- tiny helpers ---- */
   function esc(s) {
@@ -68,6 +29,7 @@
      so the @media rules apply however the markup was written.
      ============================================================ */
   function normalize(root) {
+    if (!root) return;
     $all('[style]', root).forEach(function (el) {
       el.setAttribute('style', el.style.cssText);
     });
@@ -77,6 +39,7 @@
      Hover / focus styles (data-hover / data-focus)
      ============================================================ */
   function bindHoverFocus(root) {
+    if (!root) return;
     $all('[data-hover]', root).forEach(function (el) {
       if (el._hoverBound) return;
       el._hoverBound = true;
@@ -139,157 +102,96 @@
   }
 
   /* ============================================================
-     Hero <video> autoplay nudge
-     ============================================================ */
-  function initHeroVideo() {
-    var tries = 0;
-    var t = setInterval(function () {
-      tries++;
-      var v = document.querySelector('video[data-hero]');
-      if (v) {
-        v.muted = true; v.loop = true;
-        v.setAttribute('muted', ''); v.setAttribute('loop', ''); v.setAttribute('playsinline', '');
-        if (!v._lw) { v._lw = true; v.addEventListener('ended', function () { try { v.currentTime = 0; v.play(); } catch (e) {} }); }
-        var p = v.play();
-        if (p && p.catch) p.catch(function () {});
-      }
-      if ((v && !v.paused) || tries > 25) clearInterval(t);
-    }, 150);
-  }
-
-  /* ============================================================
      Lightbox
      ============================================================ */
   var lb = $('[data-lightbox]');
   var lbImg = $('[data-lightbox-img]');
-  function openLightbox(url) {
-    lbImg.setAttribute('src', url);
-    lb.hidden = false;
+  var galleryCells = [];
+  var activeImage = 0;
+  function showImage(index) {
+    activeImage = (index + galleryCells.length) % galleryCells.length;
+    lbImg.src = galleryCells[activeImage].dataset.src;
+    lbImg.alt = ferroProjects[state.detail].title + ', bilde ' + (activeImage + 1);
+    $('[data-position]', lb).textContent = (activeImage + 1) + ' / ' + galleryCells.length;
   }
-  function closeLightbox() { lb.hidden = true; lbImg.setAttribute('src', ''); }
-  if (lb) {
-    lb.addEventListener('click', function (e) {
-      // click anywhere on backdrop (or the ✕) closes; clicking the image itself also closes (cursor:zoom-out)
-      closeLightbox();
-    });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !lb.hidden) closeLightbox(); });
+  function openLightbox(cell) {
+    galleryCells = $all('[data-gallery-img]', cell.closest('.h26-gallery'));
+    showImage(galleryCells.indexOf(cell));
+    $('[data-prev]', lb).hidden = $('[data-next]', lb).hidden = galleryCells.length < 2;
+    cell.focus({preventScroll: true});
+    lb.showModal();
   }
+  $('.lightbox__close', lb).onclick = function () { lb.close(); };
+  $('[data-prev]', lb).onclick = function () { showImage(activeImage - 1); };
+  $('[data-next]', lb).onclick = function () { showImage(activeImage + 1); };
+  lb.addEventListener('click', function (event) { if (event.target === lb) lb.close(); });
+  lb.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      lb.close();
+      return;
+    }
+    if (event.key === 'ArrowLeft') showImage(activeImage - 1);
+    if (event.key === 'ArrowRight') showImage(activeImage + 1);
+  });
+  var startTouch;
+  lbImg.addEventListener('touchstart', function (event) {
+    startTouch = event.touches.length === 1 ? event.touches[0] : null;
+  }, {passive:true});
+  lbImg.addEventListener('touchend', function (event) {
+    if (!startTouch) return;
+    var dx = event.changedTouches[0].clientX - startTouch.clientX;
+    var dy = event.changedTouches[0].clientY - startTouch.clientY;
+    if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy)) showImage(activeImage + (dx < 0 ? 1 : -1));
+    startTouch = null;
+  }, {passive:true});
 
   /* ============================================================
      Render: project grid (/prosjekter)
      ============================================================ */
-  function gridCardHTML(i, c) {
-    return '' +
-      '<a data-proj data-action="openA' + i + '" style="position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid rgba(20,22,24,0.08);border-radius:22px;overflow:hidden;cursor:zoom-in;box-shadow:0 12px 34px -24px rgba(32,57,93,0.25);transition:box-shadow .4s,transform .28s cubic-bezier(.16,1,.3,1);text-decoration:none;color:inherit;animation:revealUp both linear;animation-timeline:view();animation-range:entry 0% cover 12%" data-hover="box-shadow:0 34px 64px -34px rgba(32,57,93,0.42)">' +
-        '<div style="position:relative;aspect-ratio:4/3;overflow:hidden;background:#E4ECF6">' +
-          '<img data-proj-img src="' + esc(c.img) + '" alt="' + esc(c.title) + '" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.16,1,.3,1)">' +
-          '<div data-proj-spot style="position:absolute;inset:0;z-index:1;opacity:0;transition:opacity .35s;pointer-events:none;mix-blend-mode:screen"></div>' +
-          '<img src="' + LOGO_WHITE + '" alt="" style="position:absolute;top:12px;left:12px;height:17px;opacity:.9;z-index:2;filter:drop-shadow(0 1px 4px rgba(0,0,0,0.6));pointer-events:none">' +
-          '<span style="position:absolute;bottom:12px;left:12px;z-index:2;font-family:\'Space Mono\',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:#16263E;background:rgba(255,255,255,0.92);padding:5px 11px;border-radius:100px">' + esc(c.badge) + '</span>' +
-        '</div>' +
-        '<div style="padding:22px 22px 24px;display:flex;flex-direction:column;gap:6px;flex:1">' +
-          '<h3 style="margin:0;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:19px;letter-spacing:-0.01em;line-height:1.15">' + esc(c.title) + '</h3>' +
-          '<span style="font-size:13.5px;color:#6B6E6A;line-height:1.45">' + esc(c.sub) + '</span>' +
-        '</div>' +
-      '</a>';
+  function card(project) {
+    const image=project.hero ? '<img src="'+esc(project.hero)+'" alt="" loading="lazy">' : '';
+    return '<a class="h26-project h26-project-link" href="#prosjekt/'+project.slug+'">'+image+
+      '<p class="h26-metadata">'+esc(project.sted)+' · '+esc(projectCategories[project.category])+'</p>'+
+      '<h3>'+esc(project.title)+'</h3><p>'+esc(project.lead)+'</p></a>';
   }
 
   function renderGrid() {
-    var grid = $('[data-proj-grid]');
-    if (!grid || grid._rendered) return;
-    grid._rendered = true;
-    grid.innerHTML = GRID.map(function (c, i) { return gridCardHTML(i, c); }).join('');
-    normalize(grid);
-    bindHoverFocus(grid);
-  }
-
-  /* ============================================================
-     Render: project detail
-     ============================================================ */
-  function imgFill(src, alt) {
-    return '<img src="' + esc(src) + '" alt="' + esc(alt || '') + '" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">';
+    const terms=$('#project-search').value.trim().toLocaleLowerCase('nb').split(/\s+/);
+    const projects=ferroProjects.filter(p=>{
+      const text=[p.title,p.sted,p.client,p.lead,projectCategories[p.category],p.slug.replaceAll('-',' ')].join(' ').toLocaleLowerCase('nb');
+      return (!category || p.category===category) && terms.every(term=>text.includes(term));
+    });
+    $('[data-proj-grid]').innerHTML=projects.map(card).join('');
+    $('[data-result-count]').textContent=projects.length ? projects.length+(projects.length===1?' prosjekt':' prosjekter') : 'Ingen treff. Prøv en annen kategori eller et annet søk.';
+    $all('[data-category]').forEach(link=>link.setAttribute('aria-current',link.dataset.category===category?'true':'false'));
   }
 
   function detailHTML(d) {
-    var bodyParas = (d.body && d.body.length)
-      ? d.body.map(function (p) { return '<p style="margin:0">' + esc(p) + '</p>'; }).join('')
-      : '<p style="margin:0">Ta kontakt med oss for mer informasjon og bilder fra dette prosjektet.</p>';
-
-    var specsHTML = '';
-    if (d.specs && d.specs.length) {
-      var rows = d.specs.map(function (s) {
-        return '<div style="display:flex;gap:11px;align-items:flex-start;font-size:14.5px;line-height:1.5;color:#23262A"><span style="flex-shrink:0;color:#2E5A8C;margin-top:1px">✓</span>' + esc(s) + '</div>';
-      }).join('');
-      var bygg = d.byggetid
-        ? '<div style="margin-top:22px;padding-top:18px;border-top:1px solid rgba(20,22,24,0.08)"><div style="font-family:\'Space Mono\',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#2E5A8C;margin-bottom:6px">Byggetid</div><div style="font-weight:600;font-size:15px;color:#16263E">' + esc(d.byggetid) + '</div></div>'
-        : '';
-      specsHTML =
-        '<div style="background:#fff;border:1px solid rgba(20,22,24,0.08);border-radius:20px;padding:30px;box-shadow:0 16px 40px -28px rgba(32,57,93,0.3)">' +
-          '<div style="font-family:\'Space Mono\',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#2E5A8C;margin-bottom:18px">Prosjektet omfattet</div>' +
-          '<div style="display:flex;flex-direction:column;gap:14px">' + rows + '</div>' + bygg +
-        '</div>';
-    }
-
-    var headlineHTML = d.headline
-      ? '<h2 style="margin:0 0 30px;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:clamp(24px,3vw,38px);line-height:1.1;letter-spacing:-0.02em;max-width:22ch;color:#16263E">' + esc(d.headline) + '</h2>'
-      : '';
-
-    var galleryHTML = '';
-    if (d.gallery && d.gallery.length) {
-      var cells = d.gallery.map(function (u) {
-        return '<div data-gallery-img data-src="' + esc(u) + '" style="position:relative;aspect-ratio:4/3;border-radius:16px;overflow:hidden;cursor:zoom-in;background:#E4ECF6">' + imgFill(u, '') + '</div>';
-      }).join('');
-      galleryHTML =
-        '<div style="margin-top:50px">' +
-          '<div style="font-family:\'Space Mono\',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#2E5A8C;margin-bottom:18px">Flere bilder</div>' +
-          '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">' + cells + '</div>' +
-        '</div>';
-    }
-
-    return '' +
-      '<section style="background-color:#20395D;background-image:linear-gradient(rgba(157,189,226,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(157,189,226,0.06) 1px,transparent 1px);background-size:46px 46px;padding:140px 0 66px;color:#fff;position:relative;overflow:hidden">' +
-        '<div style="position:absolute;left:0;right:0;top:0;height:170px;background:linear-gradient(180deg,rgba(157,189,226,0.12),transparent);animation:scanBeam 9s ease-in-out infinite;pointer-events:none"></div>' +
-        '<div style="position:relative;max-width:1100px;margin:0 auto;padding:0 32px">' +
-          '<span data-action="closeDetail" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-family:\'Space Mono\',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#9DBDE2;margin-bottom:26px" data-hover="color:#fff"><span style="font-size:15px">←</span> Alle prosjekter</span>' +
-          '<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">' +
-            '<span style="font-family:\'Space Mono\',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#16263E;background:#9DBDE2;padding:6px 13px;border-radius:100px">' + esc(d.type) + '</span>' +
-            '<span style="font-family:\'Space Mono\',monospace;font-size:12px;color:rgba(255,255,255,0.6)">' + esc(d.sted) + '</span>' +
-          '</div>' +
-          '<h1 style="margin:0;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:clamp(32px,5vw,62px);line-height:1.0;letter-spacing:-0.025em;max-width:18ch;animation:revealUp .7s both">' + esc(d.title) + '</h1>' +
-          '<p style="margin:16px 0 0;font-size:16px;color:rgba(255,255,255,0.74)">' + esc(d.client) + '</p>' +
-        '</div>' +
-      '</section>' +
-      '<section style="background:transparent;padding:50px 0 110px">' +
-        '<div style="max-width:1100px;margin:0 auto;padding:0 32px">' +
-          '<div style="position:relative;border-radius:24px;overflow:hidden;box-shadow:0 40px 80px -40px rgba(22,38,62,0.45);margin-bottom:46px;aspect-ratio:16/10;background:#E4ECF6">' +
-            imgFill(d.hero, d.title) +
-            '<img src="' + LOGO_WHITE + '" alt="" style="position:absolute;top:16px;left:16px;height:22px;opacity:.9;filter:drop-shadow(0 1px 4px rgba(0,0,0,0.6));z-index:2">' +
-          '</div>' +
-          headlineHTML +
-          '<div style="display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:start">' +
-            '<div style="font-size:16.5px;line-height:1.7;color:#3a3d3a;display:flex;flex-direction:column;gap:18px">' + bodyParas + '</div>' +
-            specsHTML +
-          '</div>' +
-          galleryHTML +
-          '<div style="margin-top:54px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;background:#16263E;border-radius:22px;padding:32px clamp(28px,4vw,44px);color:#fff">' +
-            '<div>' +
-              '<div style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:clamp(20px,2.4vw,26px);letter-spacing:-0.01em">Har du et lignende prosjekt på gang?</div>' +
-              '<div style="font-size:14.5px;color:rgba(255,255,255,0.7);margin-top:6px">Ta en uforpliktende prat med oss.</div>' +
-            '</div>' +
-            '<span data-action="goKontakt" style="cursor:pointer;font-family:\'Space Grotesk\',sans-serif;font-weight:600;font-size:15px;color:#16263E;background:#fff;padding:15px 28px;border-radius:100px;white-space:nowrap;transition:transform .25s,background .25s" data-hover="background:#E4ECF6;transform:translateY(-2px)">Kontakt oss →</span>' +
-          '</div>' +
-        '</div>' +
-      '</section>';
+    const facts={Sted:d.sted,...(d.client?{Byggherre:d.client}:{}),...d.facts,...(d.byggetid?{Byggetid:d.byggetid}:{})};
+    const related=ferroProjects.filter(p=>p!==d).sort((a,b)=>Number(b.category===d.category)-Number(a.category===d.category)).slice(0,3);
+    return '<nav class="h26-shell h26-detail-top path-links" aria-label="Brødsmuler"><a href="#hjem">Forside</a> / <a href="#prosjekter">Prosjekter</a> / <span aria-current="page">'+esc(d.title)+'</span></nav>'+
+      '<header class="h26-page-head h26-shell"><h1>'+esc(d.headline || d.title)+'</h1><p>'+esc(d.lead)+'</p></header>'+
+      (d.hero?'<div class="h26-shell"><img class="h26-detail-hero" src="'+esc(d.hero)+'" alt="'+esc(d.heroAlt || d.title+' i '+d.sted)+'"></div>':'')+
+      '<section class="h26-section h26-shell h26-detail-body"><div class="h26-detail-text">'+(d.body || []).map(p=>'<p>'+esc(p)+'</p>').join('')+
+      (d.specs?'<h2>Leveransen</h2><ul class="h26-build-list h26-spec-list">'+d.specs.map(s=>'<li>'+esc(s)+'</li>').join('')+'</ul>':'')+
+      '<a class="h26-text-link" href="#prosjekter/'+d.category+'">Flere bygg i kategorien '+esc(projectCategories[d.category])+' →</a></div>'+
+      '<aside><h2>Fakta</h2><dl class="h26-facts">'+Object.entries(facts).map(([k,v])=>'<div><dt>'+esc(k)+'</dt><dd>'+esc(v)+'</dd></div>').join('')+'</dl></aside></section>'+
+      (d.gallery?'<section class="h26-shell h26-detail-gallery" aria-label="Bildegalleri"><h2>Bildegalleri</h2><div class="h26-gallery">'+d.gallery.map((u,i)=>'<button type="button" class="h26-gallery-item" data-gallery-img data-src="'+esc(u)+'" aria-label="Vis bilde '+(i+1)+' fra '+esc(d.title)+'"><img src="'+esc(u)+'" alt="" loading="lazy"></button>').join('')+'</div></section>':'')+
+      (d.quote?'<figure class="h26-shell detail-quote"><blockquote>«'+esc(d.quote.text)+'»</blockquote><figcaption>'+esc(d.quote.name)+' · '+esc(d.quote.org)+'</figcaption></figure>':'')+
+      '<section class="h26-section h26-shell"><div class="h26-section-head"><h2>Flere prosjekter</h2><a class="archive-link" href="#prosjekter">Se alle prosjekter →</a></div><div class="h26-project-list">'+related.map(card).join('')+'</div></section>'+
+      '<section class="h26-contact"><div class="h26-section h26-shell h26-contact-layout"><h2>Har du et lignende prosjekt?</h2><div class="h26-contact-links"><a class="h26-button h26-button-light" href="#kontakt">Be om tilbud ↗</a><a class="h26-button h26-button-quiet" href="tel:+4795837123" data-contact="phone" data-prefix="Ring ">Ring 958 37 123</a></div></div></section>';
   }
 
   function renderDetail(i) {
     var host = $('[data-screen="prosjekt"]');
-    host.innerHTML = detailHTML(PROJECTS[i]);
+    host.innerHTML = detailHTML(ferroProjects[i]);
+    if (window.ferroApplyContact) window.ferroApplyContact(host);
     normalize(host);
     bindHoverFocus(host);
     // gallery clicks → lightbox
     $all('[data-gallery-img]', host).forEach(function (cell) {
-      cell.addEventListener('click', function () { openLightbox(cell.getAttribute('data-src')); });
+      cell.addEventListener('click', function () { openLightbox(cell); });
     });
   }
 
@@ -300,46 +202,69 @@
   var hashForPage = { home: 'hjem', prosjekter: 'prosjekter', omoss: 'omoss', kontakt: 'kontakt' };
   var pageForHash = { '': 'home', home: 'home', hjem: 'home', prosjekter: 'prosjekter', omoss: 'omoss', 'om-oss': 'omoss', kontakt: 'kontakt' };
 
-  function resetForms() {
-    $all('form[data-action="submitForm"]').forEach(function (f) {
-      var sent = $('[data-form-sent]', f);
-      var fields = $('[data-form-fields]', f);
-      if (sent) sent.hidden = true;
-      if (fields) fields.hidden = false;
-    });
-  }
-
+  let category='';
+  $('#project-search').addEventListener('input',renderGrid);
+  const nav=$('#ferro-menu'),menuToggle=$('[data-menu-toggle]');
+  function closeMenu(){nav.classList.remove('menu-open');menuToggle.setAttribute('aria-expanded','false');}
+  menuToggle.onclick=()=>{
+    const open=nav.classList.toggle('menu-open');menuToggle.setAttribute('aria-expanded',open);
+  };
+  nav.addEventListener('click',closeMenu);
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape' && nav.classList.contains('menu-open')){closeMenu();menuToggle.focus();}
+  });
   function render() {
     var active = state.detail != null ? 'prosjekt' : state.page;
     $all('.screen').forEach(function (s) {
       s.classList.toggle('is-active', s.getAttribute('data-screen') === active);
     });
-    if (state.page === 'prosjekter' || state.detail != null) renderGrid();
+    // every screen currently renders in the light theme (the 2026 home is light-only)
+    document.documentElement.toggleAttribute('data-legacy', true);
+    document.documentElement.setAttribute('data-page', active);
+    if (state.page === 'prosjekter' && state.detail == null) renderGrid();
     if (state.detail != null) renderDetail(state.detail);
     // nav highlight follows the page (stays on "Prosjekter" while a detail is open)
-    $all('[data-navdot]').forEach(function (dot) {
-      dot.hidden = dot.getAttribute('data-navdot') !== state.page;
+    $all('[data-nav]').forEach(function (link) {
+      if (link.getAttribute('data-nav') === state.page) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
     });
   }
 
   function scrollTop() {
-    try { window.scrollTo(0, 0); } catch (e) {}
-    try { (document.scrollingElement || document.documentElement).scrollTop = 0; } catch (e) {}
-    try { document.body.scrollTop = 0; } catch (e) {}
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
-  function setPage(page) {
+  const homeTitle = document.title;
+  var routeInitialized = false;
+  function setPage(page, detail) {
+    if (lb.open) lb.close();
     state.page = page;
-    state.detail = null;
-    resetForms();
+    state.detail = detail == null ? null : detail;
     render();
+    document.title = page === 'home' ? homeTitle : (state.detail != null ? ferroProjects[state.detail].title : $('.screen.is-active').dataset.screenLabel) + ' | Ferro Stålentreprenør';
+    if (routeInitialized) $('#innhold').focus({preventScroll:true});
+    routeInitialized = true;
     scrollTop();
   }
-
   function applyHash() {
-    var h = (location.hash || '').replace('#', '').toLowerCase();
-    var pg = pageForHash[h] || 'home';
-    if (pg !== state.page || state.detail != null) setPage(pg);
+    var hash = location.hash.slice(1).toLowerCase();
+    closeMenu();
+    if (['byggskisse','bygg','prosess','ansatte'].includes(hash)) {
+      setPage(hash==='ansatte'?'omoss':'home');
+      requestAnimationFrame(function () {
+        const section=document.getElementById(hash);
+        const title=section.querySelector('h2');title.tabIndex=-1;title.focus({preventScroll:true});section.scrollIntoView({behavior:'instant'});
+      });
+      return;
+    }
+    if(hash==='prosjekter' || (hash.startsWith('prosjekter/') && Object.hasOwn(projectCategories,hash.slice('prosjekter/'.length)))) {
+      const next=hash.slice('prosjekter/'.length);
+      if(category!==next || state.page!=='prosjekter') $('#project-search').value='';
+      category=next;setPage('prosjekter');return;
+    }
+    var detail = ferroProjects.findIndex(function (p) { return hash === 'prosjekt/' + p.slug; });
+    if (detail >= 0) setPage('prosjekter', detail);
+    else setPage(pageForHash[hash] || 'home');
   }
 
   function navigate(page) {
@@ -363,16 +288,11 @@
     goProsjekter: function () { navigate('prosjekter'); },
     goOmOss: function () { navigate('omoss'); },
     goKontakt: function () { navigate('kontakt'); },
-    closeDetail: function () { state.detail = null; render(); scrollTop(); },
-    closeLb: function () { closeLightbox(); }
   };
-  PROJECTS.forEach(function (_, i) {
-    ACTIONS['openA' + i] = function () { state.detail = i; render(); scrollTop(); };
-  });
 
   document.addEventListener('click', function (e) {
     var el = e.target && e.target.closest ? e.target.closest('[data-action]') : null;
-    if (!el) return;
+    if (!el || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
     var name = el.getAttribute('data-action');
     if (name === 'submitForm') return; // handled on submit
     if (ACTIONS[name]) {
@@ -384,25 +304,233 @@
     }
   });
 
-  document.addEventListener('submit', function (e) {
-    var f = e.target;
-    if (f && f.matches && f.matches('form[data-action="submitForm"]')) {
-      e.preventDefault();
-      var sent = $('[data-form-sent]', f);
-      var fields = $('[data-form-fields]', f);
-      if (fields) fields.hidden = true;
-      if (sent) sent.hidden = false;
+  /* ============================================================
+     Theme toggle (light is the default; the choice is remembered)
+     ============================================================ */
+  var THEME_KEY = 'ferro-theme';
+  function applyTheme(theme) {
+    var root = document.documentElement;
+    root.setAttribute('data-theme', theme);
+    $all('[data-theme-toggle]').forEach(function (btn) {
+      btn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+      btn.setAttribute('aria-label', theme === 'dark' ? 'Bytt til lyst tema' : 'Bytt til mørkt tema');
+    });
+    var meta = $('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', theme === 'dark' ? '#0A1320' : '#FFFFFF');
+  }
+  function initTheme() {
+    applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
+    $all('[data-theme-toggle]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        applyTheme(next);
+        try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
+      });
+    });
+  }
+
+  /* ============================================================
+     Logo intro: the outline draws once, then the class is removed
+     ============================================================ */
+  function initLogoIntro() {
+    var root = document.documentElement;
+    if (!root.classList.contains('logo-intro')) return;
+    setTimeout(function () { root.classList.remove('logo-intro'); }, 1600);
+  }
+
+  /* ============================================================
+     Scroll reveal (opacity + small rise, see [data-reveal] in CSS)
+     ============================================================ */
+  function initReveal() {
+    var items = $all('[data-reveal]');
+    if (!document.documentElement.classList.contains('motion') || !('IntersectionObserver' in window)) {
+      items.forEach(function (el) { el.classList.add('is-visible'); });
+      return;
     }
-  });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+    items.forEach(function (el) { io.observe(el); });
+  }
+
+  /* ============================================================
+     Service cards: on touch screens a tap opens a card
+     (hover and keyboard focus are handled in CSS)
+     ============================================================ */
+  function initServiceCards() {
+    var cards = $all('[data-svc]');
+    var lastPointer = '';
+    document.addEventListener('pointerdown', function (e) { lastPointer = e.pointerType; }, true);
+    cards.forEach(function (card) {
+      // capture phase, so a first tap on a closed card does not follow its link
+      card.addEventListener('click', function (e) {
+        if (lastPointer !== 'touch' || card.classList.contains('is-open')) return;
+        if (!window.matchMedia('(min-width: 900px)').matches) return;
+        e.preventDefault();
+        e.stopPropagation();
+        cards.forEach(function (c) { c.classList.toggle('is-open', c === card); });
+      }, true);
+    });
+  }
+
+  /* ============================================================
+     Hero drone film: a muted loop. The file is fetched only after
+     the page has loaded, the small version on small screens. It
+     pauses while the hero is off screen or the tab is hidden.
+     Reduced motion: the poster stays until the button is used.
+     The caption names the project on screen; "from" is the cut
+     time in seconds where that project's shots begin.
+     ============================================================ */
+  var HERO_CAPTIONS = [
+    { from: 0,     text: 'Tokke Teknologipark · Dalen' },
+    { from: 3.72,  text: 'Skiensvegen 740 · NTT' },
+    { from: 7.46,  text: 'Folkestadvegen 3 · Coop Extra Bø' },
+    { from: 11.33, text: 'Coop Extra · Lunde' }
+  ];
+
+  function initHeroVideo() {
+    var video = $('[data-hero-video]');
+    if (!video || !video.canPlayType('video/mp4; codecs="avc1.640028"')) return;
+    var toggle = $('[data-hero-toggle]');
+    var caption = $('[data-hero-caption]');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var small = window.matchMedia && window.matchMedia('(max-width: 599.98px)').matches;
+    var pageLoaded = document.readyState === 'complete';
+    var userPaused = reduce;
+    var inView = true;
+
+    function captionAt(t) {
+      var text = HERO_CAPTIONS[0].text;
+      for (var i = 0; i < HERO_CAPTIONS.length; i++) {
+        if (t >= HERO_CAPTIONS[i].from) text = HERO_CAPTIONS[i].text;
+      }
+      return text;
+    }
+    function showCaption(t) {
+      if (!caption) return;
+      var text = captionAt(t);
+      if (caption.textContent !== text) caption.textContent = text;
+    }
+
+    function syncToggle() {
+      if (!toggle) return;
+      var paused = video.paused;
+      toggle.setAttribute('aria-pressed', paused ? 'true' : 'false');
+      toggle.setAttribute('aria-label', paused ? 'Spill av video' : 'Pause video');
+    }
+
+    function load() {
+      if (video.getAttribute('src')) return;
+      video.preload = 'auto';
+      video.src = video.getAttribute(small ? 'data-src-small' : 'data-src-large');
+    }
+
+    function update() {
+      if (pageLoaded && !userPaused && inView && !document.hidden) {
+        load();
+        if (video.paused) {
+          var p = video.play();
+          if (p && p.catch) p.catch(syncToggle);
+        }
+      } else if (!video.paused) {
+        video.pause();
+      }
+    }
+
+    showCaption(0);
+    if (caption) caption.hidden = false;
+    if (toggle) toggle.hidden = false;
+    syncToggle();
+
+    video.addEventListener('play', syncToggle);
+    video.addEventListener('pause', syncToggle);
+
+    // frame-accurate where supported, otherwise a few updates per second
+    if ('requestVideoFrameCallback' in video) {
+      var onFrame = function (now, meta) {
+        showCaption(meta.mediaTime);
+        video.requestVideoFrameCallback(onFrame);
+      };
+      video.requestVideoFrameCallback(onFrame);
+    } else {
+      video.addEventListener('timeupdate', function () { showCaption(video.currentTime); });
+    }
+
+    if (toggle) {
+      toggle.addEventListener('click', function () {
+        userPaused = !video.paused;
+        pageLoaded = true;
+        if (userPaused) video.pause();
+        else update();
+      });
+    }
+
+    document.addEventListener('visibilitychange', update);
+    if (!pageLoaded) window.addEventListener('load', function () { pageLoaded = true; update(); }, { once: true });
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        inView = entries[entries.length - 1].isIntersecting;
+        update();
+      }, { threshold: 0.15 }).observe(video);
+    } else {
+      update();
+    }
+  }
+
+  /* ---- floating navigation: steps aside while it would cover the hero buttons ---- */
+  function initDockYield() {
+    var dock = $('.dock');
+    var actions = $('.hero__actions');
+    if (!dock || !actions) return;
+    var queued = false;
+    function update() {
+      queued = false;
+      var a = actions.getBoundingClientRect();
+      // resting position of the dock, independent of its own transition
+      var width = dock.offsetWidth;
+      var left = (window.innerWidth - width) / 2;
+      var top = window.innerHeight - dock.offsetHeight - (parseFloat(getComputedStyle(dock).bottom) || 0);
+      var covers = a.width > 0 && a.bottom > top - 8 && a.top < window.innerHeight &&
+                   a.right > left && a.left < left + width;
+      dock.classList.toggle('is-yielding', covers);
+    }
+    function request() {
+      if (queued) return;
+      queued = true;
+      window.requestAnimationFrame(update);
+    }
+    window.addEventListener('scroll', request, { passive: true });
+    window.addEventListener('resize', request);
+    window.addEventListener('hashchange', request);
+    window.addEventListener('load', request);
+    request();
+  }
 
   /* ============================================================
      Boot
      ============================================================ */
-  normalize(document);
-  bindHoverFocus(document);
+  $all('.screen--legacy').forEach(function (screen) {
+    normalize(screen);
+    bindHoverFocus(screen);
+  });
+  $('.skip-link').addEventListener('click', function (event) {
+    event.preventDefault();
+    $('#innhold').focus();
+  });
   initParallax();
+  initTheme();
+  initLogoIntro();
+  initReveal();
+  initServiceCards();
   initHeroVideo();
+  initDockYield();
   window.addEventListener('hashchange', applyHash);
   applyHash();           // sets initial screen from the URL hash
-  render();              // ensure first paint reflects state
+
 })();

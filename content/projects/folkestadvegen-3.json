@@ -1,0 +1,32 @@
+{
+  "slug": "folkestadvegen-3",
+  "published": true,
+  "order": 10,
+  "category": "handel",
+  "title": "Coop Extra, Folkestadvegen 3",
+  "sted": "Bø i Telemark",
+  "lead": "Butikk, kontorer og parkeringskjeller for Forberg Eiendomsselskap AS.",
+  "headline": "",
+  "hero": "assets/photos/2024/09/image11.webp",
+  "heroAlt": "Coop Extra, Folkestadvegen 3 i Bø i Telemark",
+  "body": [],
+  "specs": [
+    "2000 m² hulldekker for et stabilt og varig bygg",
+    "1000 m² parkeringskjeller for god tilgjengelighet",
+    "1000 m² butikkareal med praktisk utforming",
+    "800 m² kontorlokaler i 2. etasje"
+  ],
+  "client": "Forberg Eiendomsselskap AS",
+  "byggetid": "",
+  "facts": [],
+  "gallery": [
+    "assets/photos/2024/09/image12.webp",
+    "assets/photos/2024/09/image10.webp",
+    "assets/photos/2024/09/image8.webp"
+  ],
+  "quote": {
+    "text": "Vi er også svært godt fornøyd med det arbeidet som denne entreprenøren utførte for oss og i tillegg var prisene meget konkurransedyktige.",
+    "name": "Einar Forberg",
+    "org": "Forberg Eiendomsselskap AS"
+  }
+}

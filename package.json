@@ -1,0 +1,11 @@
+{
+  "name": "ferro-webside",
+  "private": true,
+  "type": "module",
+  "engines": {"node": ">=22"},
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "serve": "node scripts/serve.mjs"
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "settings": {
+    "siteUrl": "https://ferro-ui.github.io/ferro-webside/",
+    "title": "Stålbygg for næring og landbruk | Ferro Stålentreprenør",
+    "description": "Ferro leverer stålbygg til næring og landbruk i hele Norge. Se lagerbygg, verksteder og driftsbygninger, eller skisser ditt eget bygg i 3D.",
+    "ogImage": "assets/img/hero-drone-v4-poster-1080.webp",
+    "ogImageAlt": "Dronebilde av et stålbygg fra Ferro i Telemark"
+  },
+  "nav": [
+    {
+      "label": "Hva vi bygger",
+      "href": "#bygg"
+    },
+    {
+      "label": "Prosjekter",
+      "href": "#prosjekter"
+    },
+    {
+      "label": "Slik jobber vi",
+      "href": "#prosess"
+    },
+    {
+      "label": "Om oss",
+      "href": "#om-oss"
+    },
+    {
+      "label": "Kontakt",
+      "href": "#kontakt"
+    }
+  ],
+  "home": {
+    "heading": "Næringsbygg i stål",
+    "intro": "Vi kan levere råbygget eller ta ansvar for hele prosjektet, fra første skisse til overlevering.",
+    "scenes": [
+      {
+        "project": "tokke-teknologipark",
+        "label": "Dalen",
+        "start": 0,
+        "title": "Tokke Teknologipark · Dalen",
+        "image": "assets/flight/tokke.webp"
+      },
+      {
+        "project": "skiensvegen-740",
+        "label": "Nome",
+        "start": 3.29,
+        "title": "Skiensvegen 740 · Nome",
+        "image": "assets/flight/nome.webp"
+      },
+      {
+        "project": "folkestadvegen-3",
+        "label": "Bø",
+        "start": 7.31,
+        "title": "Folkestadvegen 3 · Bø",
+        "image": "assets/flight/bo.webp"
+      },
+      {
+        "project": "coop-extra-lunde",
+        "label": "Lunde",
+        "start": 11.66,
+        "title": "Coop Extra · Lunde",
+        "image": "assets/flight/lunde.webp"
+      }
+    ],
+    "featured": [
+      {
+        "project": "tokke-teknologipark",
+        "title": "Tokke Teknologipark",
+        "meta": "Dalen · Industri og kontor",
+        "text": "Tilbygg på 540 m² for Dalen Mekaniske AS.",
+        "image": "assets/photos/2024/09/IMG_8290.webp",
+        "alt": "Tilbygget i Tokke Teknologipark"
+      },
+      {
+        "project": "skiensvegen-740",
+        "title": "Skiensvegen 740",
+        "meta": "Nome · Kontor, verksted og lager",
+        "text": "756 m² over to etasjer. Bygget på fem måneder.",
+        "image": "assets/photos/2024/09/IMG_2054-rotated.webp",
+        "alt": "NTT-bygget i Skiensvegen 740"
+      },
+      {
+        "project": "folkestadvegen-3",
+        "title": "Folkestadvegen 3",
+        "meta": "Bø i Telemark · Handel og kontor",
+        "text": "Butikk, kontorer og parkeringskjeller for Forberg Eiendomsselskap AS.",
+        "image": "assets/photos/2024/09/image11.webp",
+        "alt": "Fasaden til Coop Extra i Bø"
+      }
+    ]
+  },
+  "about": {
+    "heading": "Et lite team med tett oppfølging",
+    "intro": "Vi leverer skreddersydde stålbygg til næring og landbruk over hele Norge.",
+    "heroImage": "assets/photos/2024/09/image9.webp",
+    "heroAlt": "Teamet foran Eika-bygget",
+    "teamHeading": "Våre ansatte",
+    "teamIntro": "Ta gjerne kontakt direkte med en av oss.",
+    "people": [
+      {
+        "name": "Vegard Landsdal",
+        "role": "Daglig leder",
+        "email": "vegard@ferrostal.no",
+        "phone": "958 37 123",
+        "photo": "assets/photos/2024/09/Vegard-ferro-768x1024.webp"
+      },
+      {
+        "name": "Ingar Kaasa",
+        "role": "Prosjektleder",
+        "email": "ingar@ferrostal.no",
+        "phone": "950 78 729",
+        "photo": "assets/photos/2025/02/477673771_9946373715377044_7439716856953463575_n-769x1024.webp"
+      },
+      {
+        "name": "Aleksander Dahle Madsen",
+        "role": "Prosjektleder",
+        "email": "aleksander@ferrostal.no",
+        "phone": "959 79 331",
+        "photo": "assets/photos/2025/02/aleksander.webp"
+      }
+    ],
+    "joinTitle": "Vi vokser.",
+    "joinText": "Bli en del av teamet.",
+    "joinEmail": "vegard@ferrostal.no",
+    "officeHeading": "Ferrobygget på Ulefoss",
+    "officeText": "Vi holder til i Ringsevja 3 på Ulefoss. Bygget er totalrenovert og rommer også et kontorfellesskap.",
+    "officePhoto": "assets/photos/reportasje/ferrobygget.webp",
+    "officeAlt": "Møterom i Ferrobygget",
+    "partnersHeading": "Samarbeidspartnere",
+    "partnersText": "Vi samarbeider med fagfolk på betong, tak, vinduer og gulv.",
+    "partners": [
+      "Optimal Bygg & Betong AS",
+      "Uni Tak AS",
+      "Saga Aluminium AS",
+      "Systemblokk",
+      "Teft Industrigulv AS",
+      "SØR Entreprenør AS"
+    ],
+    "closingHeading": "Teamet vårt står klare for en prat.",
+    "closingText": "Ring oss for en uforpliktende prat om ditt prosjekt — vi er med hele veien."
+  },
+  "contact": {
+    "heading": "Kontakt oss",
+    "intro": "Fortell kort om prosjektet. Du kan også ringe oss direkte.",
+    "phone": "958 37 123",
+    "email": "vegard@ferrostal.no",
+    "address": "Ringsevja 3, 3830 Ulefoss",
+    "orgNr": "926 542 680",
+    "facebookUrl": "https://www.facebook.com/profile.php?id=100063960077172",
+    "brochureUrl": "https://www.visbrosjyre.no/Ferro_Staalentreprenor/MailView/",
+    "privacyUrl": "https://app.adminkit.com/legal/privacy/no/01ca9bcb-9bf4-4863-b597-9ea8efa0b419",
+    "formTitle": "Fortell om prosjektet",
+    "formIntro": "Lag et e-postutkast til Ferro. Du sender meldingen fra ditt eget e-postprogram.",
+    "buildingTypes": [
+      "Næringslokaler",
+      "Produksjonslokaler",
+      "Verksted",
+      "Butikk",
+      "Kontor",
+      "Lagerhall",
+      "Driftsbygning",
+      "Idrettshall",
+      "Ridehall",
+      "Vaskehall",
+      "Landbruk",
+      "Ombygging eller tilbygg",
+      "Annet bygg"
+    ]
+  },
+  "categories": {
+    "handel": "Handel og næring",
+    "kontor": "Kontor",
+    "industri": "Industri og verksted",
+    "lager": "Lager",
+    "vask": "Vaskehaller",
+    "landbruk": "Landbruk",
+    "bolig": "Bolig"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "slug": "skiensvegen-740",
+  "published": true,
+  "order": 30,
+  "category": "kontor",
+  "title": "NTT AS, Skiensvegen 740",
+  "sted": "Nome",
+  "lead": "Skiensvegen 740 i Nome. Levert som totalentreprise.",
+  "headline": "Nytt kontor, verksted og lager for NTT AS",
+  "hero": "assets/photos/reportasje/ntt-flyfoto.webp",
+  "heroAlt": "NTT AS, Skiensvegen 740 i Nome",
+  "body": [
+    "Da NTT AS skulle bygge nytt kontor, verksted og lager i Nome, valgte de oss som totalentreprenør.",
+    "Bygget har 505 m² grunnflate og 756 m² fordelt på to etasjer."
+  ],
+  "specs": [
+    "Stålkonstruksjon med sandwichelementer",
+    "Hulldekker i etasjeskillet",
+    "Skreddersydd for NTT AS sine behov"
+  ],
+  "client": "Nome Eiendom AS",
+  "byggetid": "Juni – november 2023",
+  "facts": [
+    {
+      "label": "Bruker",
+      "value": "NTT AS"
+    },
+    {
+      "label": "Entreprise",
+      "value": "Totalentreprise"
+    },
+    {
+      "label": "Bruk",
+      "value": "Kontor, verksted og lager"
+    },
+    {
+      "label": "Areal",
+      "value": "756 m² (505 m² grunnflate)"
+    }
+  ],
+  "gallery": [
+    "assets/photos/2024/09/IMG_8596.webp",
+    "assets/photos/2024/09/DJI_0024.webp",
+    "assets/photos/2024/09/DJI_0018.webp",
+    "assets/photos/2024/09/DJI_0030.webp"
+  ],
+  "quote": {
+    "text": "Den tette oppfølgingen, de gode løsningene vi fikk servert og hvor engasjerte Vegard og Ingar var, gjorde at vi raskt kunne flytte inn i et nytt og fremtidsrettet lokale.",
+    "name": "Reidar Brauti",
+    "org": "NTT AS"
+  }
+}
