@@ -24,6 +24,6 @@ function prefill(def, row, slug) {
 
 export const homeSection = {
   id: 'forside', label: 'Forside', hash: '#hjem', base: ['home'],
-  intro: 'Overskriften øverst, scenene i dronefilmen og prosjektkortene under «Utvalgte prosjekter». Dra kortene eller bruk pilene for å endre rekkefølgen.',
+  intro: 'Overskriften øverst, scenene i dronefilmen og prosjektkortene, byggtypene og trinnene i byggeprosessen. Dra kortene eller bruk pilene for å endre rekkefølgen.',
   render: ctx => renderFields(homeFields, siteDoc().current.home, {...ctx, onSelect: (def, row, slug) => { if (prefill(def, row, slug)) ctx.changed(true) }}, ['home']),
 }

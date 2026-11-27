@@ -4,7 +4,7 @@
 
 import {h, nextId, toast} from '../dom.js'
 import {prepareImage, imageUrl} from '../images.js'
-import {store, projectDocs} from '../store.js'
+import {store, projectDocs, siteDoc} from '../store.js'
 
 const INPUT = {url: 'url', email: 'email', phone: 'tel', number: 'number', link: 'text', text: 'text', slug: 'text'}
 
@@ -47,10 +47,10 @@ export function renderField(def, obj, ctx, path) {
     return h('div', {class: 'field field-boolean', dataset: {path: path.join('.')}}, h('label', {for: id}, input, ' ', def.label),
       def.hint ? h('p', {class: 'hint'}, def.hint) : '', h('p', {class: 'field-error', id: id + '-err', hidden: true}))
   }
-  if (def.type === 'select' || def.type === 'project') {
+  if (['select','project','category'].includes(def.type)) {
     const options = def.type === 'project'
       ? projectDocs().map(d => ({value: d.current.slug, label: (d.current.title || d.current.slug) + (d.current.published ? '' : ' (ikke publisert)')}))
-      : def.options
+      : def.type === 'category' ? Object.entries(siteDoc().current.categories).map(([value,label])=>({value,label})) : def.options
     const input = h('select', {id, onchange: e => { set(e.target.value); ctx.onSelect?.(def, obj, e.target.value) }},
       h('option', {value: ''}, '– Velg –'), options.map(o => h('option', {value: o.value, selected: o.value === obj[key]}, o.label)))
     return wrap(def, path, input, id)

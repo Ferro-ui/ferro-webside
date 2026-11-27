@@ -86,7 +86,61 @@
         "image": "assets/photos/2024/09/image11.webp",
         "alt": "Fasaden til Coop Extra i Bø"
       }
-    ]
+    ],
+    "building": {
+      "heading": "Hva vi bygger",
+      "intro": "Et stålbygg kan formes etter bruken. Vi tilpasser størrelse, planløsning og fasade til det du skal ha i bygget.",
+      "items": [
+        {
+          "label": "Næring og handel",
+          "category": "handel"
+        },
+        {
+          "label": "Kontorbygg",
+          "category": "kontor"
+        },
+        {
+          "label": "Industri og verksted",
+          "category": "industri"
+        },
+        {
+          "label": "Lagerbygg",
+          "category": "lager"
+        },
+        {
+          "label": "Vaskehaller",
+          "category": "vask"
+        },
+        {
+          "label": "Landbruk",
+          "category": "landbruk"
+        }
+      ]
+    },
+    "process": {
+      "heading": "Slik jobber vi",
+      "intro": "Vi kan være med fra du får ideen. Da kan vi gi råd om løsning og pris tidlig i prosessen.",
+      "image": "assets/photos/reportasje/montorer.webp",
+      "alt": "Montører legger hulldekker på stålkonstruksjonen",
+      "steps": [
+        {
+          "title": "Første samtale",
+          "text": "Vi går gjennom behov, tomt og budsjett."
+        },
+        {
+          "title": "Løsning og tilbud",
+          "text": "Du får et tilbud som dekker hele prosjektet."
+        },
+        {
+          "title": "Bygging",
+          "text": "Vi bygger i stål og sandwichelementer."
+        },
+        {
+          "title": "Overlevering",
+          "text": "Du får nøkkelen til et ferdig bygg."
+        }
+      ]
+    }
   },
   "about": {
     "heading": "Et lite team med tett oppfølging",

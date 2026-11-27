@@ -71,3 +71,14 @@ test('preview mode inlines the data and maps image URLs', () => {
   assert.match(out.html, /const ferroProjects = /)
   assert.match(out.html, /src="https:\/\/cdn\.test\/assets\/photos\/2024\/09\/IMG_8290\.webp"/)
 })
+
+test('home editor updates the service links, process image and ordered steps', () => {
+  const site = structuredClone(seed.site)
+  site.home.building.items = [{label:'Lager & logistikk', category:'lager'}]
+  site.home.process.steps = [{title:'Befaring',text:'Besøk på tomten.'}]
+  site.home.process.image = ''
+  const out = renderSite(template, {...seed,site}).html
+  assert.match(out, /href="#prosjekter\/lager">Lager &amp; logistikk/)
+  assert.match(out, /<div class="process-story"><ol class="h26-steps"><li><h3>Befaring/)
+  assert.doesNotMatch(out, /<h3>Første samtale<\/h3>/)
+})
