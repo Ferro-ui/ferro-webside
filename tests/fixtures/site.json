@@ -179,18 +179,16 @@
     "officeText": "Vi holder til i Ringsevja 3 på Ulefoss. Bygget er totalrenovert og rommer også et kontorfellesskap.",
     "officePhoto": "assets/photos/reportasje/ferrobygget.webp",
     "officeAlt": "Møterom i Ferrobygget",
-    "partnersHeading": "Samarbeidspartnere",
-    "partnersText": "Vi samarbeider med fagfolk på betong, tak, vinduer og gulv.",
-    "partners": [
-      "Optimal Bygg & Betong AS",
-      "Uni Tak AS",
-      "Saga Aluminium AS",
-      "Systemblokk",
-      "Teft Industrigulv AS",
-      "SØR Entreprenør AS"
-    ],
     "closingHeading": "Teamet vårt står klare for en prat.",
-    "closingText": "Ring oss for en uforpliktende prat om ditt prosjekt — vi er med hele veien."
+    "closingText": "Ring oss for en uforpliktende prat om ditt prosjekt — vi er med hele veien.",
+    "briefHeading": "Før første samtale",
+    "briefText": "Har du en idé til et bygg? Dette hjelper oss å gi konkrete råd.",
+    "briefItems": [
+      "Hvor skal bygget stå?",
+      "Hva skal du bruke bygget til?",
+      "Omtrent hvor stor plass trenger du?",
+      "Har du en skisse eller et bilde av tomten?"
+    ]
   },
   "contact": {
     "heading": "Kontakt oss",

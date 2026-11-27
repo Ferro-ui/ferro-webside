@@ -75,6 +75,8 @@ function build() {
       uploads++
     }
   }
+  const missingFilms = missing.filter(path => /\.mp4$/i.test(path))
+  if (missingFilms.length) throw new Error('Mangler videofil: ' + missingFilms.join(', '))
   if (missing.length) console.warn('Advarsel: disse bildene finnes ikke i repoet:\n' + missing.map(m => '  - ' + m).join('\n'))
 
   // Published content as JSON, for the admin's demo mode. It is public in the repo anyway.

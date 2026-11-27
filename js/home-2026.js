@@ -18,9 +18,10 @@
   let current = 0, pending = null, inView = false, failed = false;
   let wantsPlay = !reduced.matches && !navigator.connection?.saveData;
   function loadFilm() {
-    if (film.hasAttribute('src')) return;
+
     const width = film.clientWidth * Math.min(devicePixelRatio, 2);
-    film.src = 'assets/video/hero-drone-v4-' + (width <= 900 ? 480 : width <= 1500 ? 720 : 1080) + '.mp4';
+    const src = scenes[current]?.video || 'assets/video/hero-drone-v4-' + (width <= 900 ? 480 : width <= 1500 ? 720 : 1080) + '.mp4';
+    if(film.getAttribute('src')!==src) film.src=src;
   }
   function syncPlayback() {
     if (!wantsPlay || !inView || document.hidden || failed) {
@@ -59,14 +60,17 @@
     film.currentTime = scenes[index].start;
   }
   function selectScene(index) {
-    if (failed) return;
+    failed=false;
+    showScene(index);
     pending = index;
     film.preload = 'auto';
     loadFilm();
     seekPending();
+    syncPlayback();
   }
   function configureScenes(items) {
     scenes=items;
+    film.loop=!items.some(scene=>scene.video);
     pending=null;
     chapters=scenes.map((scene,i)=>{
       const button=document.createElement('button');
@@ -77,7 +81,7 @@
     chapterBar.replaceChildren(...chapters);
     chapterBar.hidden=failed || scenes.length<2;
     neighbors.forEach(button=>{button.disabled=failed || scenes.length<2;button.hidden=scenes.length<2;});
-    showScene(Math.max(0,scenes.findLastIndex(scene=>film.currentTime>=scene.start)));
+    showScene(Math.max(0,scenes.findLastIndex(scene=>!scene.video && film.currentTime>=scene.start)));
   }
   const initialLabels=Array.from(chapterBar.children,b=>b.textContent);
   configureScenes(window.ferroHomeScenes ?? defaults.map((scene,i)=>({...scene,label:initialLabels[i]})));
@@ -89,15 +93,15 @@
   film.addEventListener('playing', () => { film.classList.add('ready'); updateToggle(); });
   film.addEventListener('pause',updateToggle);
   film.addEventListener('timeupdate', () => {
-    const index = scenes.findLastIndex(scene=>film.currentTime>=scene.start);
+    if(pending!==null || scenes[current]?.video) return;
+    const index = scenes.findLastIndex(scene=>!scene.video && film.currentTime>=scene.start);
     if (index >= 0 && index !== current) showScene(index);
   });
+  film.addEventListener('ended',()=>{if(scenes.length && wantsPlay) selectScene((current+1)%scenes.length)});
   film.addEventListener('error', () => {
     failed = true;
     film.classList.remove('ready');
-    toggle.hidden = chapterBar.hidden = true;
-    neighbors.forEach(button=>button.disabled=true);
-    showScene(0);
+    updateToggle();
   });
   reduced.addEventListener('change', () => { if (reduced.matches) { wantsPlay = false; syncPlayback(); } });
   document.addEventListener('visibilitychange',syncPlayback);

@@ -59,7 +59,7 @@ test('unpublished projects and their cards leave the site', () => {
 test('text is escaped, so content cannot inject markup', () => {
   const site = structuredClone(seed.site)
   site.home.heading = '<img src=x onerror=alert(1)>'
-  site.about.partners = ['A & B </ul><script>']
+  site.about.briefItems = ['A & B </ul><script>']
   const out = renderSite(template, {...seed, site}).html
   assert.match(out, /<h1>&lt;img src=x onerror=alert\(1\)&gt;<\/h1>/)
   assert.match(out, /<li>A &amp; B &lt;\/ul&gt;&lt;script&gt;<\/li>/)

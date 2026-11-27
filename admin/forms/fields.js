@@ -3,7 +3,7 @@
 // removing or moving rows calls ctx.changed(true), which rebuilds the section.
 
 import {h, nextId, toast} from '../dom.js'
-import {prepareImage, imageUrl} from '../images.js'
+import {prepareImage, imageUrl, slugifyName} from '../images.js'
 import {store, projectDocs, siteDoc} from '../store.js'
 
 const INPUT = {url: 'url', email: 'email', phone: 'tel', number: 'number', link: 'text', text: 'text', slug: 'text'}
@@ -40,6 +40,27 @@ export function renderField(def, obj, ctx, path) {
   if (def.type === 'object') {
     obj[key] ??= {}
     return h('fieldset', {class: 'group', dataset: {path: path.join('.')}}, h('legend', {}, def.label), renderFields(def.fields, obj[key], ctx, path))
+  }
+  if (def.type === 'video') {
+    const status=h('span',{role:'status'},obj[key]?.split('/').pop() || 'Velg en MP4-film (maks 40 MB).')
+    const input=h('input',{id,type:'file',accept:'video/mp4,.mp4',onchange:async()=>{
+      const file=input.files[0]
+      if(!file) return
+      if(!/\.mp4$/i.test(file.name) || !file.size || file.size>40*1024*1024){
+        status.textContent='Velg en MP4-film på inntil 40 MB.';input.value='';return
+      }
+      input.disabled=true
+      try {
+        const path='content/uploads/'+slugifyName(file.name)+'-'+crypto.randomUUID()+'.mp4'
+        const bytes=new Uint8Array(await file.arrayBuffer())
+        if(String.fromCharCode(...bytes.slice(4,8))!=='ftyp') throw new Error('Ugyldig MP4-fil.')
+        const reader=new FileReader()
+        const dataUrl=await new Promise((resolve,reject)=>{reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(file)})
+        store.uploads.set(path,{bytes,dataUrl,committed:false})
+        set(path);status.textContent=file.name+' – klar til lagring.'
+      } catch {status.textContent='Filmen kunne ikke leses.'} finally {input.disabled=false}
+    }})
+    return wrap(def,path,input,id,[status])
   }
   if (def.type === 'image') return renderImage(def, obj, ctx, path, id)
   if (def.type === 'boolean') {
